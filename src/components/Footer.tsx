@@ -1,17 +1,24 @@
 const Footer = () => {
   return (
-    <footer className="border-t border-border py-10 px-6 md:px-10">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <span className="font-oswald text-xl font-black tracking-tighter text-foreground">
-          AD.KO
-        </span>
-        <p className="font-inter text-xs text-muted-foreground">
+    <footer className="border-t border-border/60 py-10 px-6 lg:px-12">
+      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <a href="#" className="flex flex-col leading-[0.85]">
+          <span className="font-montserrat text-[18px] font-[900] tracking-[-0.06em] text-foreground">AD.</span>
+          <span className="font-montserrat text-[18px] font-[900] tracking-[-0.06em] text-foreground">KO</span>
+        </a>
+        <p className="font-montserrat text-[11px] font-[400] text-muted-foreground tracking-[0.05em]">
           © 2025 ADKO. All rights reserved.
         </p>
-        <div className="flex gap-6 font-inter text-xs text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition-colors">Instagram</a>
-          <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-          <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
+        <div className="flex gap-8">
+          <a href="#" className="font-montserrat text-[11px] font-[500] text-muted-foreground hover:text-foreground transition-colors tracking-[0.05em]">
+            Instagram
+          </a>
+          <a href="#" className="font-montserrat text-[11px] font-[500] text-muted-foreground hover:text-foreground transition-colors tracking-[0.05em]">
+            LinkedIn
+          </a>
+          <a href="#" className="font-montserrat text-[11px] font-[500] text-muted-foreground hover:text-foreground transition-colors tracking-[0.05em]">
+            Twitter
+          </a>
         </div>
       </div>
     </footer>

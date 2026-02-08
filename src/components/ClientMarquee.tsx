@@ -1,18 +1,15 @@
 const clients = [
-  "Marriott", "Audi", "Milton", "Google", "Carlton", "Paytm", "Britime",
-  "Blue Sea", "Fairfield", "Lexus", "VIP Bags", "Tots",
+  "MARRIOTT", "AUDI", "MILTON", "GOOGLE", "CARLTON", "PAYTM",
+  "BRITIME", "BLUE SEA", "FAIRFIELD", "LEXUS", "VIP BAGS", "TOTS",
 ];
 
 const ClientMarquee = () => {
   return (
-    <section className="py-12 border-y border-border overflow-hidden">
-      <div className="flex animate-marquee" style={{ width: "fit-content" }}>
-        {[...clients, ...clients].map((client, i) => (
-          <div
-            key={i}
-            className="flex-shrink-0 mx-8 md:mx-12 flex items-center"
-          >
-            <span className="font-oswald text-lg md:text-xl font-bold uppercase tracking-wider text-muted-foreground/60">
+    <section className="py-8 border-y border-border/60 overflow-hidden">
+      <div className="flex animate-marquee items-center" style={{ width: "fit-content" }}>
+        {[...clients, ...clients, ...clients].map((client, i) => (
+          <div key={i} className="flex-shrink-0 mx-10 md:mx-14 flex items-center">
+            <span className="font-montserrat text-[13px] md:text-[15px] font-[700] uppercase tracking-[0.2em] text-muted-foreground/40 whitespace-nowrap">
               {client}
             </span>
           </div>
