@@ -7,7 +7,7 @@ const CTASection = () => {
     <section id="contact" className="py-24 md:py-36 px-6 lg:px-12 max-w-[1440px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -37,10 +37,10 @@ const CTASection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.93 }}
+          initial={{ opacity: 0, scale: 0.92 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="rounded-[28px] overflow-hidden"
         >
           <img
