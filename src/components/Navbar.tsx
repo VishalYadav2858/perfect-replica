@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,10 +25,11 @@ const Navbar = () => {
           <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">KO</span>
         </a>
 
-        {/* Desktop Nav */}
+        {/* Desktop Nav - centered */}
         <div className="hidden lg:flex items-center gap-10">
-          <a href="#work" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          <a href="#work" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
             Our Work
+            <ChevronDown className="w-3 h-3" />
           </a>
           <a href="#services" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Services
@@ -73,9 +75,9 @@ const Navbar = () => {
                   key={item}
                   href={`#${item.toLowerCase().replace(/\s/g, "-")}`}
                   onClick={() => setMenuOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08 }}
+                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground"
                 >
                   {item}

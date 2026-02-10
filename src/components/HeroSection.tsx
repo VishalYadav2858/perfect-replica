@@ -21,19 +21,19 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="pt-32 pb-0 overflow-hidden">
+    <section className="pt-28 md:pt-32 pb-0 overflow-hidden">
       {/* Rotating Word */}
       <div className="text-center px-4">
-        <div className="h-[100px] sm:h-[140px] md:h-[180px] lg:h-[220px] flex items-center justify-center overflow-hidden">
+        <div className="h-[80px] sm:h-[120px] md:h-[160px] lg:h-[200px] flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentWord}
-              initial={{ y: 100, opacity: 0, rotateX: -15 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              exit={{ y: -100, opacity: 0, rotateX: 15 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="font-montserrat text-[72px] sm:text-[100px] md:text-[150px] lg:text-[200px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground"
-              style={{ fontStretch: "condensed" }}
+              initial={{ y: 120, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -120, opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="font-montserrat text-[64px] sm:text-[100px] md:text-[140px] lg:text-[180px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground"
+              style={{ fontStretch: "ultra-condensed" }}
             >
               {words[currentWord]}
             </motion.h1>
@@ -43,23 +43,23 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="font-montserrat text-[11px] sm:text-xs md:text-sm font-[600] uppercase tracking-[0.25em] text-muted-foreground mt-4"
+          className="font-montserrat text-[10px] sm:text-[11px] md:text-[13px] font-[700] uppercase tracking-[0.3em] text-muted-foreground mt-6"
         >
           We lead with content. We scale with digital.
         </motion.p>
       </div>
 
       {/* Infinite Tilted Image Carousel */}
-      <div className="mt-16 md:mt-20 overflow-hidden pb-12">
-        <div className="flex animate-carousel items-center" style={{ width: "fit-content" }}>
+      <div className="mt-14 md:mt-20 overflow-hidden pb-8">
+        <div className="flex animate-carousel items-end" style={{ width: "fit-content" }}>
           {[...heroImages, ...heroImages, ...heroImages].map((img, i) => (
             <motion.div
               key={i}
-              className="flex-shrink-0 w-[220px] sm:w-[260px] md:w-[300px] lg:w-[340px] h-[300px] sm:h-[360px] md:h-[420px] lg:h-[480px] mx-2 md:mx-3 rounded-[20px] overflow-hidden shadow-lg"
+              className="flex-shrink-0 w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px] h-[320px] sm:h-[380px] md:h-[440px] lg:h-[500px] mx-2 md:mx-3 rounded-[20px] overflow-hidden shadow-xl"
               style={{
                 transform: `rotate(${rotations[i % 5]}deg)`,
               }}
-              whileHover={{ scale: 1.03, rotate: 0 }}
+              whileHover={{ scale: 1.04, rotate: 0 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
               <img

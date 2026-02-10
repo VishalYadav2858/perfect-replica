@@ -12,11 +12,11 @@ const projects = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 50 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { duration: 0.8, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
   }),
 };
 
@@ -26,54 +26,34 @@ const PortfolioGrid = () => {
       {/* Bento Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-20 auto-rows-[200px] md:auto-rows-[260px]">
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={0}
-          viewport={{ once: true }}
-          className="col-span-1 row-span-2 rounded-[20px] overflow-hidden"
+          variants={fadeUp} initial="hidden" whileInView="visible" custom={0} viewport={{ once: true }}
+          className="col-span-1 row-span-2 rounded-[20px] overflow-hidden group"
         >
-          <img src={portfolio1} alt="Creative work" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <img src={portfolio1} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
         </motion.div>
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={1}
-          viewport={{ once: true }}
-          className="col-span-1 rounded-[20px] overflow-hidden"
+          variants={fadeUp} initial="hidden" whileInView="visible" custom={1} viewport={{ once: true }}
+          className="col-span-1 rounded-[20px] overflow-hidden group"
         >
-          <img src={aboutImage} alt="Creative work" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <img src={aboutImage} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
         </motion.div>
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={2}
-          viewport={{ once: true }}
-          className="col-span-1 rounded-[20px] overflow-hidden"
+          variants={fadeUp} initial="hidden" whileInView="visible" custom={2} viewport={{ once: true }}
+          className="col-span-1 rounded-[20px] overflow-hidden group"
         >
-          <img src={portfolio2} alt="Creative work" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <img src={portfolio2} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
         </motion.div>
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={3}
-          viewport={{ once: true }}
-          className="col-span-1 row-span-2 rounded-[20px] overflow-hidden"
+          variants={fadeUp} initial="hidden" whileInView="visible" custom={3} viewport={{ once: true }}
+          className="col-span-1 row-span-2 rounded-[20px] overflow-hidden group"
         >
-          <img src={portfolio3} alt="Creative work" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <img src={portfolio3} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
         </motion.div>
         <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          custom={4}
-          viewport={{ once: true }}
-          className="col-span-2 rounded-[20px] overflow-hidden"
+          variants={fadeUp} initial="hidden" whileInView="visible" custom={4} viewport={{ once: true }}
+          className="col-span-2 rounded-[20px] overflow-hidden group"
         >
-          <img src={hero3} alt="Creative work" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <img src={hero3} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
         </motion.div>
       </div>
 
@@ -83,11 +63,7 @@ const PortfolioGrid = () => {
           <motion.a
             key={project.title}
             href="#"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            custom={i}
-            viewport={{ once: true }}
+            variants={fadeUp} initial="hidden" whileInView="visible" custom={i} viewport={{ once: true }}
             className="group rounded-[20px] overflow-hidden bg-card border border-border/50 hover:shadow-xl transition-all duration-500"
           >
             <div className="aspect-[16/10] overflow-hidden relative">
@@ -116,7 +92,7 @@ const PortfolioGrid = () => {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="font-montserrat text-[13px] font-[400] text-muted-foreground max-w-lg mt-12 leading-[1.8]"
       >
         Explore our curated projects that showcase creativity, strategy, and innovation across
@@ -127,6 +103,7 @@ const PortfolioGrid = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
         className="inline-flex items-center mt-4 font-montserrat text-[11px] font-[700] uppercase tracking-[0.2em] text-foreground link-underline"
       >
         Know us
