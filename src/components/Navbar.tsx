@@ -27,17 +27,17 @@ const Navbar = () => {
 
         {/* Desktop Nav - centered */}
         <div className="hidden lg:flex items-center gap-10">
-          <a href="#work" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
+          <a href="#work" onClick={(e) => { e.preventDefault(); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
             Our Work
             <ChevronDown className="w-3 h-3" />
           </a>
-          <a href="#services" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          <a href="#services" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Services
           </a>
-          <a href="#campaigns" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          <a href="#campaigns" onClick={(e) => { e.preventDefault(); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Campaigns
           </a>
-          <a href="#about" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          <a href="#about" onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             About Us
           </a>
         </div>
@@ -45,6 +45,7 @@ const Navbar = () => {
         {/* CTA */}
         <a
           href="#contact"
+          onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
           className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
         >
           Get in touch
@@ -74,7 +75,12 @@ const Navbar = () => {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase().replace(/\s/g, "-")}`}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMenuOpen(false);
+                    const targetId = item === "Our Work" || item === "Our Campaigns" ? "work" : item === "Our Services" ? "services" : "about";
+                    setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' }), 300);
+                  }}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -85,7 +91,7 @@ const Navbar = () => {
               ))}
               <motion.a
                 href="#contact"
-                onClick={() => setMenuOpen(false)}
+                onClick={(e) => { e.preventDefault(); setMenuOpen(false); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 300); }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
