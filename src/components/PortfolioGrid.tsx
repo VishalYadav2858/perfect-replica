@@ -100,6 +100,7 @@ const PortfolioGrid = () => {
       </motion.p>
       <motion.a
         href="#about"
+        onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
