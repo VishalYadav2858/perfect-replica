@@ -20,7 +20,7 @@ const CTASection = () => {
           </h3>
 
           <motion.a
-            href="#"
+            href="mailto:hello@adko.in"
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-foreground text-background font-montserrat text-[13px] font-[600] tracking-[0.05em] group"

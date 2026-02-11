@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 const ContactBanner = () => {
   return (
     <section className="py-0 bg-foreground overflow-hidden cursor-pointer group">
-      <a href="#contact" className="block">
+      <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="block">
         {/* Top marquee */}
         <div className="py-4 overflow-hidden border-b border-background/10">
           <div className="flex animate-contact-marquee items-center" style={{ width: "fit-content" }}>
