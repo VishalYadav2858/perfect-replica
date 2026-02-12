@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ContactBanner = () => {
   return (
     <section className="py-0 bg-foreground overflow-hidden cursor-pointer group">
-      <a href="#contact" onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }} className="block">
+      <Link to="/contact-us" className="block">
         {/* Top marquee */}
         <div className="py-4 overflow-hidden border-b border-background/10">
           <div className="flex animate-contact-marquee items-center" style={{ width: "fit-content" }}>
@@ -29,7 +30,7 @@ const ContactBanner = () => {
             Let's create something together
           </span>
         </motion.div>
-      </a>
+      </Link>
     </section>
   );
 };

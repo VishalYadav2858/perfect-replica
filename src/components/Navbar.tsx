@@ -1,16 +1,28 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" }), 400);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <nav
@@ -20,36 +32,35 @@ const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <a href="#" className="flex flex-col leading-[0.85]">
+        <Link to="/" className="flex flex-col leading-[0.85]">
           <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">AD.</span>
           <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">KO</span>
-        </a>
+        </Link>
 
-        {/* Desktop Nav - centered */}
+        {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
-          <a href="#work" onClick={(e) => { e.preventDefault(); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
+          <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
             Our Work
             <ChevronDown className="w-3 h-3" />
-          </a>
-          <a href="#services" onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          </button>
+          <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Services
-          </a>
-          <a href="#campaigns" onClick={(e) => { e.preventDefault(); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          </button>
+          <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Campaigns
-          </a>
-          <a href="#about" onClick={(e) => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          </button>
+          <Link to="/about" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             About Us
-          </a>
+          </Link>
         </div>
 
         {/* CTA */}
-        <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+        <Link
+          to="/contact-us"
           className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
         >
           Get in touch
-        </a>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -71,34 +82,32 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 top-20 bg-background z-40 overflow-hidden"
           >
             <div className="flex flex-col gap-8 p-10">
-              {["Our Work", "Our Services", "Our Campaigns", "About Us"].map((item, i) => (
-                <motion.a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(/\s/g, "-")}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setMenuOpen(false);
-                    const targetId = item === "Our Work" || item === "Our Campaigns" ? "work" : item === "Our Services" ? "services" : "about";
-                    setTimeout(() => document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' }), 300);
-                  }}
+              {[
+                { label: "Our Work", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+                { label: "Our Services", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
+                { label: "Our Campaigns", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+                { label: "About Us", action: () => { setMenuOpen(false); setTimeout(() => navigate("/about"), 300); } },
+              ].map((item, i) => (
+                <motion.button
+                  key={item.label}
+                  onClick={item.action}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground"
+                  className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left"
                 >
-                  {item}
-                </motion.a>
+                  {item.label}
+                </motion.button>
               ))}
-              <motion.a
-                href="#contact"
-                onClick={(e) => { e.preventDefault(); setMenuOpen(false); setTimeout(() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }), 300); }}
+              <motion.button
+                onClick={() => { setMenuOpen(false); setTimeout(() => navigate("/contact-us"), 300); }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
                 className="inline-flex items-center justify-center w-fit px-8 py-3.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-sm font-[600] uppercase tracking-wider mt-4"
               >
                 Get in touch
-              </motion.a>
+              </motion.button>
             </div>
           </motion.div>
         )}

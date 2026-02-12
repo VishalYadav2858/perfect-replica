@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import ctaImage from "@/assets/cta-image.jpg";
 import { ArrowUpRight } from "lucide-react";
 
@@ -19,15 +20,16 @@ const CTASection = () => {
             Contact ADKO today!
           </h3>
 
-          <motion.a
-            href="mailto:hello@adko.in"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-foreground text-background font-montserrat text-[13px] font-[600] tracking-[0.05em] group"
-          >
-            Get in touch
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-          </motion.a>
+          <Link to="/contact-us">
+            <motion.span
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-foreground text-background font-montserrat text-[13px] font-[600] tracking-[0.05em] group"
+            >
+              Get in touch
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+            </motion.span>
+          </Link>
 
           <p className="font-montserrat text-[13px] font-[400] text-muted-foreground mt-10 max-w-md leading-[1.8]">
             We'd love to hear from you! Whether you have questions, feedback, or a project idea, feel
@@ -43,12 +45,7 @@ const CTASection = () => {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="rounded-[28px] overflow-hidden"
         >
-          <img
-            src={ctaImage}
-            alt="ADKO creative team"
-            className="w-full h-full object-cover aspect-[4/3] lg:aspect-square"
-            loading="lazy"
-          />
+          <img src={ctaImage} alt="ADKO creative team" className="w-full h-full object-cover aspect-[4/3] lg:aspect-square" loading="lazy" />
         </motion.div>
       </div>
     </section>
