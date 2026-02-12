@@ -1,5 +1,7 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
+import { useInView } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const stats = [
   { value: 5, suffix: "%", label: "" },
@@ -94,15 +96,15 @@ const VisionSection = () => {
           branding, web, and motion design.
         </p>
 
-        <motion.a
-          href="#services"
-          onClick={(e) => { e.preventDefault(); document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' }); }}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="inline-flex items-center px-8 py-3.5 rounded-full bg-background text-foreground font-montserrat text-[12px] font-[600] uppercase tracking-[0.1em] hover:opacity-90 transition-opacity"
-        >
-          Our Brand Solutions
-        </motion.a>
+        <Link to="/about">
+          <motion.span
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="inline-flex items-center px-8 py-3.5 rounded-full bg-background text-foreground font-montserrat text-[12px] font-[600] uppercase tracking-[0.1em] hover:opacity-90 transition-opacity"
+          >
+            Our Brand Solutions
+          </motion.span>
+        </Link>
       </motion.div>
     </section>
   );
