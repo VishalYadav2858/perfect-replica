@@ -10,6 +10,7 @@ const projects = [
   { title: "Google FPV", category: "Campaign", image: portfolio1, slug: "google-fpv" },
   { title: "VIP Bags — Product Launch", category: "3D Animation", image: portfolio2, slug: "vip-bags-product-launch" },
   { title: "Carlton Bags — Product Launch", category: "3D Animation", image: portfolio3, slug: "carlton-bags-product-launch-3d-animation" },
+  { title: "St. Patricks' Campaign", category: "Campaign", image: hero3, slug: "st-patricks-campaign" },
 ];
 
 const fadeUp = {
