@@ -66,7 +66,7 @@ const Navbar = () => {
             onMouseEnter={openDropdown}
             onMouseLeave={closeDropdown}
           >
-            <button className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
+            <button onClick={() => setWorkDropdown((v) => !v)} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
               Our Work
               <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} />
             </button>
