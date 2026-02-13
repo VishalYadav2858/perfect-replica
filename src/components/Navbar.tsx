@@ -1,11 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import servicePhoto from "@/assets/service-photo.jpg";
+import serviceVideo from "@/assets/service-video.jpg";
+import serviceWeb from "@/assets/service-web.jpg";
+import serviceCgi from "@/assets/service-cgi.jpg";
+
+const workCategories = [
+  { title: "Our Photography", image: servicePhoto, link: "/photography" },
+  { title: "Our Videography", image: serviceVideo, link: "/videography" },
+  { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
+  { title: "3D Animation and CGI", image: serviceCgi, link: "/3d-animation-and-cgi" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [workDropdown, setWorkDropdown] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,6 +37,15 @@ const Navbar = () => {
     }
   };
 
+  const openDropdown = () => {
+    clearTimeout(dropdownTimeout.current);
+    setWorkDropdown(true);
+  };
+
+  const closeDropdown = () => {
+    dropdownTimeout.current = setTimeout(() => setWorkDropdown(false), 200);
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -39,10 +61,54 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
-          <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
-            Our Work
-            <ChevronDown className="w-3 h-3" />
-          </button>
+          <div
+            className="relative"
+            onMouseEnter={openDropdown}
+            onMouseLeave={closeDropdown}
+          >
+            <button className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
+              Our Work
+              <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} />
+            </button>
+
+            <AnimatePresence>
+              {workDropdown && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-background border border-border/60 rounded-[20px] p-6 shadow-2xl min-w-[820px]"
+                >
+                  <div className="grid grid-cols-4 gap-5">
+                    {workCategories.map((cat) => (
+                      <Link
+                        key={cat.title}
+                        to={cat.link}
+                        onClick={() => setWorkDropdown(false)}
+                        className="group"
+                      >
+                        <h4 className="font-montserrat text-[11px] font-[800] uppercase tracking-[0.08em] text-foreground mb-1">
+                          {cat.title}
+                        </h4>
+                        <span className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.1em] text-foreground underline underline-offset-4 group-hover:text-accent transition-colors">
+                          Explore
+                        </span>
+                        <div className="mt-3 rounded-[12px] overflow-hidden aspect-[4/3]">
+                          <img
+                            src={cat.image}
+                            alt={cat.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             Our Services
           </button>
