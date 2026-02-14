@@ -28,7 +28,7 @@ export default function HeroSection() {
       {/* TEXT AREA */}
       <div className="text-center px-4">
 
-        <div className="h-[120px] sm:h-[170px] md:h-[220px] lg:h-[260px] flex items-center justify-center overflow-hidden">
+        <div className="h-[90px] sm:h-[120px] md:h-[120px] lg:h-[180px] flex items-center justify-center overflow-hidden">
 
           <AnimatePresence mode="wait">
             
@@ -105,9 +105,8 @@ export default function HeroSection() {
                 overflow-hidden
                 shadow-xl
               "
-              style={{
-                transform: `rotate(${rotations[i % 5]}deg)`,
-              }}
+              
+              
               whileHover={{ scale: 1.05, rotate: 0 }}
               transition={{ duration: 0.4 }}
             >

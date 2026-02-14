@@ -106,17 +106,26 @@
   animation: marquee 25s linear infinite;
 }
 
-/* Hero carousel */
+/* HERO CAROUSEL */
+
 @keyframes carousel-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-33.33%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-carousel {
-  animation: carousel-scroll 30s linear infinite;
+  animation: carousel-scroll 40s linear infinite;
+  width: max-content;
 }
+
 .animate-carousel:hover {
   animation-play-state: paused;
 }
+
 
 /* Contact marquee */
 @keyframes contact-marquee {
@@ -157,3 +166,8 @@ html {
     @apply origin-bottom-left scale-x-100;
   }
 }
+
+
+
+
+
