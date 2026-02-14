@@ -89,7 +89,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-4 bg-background border border-border/60 rounded-[20px] p-6 shadow-2xl min-w-[820px]"
+                  className="absolute top-9  mt-4 bg-white p-6  min-w-[1200px]"
                 >
                   <div className="grid grid-cols-4 gap-5">
                     {workCategories.map((cat) => (
@@ -99,7 +99,7 @@ const Navbar = () => {
                         onClick={() => setWorkDropdown(false)}
                         className="group"
                       >
-                        <h4 className="font-montserrat text-[11px] font-[800] uppercase tracking-[0.08em] text-foreground mb-1">
+                        <h4 className="font-montserrat text-[12px] font-[500] uppercase tracking-[0.08em] text-foreground mb-1">
                           {cat.title}
                         </h4>
                         <span className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.1em] text-foreground underline underline-offset-4 group-hover:text-accent transition-colors">

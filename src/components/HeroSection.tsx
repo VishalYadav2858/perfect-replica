@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
-import hero4 from "@/assets/hero-4.jpg";
-import hero5 from "@/assets/hero-5.jpg";
-
 const words = ["Creativity.", "Strategy.", "Content."];
 
-const heroImages = [hero1, hero2, hero3, hero4, hero5];
-const rotations = [-8, -3, 2, 6, -5];
+// 🔥 Replace with your video URLs (mp4 recommended)
+const heroVideos = [
+  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
+  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
+  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
+  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
+];
 
 export default function HeroSection() {
   const [currentWord, setCurrentWord] = useState(0);
@@ -25,33 +24,28 @@ export default function HeroSection() {
   return (
     <section className="pt-32 overflow-hidden bg-white">
 
-      {/* TEXT AREA */}
+      {/* ================= TEXT AREA ================= */}
       <div className="text-center px-4">
 
         <div className="h-[90px] sm:h-[120px] md:h-[120px] lg:h-[180px] flex items-center justify-center overflow-hidden">
 
           <AnimatePresence mode="wait">
-            
             <motion.h1
               key={currentWord}
               initial={{ y: 160, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -160, opacity: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-
-              /* 🔥 EXACT TYPOGRAPHY */
               className="
                 font-satoshi
                 uppercase
                 text-[#2C2D2F]
                 leading-[0.78]
-
                 text-[110px]
                 sm:text-[160px]
                 md:text-[210px]
                 lg:text-[180px]
               "
-
               style={{
                 fontWeight: 1000,
                 fontStretch: "95%",
@@ -60,19 +54,14 @@ export default function HeroSection() {
             >
               {words[currentWord]}
             </motion.h1>
-
           </AnimatePresence>
-
         </div>
 
-        {/* SUBTITLE */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6 }}
-
           className="font-satoshi uppercase text-[#2C2D2F] mt-8"
-
           style={{
             fontSize: "20px",
             lineHeight: "42px",
@@ -85,41 +74,55 @@ export default function HeroSection() {
 
       </div>
 
-      {/* IMAGE CAROUSEL */}
-      <div className="mt-20 overflow-hidden pb-10">
+      {/* ================= VIDEO CAROUSEL ================= */}
+      <div className="relative mt-24">
+        <div className="overflow-hidden">
 
-        <div
-          className="flex items-end animate-carousel"
-          style={{ width: "fit-content" }}
-        >
-          {[...heroImages, ...heroImages, ...heroImages].map((img, i) => (
+          {/* Extra spacing so rotated corners don't cut */}
+          <div className="py-24 h-[750px]">
 
-            <motion.div
-              key={i}
-              className="
-                flex-shrink-0
-                w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px]
-                h-[320px] sm:h-[380px] md:h-[440px] lg:h-[500px]
-                mx-[-10px] md:mx-[-6px]
-                rounded-[20px]
-                overflow-hidden
-                shadow-xl
-              "
-              style={{ rotate: rotations[i % rotations.length] }}
-              whileHover={{ scale: 1.05, rotate: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <img
-                src={img}
-                alt={`Creative ${(i % 5) + 1}`}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </motion.div>
+            {/* Tilt entire track */}
+            <div className="rotate-[-6deg]">
 
-          ))}
+              <motion.div
+                className="flex items-end gap-8"
+                animate={{ x: ["0%", "-60%"] }}
+                transition={{
+                  ease: "linear",
+                  duration: 30,
+                  repeat: Infinity,
+                }}
+              >
+                {[...heroVideos, ...heroVideos].map((video, i) => (
+                  <motion.div
+                    key={i}
+                    className="
+                      flex-shrink-0
+                      w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
+                      h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
+                      rounded-[24px]
+                      overflow-hidden
+                      shadow-2xl
+                      bg-black
+                    "
+                    
+                  >
+                    <video
+                      src={video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                ))}
+
+              </motion.div>
+
+            </div>
+          </div>
         </div>
-
       </div>
 
     </section>
