@@ -13,7 +13,7 @@ export default {
       },
     },
     fontFamily: {
-      montserrat: ["Montserrat", "sans-serif"],
+      montserrat: ["Satoshi", "sans-serif"],
       varela: ["Varela", "sans-serif"],
     },
     extend: {

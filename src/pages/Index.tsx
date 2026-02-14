@@ -22,8 +22,7 @@ const Index = () => {
         <ContactBanner />
         <PortfolioGrid />
         <VisionSection />
-        <GallerySection />
-        <CTASection />
+      
       </main>
       <Footer />
     </div>

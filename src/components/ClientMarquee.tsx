@@ -20,3 +20,5 @@ const ClientMarquee = () => {
 };
 
 export default ClientMarquee;
+
+// brands howering section

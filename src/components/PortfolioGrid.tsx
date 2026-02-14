@@ -1,87 +1,223 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import portfolio1 from "@/assets/portfolio-1.jpg";
-import portfolio2 from "@/assets/portfolio-2.jpg";
-import portfolio3 from "@/assets/portfolio-3.jpg";
-import aboutImage from "@/assets/about-image.jpg";
-import hero3 from "@/assets/hero-3.jpg";
+import { ExternalLink } from "lucide-react";
+
+/* ---------- IMAGES ---------- */
+/* Put these inside: src/assets/ */
+
+import gazi from "@/assets/gazi.jpg";
+import atharva from "@/assets/atharva.jpg";
+import dose from "@/assets/dose.jpg";
+import parth from "@/assets/parth.jpg";
+
+/* ---------- PROJECT DATA ---------- */
 
 const projects = [
-  { title: "Google FPV", category: "Campaign", image: portfolio1, slug: "google-fpv" },
-  { title: "VIP Bags — Product Launch", category: "3D Animation", image: portfolio2, slug: "vip-bags-product-launch" },
-  { title: "Carlton Bags — Product Launch", category: "3D Animation", image: portfolio3, slug: "carlton-bags-product-launch-3d-animation" },
-  { title: "St. Patricks' Campaign", category: "Campaign", image: hero3, slug: "st-patricks-campaign" },
+  {
+    id: 1,
+    title: "Gazi",
+    category: "YouTube Channel",
+    description:
+      "Transformed a tech channel from 10K to 189K subscribers in 8 months",
+    image: gazi,
+    link: "https://www.youtube.com/@gaziai/featured",
+  },
+  {
+    id: 2,
+    title: "Atharva Aggarwal",
+    category: "YouTube Channel",
+    description:
+      "Multi-platform influencer campaign generating 15M+ impressions",
+    image: atharva,
+    link: "https://www.youtube.com/@AtharvaAggarwal",
+  },
+  {
+    id: 3,
+    title: "Dose of Devy",
+    category: "Education Channel",
+    description:
+      "Complete rebrand and growth strategy for exam preparation",
+    image: dose,
+    link: "https://www.youtube.com/@doseofdevy/featured",
+  },
+  {
+    id: 4,
+    title: "Parth Goyal",
+    category: "Education",
+    description:
+      "End-to-end content creation and brand partnership management",
+    image: parth,
+    link: "https://www.youtube.com/@ParthGoyal",
+  },
 ];
+
+/* ---------- ANIMATION ---------- */
 
 const fadeUp = {
   hidden: { opacity: 0, y: 50 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as const },
+    transition: {
+      duration: 0.7,
+      delay: i * 0.12,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   }),
 };
 
-const PortfolioGrid = () => {
+/* ---------- COMPONENT ---------- */
+
+export default function PortfolioGrid() {
   return (
-    <section id="work" className="py-24 md:py-36 px-6 lg:px-12 max-w-[1440px] mx-auto">
-      {/* Bento Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-20 auto-rows-[200px] md:auto-rows-[260px]">
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={0} viewport={{ once: true }} className="col-span-1 row-span-2 rounded-[20px] overflow-hidden group">
-          <img src={portfolio1} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={1} viewport={{ once: true }} className="col-span-1 rounded-[20px] overflow-hidden group">
-          <img src={aboutImage} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={2} viewport={{ once: true }} className="col-span-1 rounded-[20px] overflow-hidden group">
-          <img src={portfolio2} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={3} viewport={{ once: true }} className="col-span-1 row-span-2 rounded-[20px] overflow-hidden group">
-          <img src={portfolio3} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
-        </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" custom={4} viewport={{ once: true }} className="col-span-2 rounded-[20px] overflow-hidden group">
-          <img src={hero3} alt="Creative work" className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700" loading="lazy" />
-        </motion.div>
+    <section
+      id="work"   /* 🔥 IMPORTANT — Navbar scroll target */
+      className="
+        py-24 md:py-32
+        px-6 lg:px-12
+        max-w-[1440px]
+        mx-auto
+        bg-white
+      "
+    >
+      {/* ---------- HEADING ---------- */}
+
+      <div className="mb-16 text-center">
+
+        <h2
+          className="
+            font-satoshi
+            uppercase
+            text-[36px]
+            md:text-[56px]
+            font-black
+            tracking-[-0.03em]
+            text-[#2C2D2F]
+          "
+        >
+          Creator Case Studies
+        </h2>
+
+        <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+          Real creators. Real growth. Real measurable impact.
+        </p>
+
       </div>
 
-      {/* Campaign Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* ---------- GRID ---------- */}
+
+      <div className="grid md:grid-cols-2 gap-6">
+
         {projects.map((project, i) => (
-          <motion.div key={project.title} variants={fadeUp} initial="hidden" whileInView="visible" custom={i} viewport={{ once: true }}>
-            <Link
-              to={`/works/${project.slug}`}
-              className="group rounded-[20px] overflow-hidden bg-card border border-border/50 hover:shadow-xl transition-all duration-500 block"
-            >
-              <div className="aspect-[16/10] overflow-hidden relative">
-                <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-[800ms]" loading="lazy" />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-400" />
-              </div>
-              <div className="p-6">
-                <h4 className="font-montserrat text-[15px] font-[700] uppercase tracking-[-0.01em] text-foreground">{project.title}</h4>
-                <p className="font-montserrat text-[11px] font-[500] text-muted-foreground mt-1.5 tracking-[0.05em]">View Campaign →</p>
-              </div>
-            </Link>
-          </motion.div>
-        ))}
-      </div>
+          
+          <motion.div
+            key={project.id}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={i}
 
-      {/* Subtitle */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="font-montserrat text-[13px] font-[400] text-muted-foreground max-w-lg mt-12 leading-[1.8]"
-      >
-        Explore our curated projects that showcase creativity, strategy, and innovation across branding, web, and motion design.
-      </motion.p>
-      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-        <Link to="/about" className="inline-flex items-center mt-4 font-montserrat text-[11px] font-[700] uppercase tracking-[0.2em] text-foreground link-underline">
-          Know us
-        </Link>
-      </motion.div>
+            className="
+              group
+              border
+              border-gray-200
+              rounded-[22px]
+              overflow-hidden
+              bg-white
+              hover:shadow-xl
+              transition-all
+              duration-500
+            "
+          >
+
+            {/* IMAGE */}
+
+            <div className="relative overflow-hidden">
+
+              <img
+                src={project.image}
+                alt={project.title}
+                className="
+                  w-full
+                  h-[260px]
+                  object-cover
+                  group-hover:scale-[1.05]
+                  transition-transform
+                  duration-700
+                "
+              />
+
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-black/0
+                  group-hover:bg-black/10
+                  transition-colors
+                  duration-500
+                "
+              />
+
+            </div>
+
+            {/* CONTENT */}
+
+            <div className="p-6">
+
+              <div className="flex justify-between items-center mb-3">
+
+                <span
+                  className="
+                    text-[11px]
+                    uppercase
+                    tracking-[0.15em]
+                    text-gray-500
+                    font-satoshi
+                  "
+                >
+                  {project.category}
+                </span>
+
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="opacity-70 hover:opacity-100 transition"
+                >
+                  <ExternalLink size={16} />
+                </a>
+
+              </div>
+
+              <h3
+                className="
+                  font-satoshi
+                  text-[18px]
+                  font-bold
+                  text-[#2C2D2F]
+                "
+              >
+                {project.title}
+              </h3>
+
+              <p
+                className="
+                  text-gray-500
+                  text-[13px]
+                  mt-2
+                  leading-[1.7]
+                "
+              >
+                {project.description}
+              </p>
+
+            </div>
+
+          </motion.div>
+
+        ))}
+
+      </div>
     </section>
   );
-};
-
-export default PortfolioGrid;
+}

@@ -49,7 +49,7 @@ const About = () => {
           className="bg-foreground text-background rounded-[28px] p-10 md:p-16 lg:p-20"
         >
           <h3 className="font-montserrat text-[22px] md:text-[30px] lg:text-[38px] font-[700] leading-[1.25] max-w-[800px]">
-            At AD KO, content isn't an afterthought — it's the strategy. Founded by creators, we think like storytellers and execute like marketers.
+            At DelightX, content isn't an afterthought, it's the strategy. Founded by creators, we think like storytellers and execute like marketers.
           </h3>
           <p className="font-montserrat text-[14px] font-[400] text-background/60 max-w-lg leading-[1.8] mt-10">
             Explore our curated projects that showcase creativity, strategy, and innovation across branding, web, and motion design.

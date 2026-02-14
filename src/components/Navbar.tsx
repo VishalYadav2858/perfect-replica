@@ -6,6 +6,9 @@ import servicePhoto from "@/assets/service-photo.jpg";
 import serviceVideo from "@/assets/service-video.jpg";
 import serviceWeb from "@/assets/service-web.jpg";
 import serviceCgi from "@/assets/service-cgi.jpg";
+import logo from "@/assets/logo.png";
+
+
 
 const workCategories = [
   { title: "Our Photography", image: servicePhoto, link: "/photography" },
@@ -55,8 +58,16 @@ const Navbar = () => {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-[0.85]">
-          <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">AD.</span>
-          <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">KO</span>
+          {/* <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">delightX.</span> */}
+          <Link to="/">
+      <img
+        src={logo}
+        alt="DelightX Logo"
+        className="h-10 w-auto"
+        />
+        </Link>
+
+          <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground"></span>
         </Link>
 
         {/* Desktop Nav */}
@@ -113,7 +124,7 @@ const Navbar = () => {
             Our Services
           </button>
           <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            Our Campaigns
+            Our Talents
           </button>
           <Link to="/about" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             About Us

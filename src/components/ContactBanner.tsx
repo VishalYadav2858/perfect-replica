@@ -21,7 +21,7 @@ const ContactBanner = () => {
         </div>
         {/* Bottom subtitle */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="py-4 text-center"

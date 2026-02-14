@@ -15,6 +15,9 @@ import hero5 from "@/assets/hero-5.jpg";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
+import portfolio4 from "@/assets/portfolio-3.jpg";
+import portfolio5 from "@/assets/portfolio-3.jpg";
+import portfolio6 from "@/assets/portfolio-3.jpg";
 
 interface WorkItem {
   image: string;
@@ -48,6 +51,10 @@ const serviceData: Record<string, {
       { image: servicePhoto, category: "Products" },
       { image: hero2, category: "Events" },
       { image: hero4, category: "Lifestyle" },
+      { image: portfolio3, category: "Products" },
+      { image: portfolio3, category: "Products" },
+      { image: portfolio3, category: "Products" },
+      { image: portfolio3, category: "Products" },
       { image: portfolio3, category: "Products" },
       { image: hero1, category: "Events" },
       { image: hero3, category: "Lifestyle" },
