@@ -100,13 +100,12 @@ export default function HeroSection() {
                 flex-shrink-0
                 w-[240px] sm:w-[280px] md:w-[320px] lg:w-[360px]
                 h-[320px] sm:h-[380px] md:h-[440px] lg:h-[500px]
-                mx-2 md:mx-3
+                mx-[-10px] md:mx-[-6px]
                 rounded-[20px]
                 overflow-hidden
                 shadow-xl
               "
-              
-              
+              style={{ rotate: rotations[i % rotations.length] }}
               whileHover={{ scale: 1.05, rotate: 0 }}
               transition={{ duration: 0.4 }}
             >
