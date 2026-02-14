@@ -79,7 +79,7 @@ const ContactUs = () => {
             <div>
               <h3 className="font-montserrat text-[11px] font-[700] uppercase tracking-[0.15em] text-foreground mb-3">Email</h3>
               <a href="mailto:hello@adko.in" className="font-montserrat text-[16px] text-muted-foreground hover:text-foreground transition-colors">
-                hello@adko.in
+                contact@delightxmedia.in
               </a>
             </div>
             <div>

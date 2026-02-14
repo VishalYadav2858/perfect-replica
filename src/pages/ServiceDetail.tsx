@@ -30,12 +30,18 @@ import e1 from "@/assets/e1.jpeg";
 import e2 from "@/assets/e2.jpg";
 import e3 from "@/assets/e3.jpeg";
 
+
+
+import food from "@/assets/food.mp4";
+
+
 /* -------------------- TYPES -------------------- */
 
 interface WorkItem {
   type: "image" | "video";
   src: string;
   category: string;
+  yt?: string;
 }
 
 /* -------------------- DATA -------------------- */
@@ -63,33 +69,39 @@ const serviceData: Record<
     works: [
       {
         type: "video",
-        src: "https://www.youtube.com/embed/ysz5S6PUM-U",
+        src: food,
         category: "Food & Beverages",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
         src: "https://www.youtube.com/embed/jNQXAC9IVRw",
         category: "Products and Accessories",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
         src: "https://www.youtube.com/embed/tgbNymZ7vqY",
         category: "Ed-Tech",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
         src: "https://www.youtube.com/embed/aqz-KE-bpKQ",
         category: "Food & Beverages",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
         src: "https://www.youtube.com/embed/ScMzIvxBSi4",
         category: "Products and Accessories",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
         src: "https://www.youtube.com/embed/9No-FiEInLA",
         category: "Ed-Tech",
+        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
     ],
   },
@@ -240,24 +252,45 @@ const ServiceDetail = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="rounded-[16px] overflow-hidden aspect-[4/3] bg-black"
+                className="rounded-[16px] overflow-hidden aspect-[4/6] bg-black"
               >
                 {work.type === "image" ? (
-                  <img
-                    src={work.src}
-                    alt={work.category}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                ) : (
-                  <iframe
-                    src={work.src}
-                    title={work.category}
-                    className="w-full h-full"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                )}
+  <img
+    src={work.src}
+    alt={work.category}
+    className="w-full h-full object-cover"
+    loading="lazy"
+  />
+) : (
+  <div
+    className="relative w-full h-full cursor-pointer group"
+    onClick={() => {
+      if (work.yt) {
+        window.open(work.yt, "_blank");
+      }
+    }}
+  >
+    {/* VIDEO PREVIEW */}
+    <video
+      src={work.src}
+      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="auto"
+    />
+
+    {/* Optional Play Overlay */}
+    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition">
+      <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
+        ▶
+      </div>
+    </div>
+  </div>
+)}
+
+
               </motion.div>
             ))}
           </div>
