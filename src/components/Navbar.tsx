@@ -8,13 +8,11 @@ import serviceWeb from "@/assets/service-web.jpg";
 import serviceCgi from "@/assets/service-cgi.jpg";
 import logo from "@/assets/logo.png";
 
-
-
 const workCategories = [
-  { title: "Our Photography", image: servicePhoto, link: "/photography" },
-  { title: "Our Videography", image: serviceVideo, link: "/videography" },
+  { title: "OUR PHOTOGRAPHY", image: servicePhoto, link: "/photography" },
+  { title: "OUR VIDEOGRAPHY", image: serviceVideo, link: "/videography" },
   { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
-  { title: "3D Animation and CGI", image: serviceCgi, link: "/3d-animation-and-cgi" },
+  { title: "3D ANIMATION AND CGI", image: serviceCgi, link: "/3d-animation-and-cgi" },
 ];
 
 const Navbar = () => {
@@ -58,16 +56,11 @@ const Navbar = () => {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
         <Link to="/" className="flex flex-col leading-[0.85]">
-          {/* <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground">delightX.</span> */}
-          <Link to="/">
-      <img
-        src={logo}
-        alt="DelightX Logo"
-        className="h-10 w-auto"
-        />
-        </Link>
-
-          <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-foreground"></span>
+          <img
+            src={logo}
+            alt="DelightX Logo"
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -77,8 +70,11 @@ const Navbar = () => {
             onMouseEnter={openDropdown}
             onMouseLeave={closeDropdown}
           >
-            <button onClick={() => setWorkDropdown((v) => !v)} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1">
-              Our Work
+            <button 
+              onClick={() => setWorkDropdown((v) => !v)} 
+              className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1"
+            >
+              OUR WORK
               <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} />
             </button>
 
@@ -89,31 +85,38 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute top-9  mt-4 bg-white p-6  min-w-[1200px]"
+                  className="fixed left-0 right-0 top-20 bg-white shadow-xl"
+                  style={{ 
+                    marginLeft: 'calc(-50vw + 50%)',
+                    marginRight: 'calc(-50vw + 50%)',
+                    width: '100vw'
+                  }}
                 >
-                  <div className="grid grid-cols-4 gap-5">
-                    {workCategories.map((cat) => (
-                      <Link
-                        key={cat.title}
-                        to={cat.link}
-                        onClick={() => setWorkDropdown(false)}
-                        className="group"
-                      >
-                        <h4 className="font-montserrat text-[12px] font-[500] uppercase tracking-[0.08em] text-foreground mb-1">
-                          {cat.title}
-                        </h4>
-                        <span className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.1em] text-foreground underline underline-offset-4 group-hover:text-accent transition-colors">
-                          Explore
-                        </span>
-                        <div className="mt-3 rounded-[12px] overflow-hidden aspect-[4/3]">
-                          <img
-                            src={cat.image}
-                            alt={cat.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                      </Link>
-                    ))}
+                  <div className="max-w-[1800px] mx-auto px-6 lg:px-6 py-6">
+                    <div className="grid grid-cols-4 gap-16">
+                      {workCategories.map((cat) => (
+                        <Link
+                          key={cat.title}
+                          to={cat.link}
+                          onClick={() => setWorkDropdown(false)}
+                          className="group block"
+                        >
+                          <h4 className="font-montserrat text-[13px] font-[600] tracking-[0.1em] text-foreground mb-2">
+                            {cat.title}
+                          </h4>
+                          <span className="font-montserrat text-[11px] font-[500] uppercase tracking-[0.15em] text-foreground/70 group-hover:text-foreground transition-colors border-b border-transparent group-hover:border-foreground pb-0.5">
+                            EXPLORE
+                          </span>
+                          <div className="mt-4 overflow-hidden">
+                            <img
+                              src={cat.image}
+                              alt={cat.title}
+                              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                            />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -121,13 +124,13 @@ const Navbar = () => {
           </div>
 
           <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            Our Services
+            OUR SERVICES
           </button>
           <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            Our Talents
+            OUR TALENTS
           </button>
           <Link to="/about" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            About Us
+            ABOUT US
           </Link>
         </div>
 
@@ -136,7 +139,7 @@ const Navbar = () => {
           to="/contact-us"
           className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
         >
-          Get in touch
+          GET IN TOUCH
         </Link>
 
         {/* Mobile Menu Toggle */}
@@ -160,10 +163,10 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-8 p-10">
               {[
-                { label: "Our Work", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
-                { label: "Our Services", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
-                { label: "Our Campaigns", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
-                { label: "About Us", action: () => { setMenuOpen(false); setTimeout(() => navigate("/about"), 300); } },
+                { label: "OUR WORK", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+                { label: "OUR SERVICES", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
+                { label: "OUR CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+                { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => navigate("/about"), 300); } },
               ].map((item, i) => (
                 <motion.button
                   key={item.label}
@@ -183,7 +186,7 @@ const Navbar = () => {
                 transition={{ delay: 0.4 }}
                 className="inline-flex items-center justify-center w-fit px-8 py-3.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-sm font-[600] uppercase tracking-wider mt-4"
               >
-                Get in touch
+                GET IN TOUCH
               </motion.button>
             </div>
           </motion.div>
