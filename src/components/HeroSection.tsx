@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const words = ["Creativity.", "Strategy.", "Content."];
 
-// 🔥 Replace with your video URLs (mp4 recommended)
 const heroVideos = [
   "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
   "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
@@ -24,11 +23,10 @@ export default function HeroSection() {
   return (
     <section className="pt-32 overflow-hidden bg-white">
 
-      {/* ================= TEXT AREA ================= */}
+      {/* ================= TEXT ================= */}
       <div className="text-center px-4">
 
-        <div className="h-[90px] sm:h-[120px] md:h-[120px] lg:h-[180px] flex items-center justify-center overflow-hidden">
-
+        <div className="h-[120px] md:h-[180px] flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentWord}
@@ -48,7 +46,6 @@ export default function HeroSection() {
               "
               style={{
                 fontWeight: 1000,
-                fontStretch: "95%",
                 letterSpacing: "-0.09em",
               }}
             >
@@ -65,104 +62,84 @@ export default function HeroSection() {
           style={{
             fontSize: "20px",
             lineHeight: "42px",
-            fontWeight: 400,
             letterSpacing: "0.18em",
           }}
         >
           WE CREATE. WE STRATEGIZE. WE SCALE.
         </motion.p>
-
       </div>
 
-      {/* ================= VIDEO CAROUSEL ================= */}
-<div className="relative mt-3">
-  <div className="overflow-hidden">
+      {/* ================= 3D VIDEO CAROUSEL ================= */}
+      <div className="relative mt-1">
 
-    {/* Extra spacing so rotated corners don't cut */}
-    <div className="py-24 h-[750px]">
-
-      {/* 🔥 3D Perspective Wrapper */}
-      <div
-        style={{
-          perspective: "2200px",
-          perspectiveOrigin: "50% 65%",
-        }}
-      >
-
-        {/* 🔥 3D Tilt Plane */}
+        {/* 🔥 Perspective creates real 3D */}
         <div
+          className="overflow-hidden py-24"
           style={{
-            transform:
-              "rotateX(18deg) rotateY(-12deg) rotateZ(-6deg)",
-            transformStyle: "preserve-3d",
+            perspective: "2200px",
+            perspectiveOrigin: "50% 65%",
           }}
         >
 
-          <motion.div
-            className="flex items-end gap-8"
-            animate={{ x: ["0%", "-60%"] }}
-            transition={{
-              ease: "linear",
-              duration: 30,
-              repeat: Infinity,
-            }}
+          {/* Tilt whole plane in 3D */}
+          <div
             style={{
+              transform:
+                "rotateX(18deg) rotateY(-12deg) translateZ(-120px)",
               transformStyle: "preserve-3d",
             }}
           >
-            {[...heroVideos, ...heroVideos].map((video, i) => (
-              <div
-                key={i}
-                className="
-                  flex-shrink-0
-                  w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
-                  h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
-                  rounded-[24px]
-                  overflow-hidden
-                  shadow-2xl
-                  bg-black
-                "
-                style={{
-                  transform: `
-                    
-                  `,
-                }}
-              >
-                <video
-                  src={video}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </motion.div>
-                  >
-                    <video
-                      src={video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="auto"
-                      className="w-full h-full object-cover"
-                      onCanPlay={(e) => (e.target as HTMLVideoElement).play()}
-                    />
-                  </motion.div>
-                ))}
 
-              </motion.div>
+            <motion.div
+              className="flex items-end gap-10"
+              animate={{ x: ["0%", "-60%"] }}
+              transition={{
+                ease: "linear",
+                duration: 32,
+                repeat: Infinity,
+              }}
+              style={{
+                transformStyle: "preserve-3d",
+              }}
+            >
+              {[...heroVideos, ...heroVideos].map((video, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{
+                    scale: 1.08,
+                    translateZ: 60,
+                  }}
+                  className="
+                    flex-shrink-0
+                    w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
+                    h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
+                    rounded-[28px]
+                    overflow-hidden
+                    shadow-2xl
+                    bg-black
+                  "
+                  style={{
+                    transform: `
+                      
+                      
+                    `,
+                  }}
+                >
+                  <video
+                    src={video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
 
+          </div>
         </div>
       </div>
-
-    </div>
-  </div>
-</div>
-
-
     </section>
   );
 }
