@@ -21,7 +21,7 @@ const services = [
   {
     title: "Social media Growth",
     description:
-      "Data-driven strategies to accelerate your Brand growth and maximize monetization.",
+      "Data-driven strategies to accelerate your Brand growth and maximize monetization.Your social media is our responsibility",
   },
 ];
 
