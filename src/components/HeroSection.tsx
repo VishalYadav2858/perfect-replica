@@ -1,13 +1,21 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import food from "@/assets/food.mp4";
+import f from "@/assets/f.mp4";
+import p from "@/assets/p.mp4";
+import p11 from "@/assets/p1.mp4";
+import p22 from "@/assets/p2.mp4";
+import v from "@/assets/v.mp4";
+import v1 from "@/assets/v1.mp4";
+
 const words = ["Creativity.", "Strategy.", "Content."];
 
 const heroVideos = [
-  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
-  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
-  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
-  "https://cdn.prod.website-files.com/67baec8acda347f8a7b9e834/68188421c3da99dab97e2e7e_Starbucks%20India-transcode.mp4",
+  food,
+  p11,
+  p22,
+  f,
 ];
 
 export default function HeroSection() {
@@ -70,11 +78,11 @@ export default function HeroSection() {
       </div>
 
       {/* ================= 3D VIDEO CAROUSEL ================= */}
-      <div className="relative mt-1">
+      <div className="relative mt-2">
 
         {/* 🔥 Perspective creates real 3D */}
         <div
-          className="overflow-hidden py-24"
+          className="overflow-hidden py-4"
           style={{
             perspective: "2200px",
             perspectiveOrigin: "50% 65%",
@@ -91,7 +99,7 @@ export default function HeroSection() {
           >
 
             <motion.div
-              className="flex items-end gap-10"
+              className="flex items-end gap-2"
               animate={{ x: ["0%", "-60%"] }}
               transition={{
                 ease: "linear",
@@ -105,10 +113,10 @@ export default function HeroSection() {
               {[...heroVideos, ...heroVideos].map((video, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{
-                    scale: 1.08,
-                    translateZ: 60,
-                  }}
+                  // whileHover={{
+                  //   scale: 1.08,
+                  //   translateZ: 60,
+                  // }}
                   className="
                     flex-shrink-0
                     w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
@@ -143,3 +151,10 @@ export default function HeroSection() {
     </section>
   );
 }
+
+
+
+
+
+
+
