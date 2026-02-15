@@ -55,13 +55,17 @@ const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <Link to="/" className="flex flex-col leading-[0.85]">
-          <img
-            src={logo}
-            alt="DelightX Logo"
-            className="h-10 w-auto"
-          />
-        </Link>
+        <div
+  onClick={() => window.location.href = "/"}
+  className="flex flex-col leading-[0.85] cursor-pointer"
+>
+  <img
+    src={logo}
+    alt="DelightX Logo"
+    className="h-10 w-auto"
+  />
+</div>
+
 
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
