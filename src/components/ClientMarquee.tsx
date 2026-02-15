@@ -1,5 +1,9 @@
 import marriottLogo from "../assets/marriott-logo.png";
-import google from "../assets/google.png"
+// import google from "../assets/google.png"
+import lo from "../assets/lo.png"
+import lo1new from "../assets/lo1new.png"
+import lo2new from "../assets/lo2new.png"
+import lo3 from "../assets/lo3.png"
 // import audiLogo from "@/assets/clients/audi-logo.png";
 // import miltonLogo from "@/assets/clients/milton-logo.png";
 // import googleLogo from "@/assets/clients/google-logo.png";
@@ -13,18 +17,18 @@ import google from "../assets/google.png"
 // import totsLogo from "@/assets/clients/tots-logo.png";
 
 const clients = [
-  { name: "MARRIOTT", logo: marriottLogo },
-  { name: "AUDI", logo: marriottLogo },
-  { name: "MILTON", logo: marriottLogo },
-  { name: "GOOGLE", logo: google },
-  { name: "CARLTON", logo: marriottLogo },
-  { name: "PAYTM", logo: marriottLogo },
-  { name: "BRITIME", logo: marriottLogo },
-  { name: "BLUE SEA", logo: marriottLogo },
-  { name: "FAIRFIELD", logo: marriottLogo },
-  { name: "LEXUS", logo: marriottLogo },
-  { name: "VIP BAGS", logo: marriottLogo },
-  { name: "TOTS", logo: marriottLogo },
+  { name: "MARRIOTT", logo: lo },
+  { name: "AUDI", logo: lo1new },
+  { name: "MILTON", logo: lo2new },
+  // { name: "GOOGLE", logo: google },
+  { name: "CARLTON", logo: lo3 },
+  // { name: "PAYTM", logo: marriottLogo },
+  // { name: "BRITIME", logo: marriottLogo },
+  // { name: "BLUE SEA", logo: marriottLogo },
+  // { name: "FAIRFIELD", logo: marriottLogo },
+  // { name: "LEXUS", logo: marriottLogo },
+  // { name: "VIP BAGS", logo: marriottLogo },
+  // { name: "TOTS", logo: marriottLogo },
 ];
 
 const ClientMarquee = () => {

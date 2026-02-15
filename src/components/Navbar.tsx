@@ -12,7 +12,7 @@ const workCategories = [
   { title: "OUR PHOTOGRAPHY", image: servicePhoto, link: "/photography" },
   { title: "OUR VIDEOGRAPHY", image: serviceVideo, link: "/videography" },
   { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
-  { title: "3D ANIMATION AND CGI", image: serviceCgi, link: "/3d-animation-and-cgi" },
+  { title: "BRANDING", image: serviceCgi, link: "/3d-animation-and-cgi" },
 ];
 
 const Navbar = () => {

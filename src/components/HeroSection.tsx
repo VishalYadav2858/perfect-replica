@@ -29,7 +29,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="pt-32 overflow-hidden bg-white">
+    <section className="pt-36 overflow-hidden bg-white">
 
       {/* ================= TEXT ================= */}
       <div className="text-center px-4">

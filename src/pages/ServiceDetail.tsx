@@ -30,8 +30,6 @@ import e1 from "@/assets/e1.jpeg";
 import e2 from "@/assets/e2.jpg";
 import e3 from "@/assets/e3.jpeg";
 
-
-
 import food from "@/assets/food.mp4";
 import f from "@/assets/f.mp4";
 import p from "@/assets/p.mp4";
@@ -40,7 +38,11 @@ import p22 from "@/assets/p2.mp4";
 import v from "@/assets/v.mp4";
 import v1 from "@/assets/v1.mp4";
 
+import wb from "@/assets/wb.jpg";
+import web from "@/assets/web.jpg";
 
+import m from "@/assets/m.jpeg";
+import m1 from "@/assets/m1.jpeg";
 /* -------------------- TYPES -------------------- */
 
 interface WorkItem {
@@ -61,8 +63,6 @@ const serviceData: Record<
     works: WorkItem[];
   }
 > = {
-  /* ---------- VIDEOGRAPHY (YouTube Embed) ---------- */
-
   videography: {
     title: "Our Videography",
     tagline: "Visual Stories in Motion",
@@ -73,46 +73,14 @@ const serviceData: Record<
       "Food & Beverages",
     ],
     works: [
-      {
-        type: "video",
-        src: food,
-        category: "Food & Beverages",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
-      {
-        type: "video",
-        src: p22,
-        category: "Products and Accessories",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
-      {
-        type: "video",
-        src: v1,
-        category: "Ed-Tech",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
-      {
-        type: "video",
-        src: f,
-        category: "Food & Beverages",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
-      {
-        type: "video",
-        src: p11,
-        category: "Products and Accessories",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
-      {
-        type: "video",
-        src: v,
-        category: "Ed-Tech",
-        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
-      },
+      { type: "video", src: food, category: "Food & Beverages" },
+      { type: "video", src: p22, category: "Products and Accessories" },
+      { type: "video", src: v1, category: "Ed-Tech" },
+      { type: "video", src: f, category: "Food & Beverages" },
+      { type: "video", src: p11, category: "Products and Accessories" },
+      { type: "video", src: v, category: "Ed-Tech" },
     ],
   },
-
-  /* ---------- PHOTOGRAPHY ---------- */
 
   photography: {
     title: "Our Photography",
@@ -120,42 +88,37 @@ const serviceData: Record<
     filters: ["All Photos", "Events", "Products", "Lifestyle"],
     works: [
       { type: "image", src: hero4, category: "Lifestyle" },
-
       { type: "image", src: p1, category: "Products" },
       { type: "image", src: p2, category: "Products" },
       { type: "image", src: p3, category: "Products" },
       { type: "image", src: p4, category: "Products" },
       { type: "image", src: p5, category: "Products" },
       { type: "image", src: p6, category: "Products" },
-
       { type: "image", src: e1, category: "Events" },
       { type: "image", src: e2, category: "Events" },
       { type: "image", src: e3, category: "Events" },
-
       { type: "image", src: hero3, category: "Lifestyle" },
     ],
   },
-
-  /* ---------- UI / UX ---------- */
 
   "ui-ux": {
     title: "UI / UX",
     tagline: "Designing Digital Experiences",
     filters: ["All Projects", "Web Apps", "Mobile Apps", "Dashboards"],
     works: [
-      { type: "image", src: serviceWeb, category: "Web Apps" },
-      { type: "image", src: hero2, category: "Mobile Apps" },
-      { type: "image", src: hero4, category: "Dashboards" },
-      { type: "image", src: portfolio1, category: "Web Apps" },
-      { type: "image", src: hero5, category: "Mobile Apps" },
-      { type: "image", src: portfolio3, category: "Dashboards" },
+      { type: "image", src: web, category: "Web Apps" },
+      { type: "image", src: wb, category: "Web Apps" },
+      { type: "image", src: m, category: "Mobile Apps" },
+      { type: "image", src: m1, category: "Mobile Apps" },
+      
+      // { type: "image", src: hero4, category: "Dashboards" },
+      // { type: "image", src: portfolio1, category: "Web Apps" },
+      // { type: "image", src: portfolio3, category: "Dashboards" },
     ],
   },
 
-  /* ---------- 3D CGI ---------- */
-
-  "3d-animation-and-cgi": {
-    title: "3D Animation and CGI",
+  "Branding": {
+    title: "Branding",
     tagline: "Bringing Ideas to Life",
     filters: [
       "All Work",
@@ -208,7 +171,7 @@ const ServiceDetail = () => {
       <Navbar />
 
       <main className="pt-28 md:pt-36 pb-24">
-        {/* ---------- HEADER ---------- */}
+        {/* HEADER */}
 
         <div className="text-center px-6 mb-16">
           <motion.div
@@ -230,7 +193,7 @@ const ServiceDetail = () => {
           </motion.div>
         </div>
 
-        {/* ---------- FILTERS ---------- */}
+        {/* FILTERS */}
 
         <div className="flex flex-wrap justify-center gap-3 px-6 mb-16">
           {service.filters.map((filter, i) => (
@@ -248,55 +211,43 @@ const ServiceDetail = () => {
           ))}
         </div>
 
-        {/* ---------- GRID ---------- */}
+        {/* GRID */}
 
         <div className="px-6 lg:px-12 max-w-[1440px] mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div
+            className={`grid gap-4 ${
+              slug === "ui-ux"
+                ? "grid-cols-1 md:grid-cols-2"
+                : "grid-cols-1 md:grid-cols-3"
+            }`}
+          >
             {filteredWorks.map((work, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.08 }}
-                className="rounded-[16px] overflow-hidden aspect-[4/6] bg-black"
+                className={`rounded-[16px] overflow-hidden bg-black ${
+                  slug === "ui-ux" ? "aspect-[16/10]" : "aspect-[4/6]"
+                }`}
               >
                 {work.type === "image" ? (
-  <img
-    src={work.src}
-    alt={work.category}
-    className="w-full h-full object-cover"
-    loading="lazy"
-  />
-) : (
-  <div
-    className="relative w-full h-full cursor-pointer group"
-    onClick={() => {
-      if (work.yt) {
-        window.open(work.yt, "_blank");
-      }
-    }}
-  >
-    {/* VIDEO PREVIEW */}
-    <video
-      src={work.src}
-      className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-      autoPlay
-      loop
-      muted
-      playsInline
-      preload="auto"
-    />
-
-    {/* Optional Play Overlay */}
-    <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition">
-      <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center">
-        ▶
-      </div>
-    </div>
-  </div>
-)}
-
-
+                  <img
+                    src={work.src}
+                    alt={work.category}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                ) : (
+                  <video
+                    src={work.src}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                  />
+                )}
               </motion.div>
             ))}
           </div>
