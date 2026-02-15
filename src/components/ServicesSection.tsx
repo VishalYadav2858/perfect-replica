@@ -19,9 +19,9 @@ const services = [
       "Your brand is not confined to a niche; instead, we craft a narrative that spans across various facets of your personality and accomplishments.",
   },
   {
-    title: "Photography",
+    title: "Social media Growth",
     description:
-      "We create content that speaks to your audience and solves for their needs — rooted in strategy, shaped by insight, and built to perform across platforms.",
+      "Data-driven strategies to accelerate your Brand growth and maximize monetization.",
   },
 ];
 

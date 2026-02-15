@@ -33,6 +33,12 @@ import e3 from "@/assets/e3.jpeg";
 
 
 import food from "@/assets/food.mp4";
+import f from "@/assets/f.mp4";
+import p from "@/assets/p.mp4";
+import p11 from "@/assets/p1.mp4";
+import p22 from "@/assets/p2.mp4";
+import v from "@/assets/v.mp4";
+import v1 from "@/assets/v1.mp4";
 
 
 /* -------------------- TYPES -------------------- */
@@ -71,37 +77,37 @@ const serviceData: Record<
         type: "video",
         src: food,
         category: "Food & Beverages",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
-        src: "https://www.youtube.com/embed/jNQXAC9IVRw",
+        src: p22,
         category: "Products and Accessories",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
-        src: "https://www.youtube.com/embed/tgbNymZ7vqY",
+        src: v1,
         category: "Ed-Tech",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
-        src: "https://www.youtube.com/embed/aqz-KE-bpKQ",
+        src: f,
         category: "Food & Beverages",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
-        src: "https://www.youtube.com/embed/ScMzIvxBSi4",
+        src: p11,
         category: "Products and Accessories",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
       {
         type: "video",
-        src: "https://www.youtube.com/embed/9No-FiEInLA",
+        src: v,
         category: "Ed-Tech",
-        yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
+        // yt: "https://www.youtube.com/embed/jNQXAC9IVRw"
       },
     ],
   },

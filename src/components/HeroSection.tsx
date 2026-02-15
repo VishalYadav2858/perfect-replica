@@ -75,37 +75,70 @@ export default function HeroSection() {
       </div>
 
       {/* ================= VIDEO CAROUSEL ================= */}
-      <div className="relative mt-24">
-        <div className="overflow-hidden">
+<div className="relative mt-3">
+  <div className="overflow-hidden">
 
-          {/* Extra spacing so rotated corners don't cut */}
-          <div className="py-24 h-[750px]">
+    {/* Extra spacing so rotated corners don't cut */}
+    <div className="py-24 h-[750px]">
 
-            {/* Tilt entire track */}
-            <div className="rotate-[-6deg]">
+      {/* 🔥 3D Perspective Wrapper */}
+      <div
+        style={{
+          perspective: "2200px",
+          perspectiveOrigin: "50% 65%",
+        }}
+      >
 
-              <motion.div
-                className="flex items-end gap-8"
-                animate={{ x: ["0%", "-60%"] }}
-                transition={{
-                  ease: "linear",
-                  duration: 30,
-                  repeat: Infinity,
+        {/* 🔥 3D Tilt Plane */}
+        <div
+          style={{
+            transform:
+              "rotateX(18deg) rotateY(-12deg) rotateZ(-6deg)",
+            transformStyle: "preserve-3d",
+          }}
+        >
+
+          <motion.div
+            className="flex items-end gap-8"
+            animate={{ x: ["0%", "-60%"] }}
+            transition={{
+              ease: "linear",
+              duration: 30,
+              repeat: Infinity,
+            }}
+            style={{
+              transformStyle: "preserve-3d",
+            }}
+          >
+            {[...heroVideos, ...heroVideos].map((video, i) => (
+              <div
+                key={i}
+                className="
+                  flex-shrink-0
+                  w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
+                  h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
+                  rounded-[24px]
+                  overflow-hidden
+                  shadow-2xl
+                  bg-black
+                "
+                style={{
+                  transform: `
+                    
+                  `,
                 }}
               >
-                {[...heroVideos, ...heroVideos].map((video, i) => (
-                  <motion.div
-                    key={i}
-                    className="
-                      flex-shrink-0
-                      w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
-                      h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
-                      rounded-[24px]
-                      overflow-hidden
-                      shadow-2xl
-                      bg-black
-                    "
-                    
+                <video
+                  src={video}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </motion.div>
                   >
                     <video
                       src={video}
@@ -122,10 +155,13 @@ export default function HeroSection() {
 
               </motion.div>
 
-            </div>
-          </div>
         </div>
       </div>
+
+    </div>
+  </div>
+</div>
+
 
     </section>
   );
