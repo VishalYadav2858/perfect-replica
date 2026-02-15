@@ -5,6 +5,11 @@ import emailjs from "@emailjs/browser";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+
+
+
+
+
 const ContactUs = () => {
   const form = useRef(null);
   const [loading, setLoading] = useState(false);
@@ -35,6 +40,7 @@ const ContactUs = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      
       <Navbar />
 
       <main className="pt-28 md:pt-36 pb-24 px-6 lg:px-12 max-w-[1440px] mx-auto">
