@@ -29,12 +29,12 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="pt-24 sm:pt-36 overflow-hidden bg-white">
+    <section className="pt-36 overflow-hidden bg-white">
 
       {/* ================= TEXT ================= */}
       <div className="text-center px-4">
 
-        <div className="h-[70px] sm:h-[120px] md:h-[180px] flex items-center justify-center overflow-hidden">
+        <div className="h-[120px] md:h-[180px] flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentWord}
@@ -47,9 +47,9 @@ export default function HeroSection() {
                 uppercase
                 text-[#2C2D2F]
                 leading-[0.78]
-                text-[56px]
-                sm:text-[110px]
-                md:text-[160px]
+                text-[110px]
+                sm:text-[160px]
+                md:text-[210px]
                 lg:text-[180px]
               "
               style={{
@@ -66,10 +66,12 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6 }}
-          className="font-satoshi uppercase text-[#2C2D2F] mt-4 sm:mt-8 text-[12px] sm:text-[16px] md:text-[20px]"
+          className="font-satoshi uppercase text-[#2C2D2F] mt-8"
           style={{
-            lineHeight: "1.8",
+            fontSize: "20px",
+            lineHeight: "42px",
             letterSpacing: "0.18em",
+            fontWeight: 500,
           }}
         >
           WE CREATE. WE STRATEGIZE. WE SCALE.
@@ -92,7 +94,7 @@ export default function HeroSection() {
           <div
             style={{
               transform:
-                "rotateX(12deg) rotateY(-6deg) translateZ(-40px)",
+                "rotateX(18deg) rotateY(-12deg) translateZ(-120px)",
               transformStyle: "preserve-3d",
             }}
           >
@@ -102,7 +104,7 @@ export default function HeroSection() {
               animate={{ x: ["0%", "-60%"] }}
               transition={{
                 ease: "linear",
-                duration: 32,
+                duration: 12,
                 repeat: Infinity,
               }}
               style={{
@@ -118,9 +120,9 @@ export default function HeroSection() {
                   // }}
                   className="
                     flex-shrink-0
-                    w-[180px] sm:w-[260px] md:w-[340px] lg:w-[380px]
-                    h-[240px] sm:h-[340px] md:h-[460px] lg:h-[520px]
-                    rounded-[18px] sm:rounded-[28px]
+                    w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
+                    h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
+                    rounded-[28px]
                     overflow-hidden
                     shadow-2xl
                     bg-black
