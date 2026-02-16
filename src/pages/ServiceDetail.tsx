@@ -215,10 +215,10 @@ const ServiceDetail = () => {
 
         <div className="px-6 lg:px-12 max-w-[1440px] mx-auto">
           <div
-            className={`grid gap-4 ${
+            className={`grid gap-2 sm:gap-4 ${
               slug === "ui-ux"
-                ? "grid-cols-1 md:grid-cols-2"
-                : "grid-cols-1 md:grid-cols-3"
+                ? "grid-cols-2 md:grid-cols-2"
+                : "grid-cols-2 md:grid-cols-3"
             }`}
           >
             {filteredWorks.map((work, i) => (
