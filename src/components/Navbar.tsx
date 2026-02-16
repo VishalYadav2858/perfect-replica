@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import servicePhoto from "@/assets/service-photo.jpg";
 import serviceVideo from "@/assets/service-video.jpg";
@@ -18,6 +18,7 @@ const workCategories = [
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [workDropdown, setWorkDropdown] = useState(false);
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
   const navigate = useNavigate();
@@ -165,9 +166,45 @@ const Navbar = () => {
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             className="lg:hidden fixed inset-0 top-20 bg-background z-40 overflow-hidden"
           >
-            <div className="flex flex-col gap-8 p-10">
+            <div className="flex flex-col gap-6 p-10">
+              {/* OUR WORK - expandable */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <button
+                  onClick={() => setMobileWorkOpen((v) => !v)}
+                  className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left flex items-center gap-2"
+                >
+                  OUR WORK
+                  <ChevronRight className={`w-6 h-6 transition-transform duration-300 ${mobileWorkOpen ? "rotate-90" : ""}`} />
+                </button>
+                <AnimatePresence>
+                  {mobileWorkOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden ml-4 mt-3 flex flex-col gap-3"
+                    >
+                      {workCategories.map((cat) => (
+                        <Link
+                          key={cat.title}
+                          to={cat.link}
+                          onClick={() => setMenuOpen(false)}
+                          className="font-montserrat text-lg font-[600] uppercase tracking-wide text-foreground/70 hover:text-foreground transition-colors"
+                        >
+                          {cat.title}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+
               {[
-                { label: "OUR WORK", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
                 { label: "OUR SERVICES", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
                 { label: "OUR CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
                 { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => navigate("/about"), 300); } },
@@ -177,7 +214,7 @@ const Navbar = () => {
                   onClick={item.action}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: (i + 1) * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left"
                 >
                   {item.label}
