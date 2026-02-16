@@ -29,27 +29,27 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="pt-36 overflow-hidden bg-white">
+    <section className="pt-24 md:pt-36 overflow-hidden bg-white">
 
       {/* ================= TEXT ================= */}
       <div className="text-center px-4">
 
-        <div className="h-[120px] md:h-[180px] flex items-center justify-center overflow-hidden">
+        <div className="h-[60px] sm:h-[100px] md:h-[180px] flex items-center justify-center overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.h1
               key={currentWord}
-              initial={{ y: 160, opacity: 0 }}
+              initial={{ y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -160, opacity: 0 }}
+              exit={{ y: -80, opacity: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="
                 font-satoshi
                 uppercase
                 text-[#2C2D2F]
                 leading-[0.78]
-                text-[110px]
-                sm:text-[160px]
-                md:text-[210px]
+                text-[48px]
+                sm:text-[90px]
+                md:text-[160px]
                 lg:text-[180px]
               "
               style={{
@@ -66,10 +66,9 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.35, duration: 0.6 }}
-          className="font-satoshi uppercase text-[#2C2D2F] mt-8"
+          className="font-satoshi uppercase text-[#2C2D2F] mt-6 md:mt-8 text-[11px] sm:text-[14px] md:text-[20px]"
           style={{
-            fontSize: "20px",
-            lineHeight: "42px",
+            lineHeight: "1.8",
             letterSpacing: "0.18em",
             fontWeight: 500,
           }}
@@ -80,8 +79,6 @@ export default function HeroSection() {
 
       {/* ================= 3D VIDEO CAROUSEL ================= */}
       <div className="relative mt-2">
-
-        {/* 🔥 Perspective creates real 3D */}
         <div
           className="overflow-hidden py-4"
           style={{
@@ -89,16 +86,13 @@ export default function HeroSection() {
             perspectiveOrigin: "50% 65%",
           }}
         >
-
-          {/* Tilt whole plane in 3D */}
           <div
+            className="md:transform-none"
             style={{
-              transform:
-                "rotateX(18deg) rotateY(-12deg) translateZ(-120px)",
+              transform: "rotateX(12deg) rotateY(-6deg) translateZ(-60px)",
               transformStyle: "preserve-3d",
             }}
           >
-
             <motion.div
               className="flex items-end gap-2"
               animate={{ x: ["0%", "-60%"] }}
@@ -114,25 +108,15 @@ export default function HeroSection() {
               {[...heroVideos, ...heroVideos].map((video, i) => (
                 <motion.div
                   key={i}
-                  // whileHover={{
-                  //   scale: 1.08,
-                  //   translateZ: 60,
-                  // }}
                   className="
                     flex-shrink-0
-                    w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px]
-                    h-[340px] sm:h-[400px] md:h-[460px] lg:h-[520px]
-                    rounded-[28px]
+                    w-[160px] sm:w-[260px] md:w-[340px] lg:w-[380px]
+                    h-[220px] sm:h-[340px] md:h-[460px] lg:h-[520px]
+                    rounded-[16px] sm:rounded-[28px]
                     overflow-hidden
                     shadow-2xl
                     bg-black
                   "
-                  style={{
-                    transform: `
-                      
-                      
-                    `,
-                  }}
                 >
                   <video
                     src={video}
@@ -140,12 +124,13 @@ export default function HeroSection() {
                     loop
                     muted
                     playsInline
+                    preload="auto"
+                    onCanPlay={(e) => (e.target as HTMLVideoElement).play()}
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
               ))}
             </motion.div>
-
           </div>
         </div>
       </div>
