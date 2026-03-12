@@ -5,7 +5,7 @@ import { ExternalLink } from "lucide-react";
 /* Put these inside: src/assets/ */
 
 import gazi from "@/assets/gazi.jpg";
-import atharva from "@/assets/atharva.jpg";
+import Nachiket from "@/assets/Nachiket.jpg";
 import dose from "@/assets/dose.jpg";
 import parth from "@/assets/parth.jpg";
 
@@ -23,12 +23,12 @@ const projects = [
   },
   {
     id: 2,
-    title: "Atharva Aggarwal",
+    title: "The Nachiket Bhatia Show",
     category: "YouTube Channel",
     description:
-      "Multi-platform influencer campaign generating 15M+ impressions",
-    image: atharva,
-    link: "https://www.youtube.com/@AtharvaAggarwal",
+      "Multi-platform generating 15M+ impressions",
+    image: Nachiket,
+    link: "https://www.youtube.com/@TheNachiketBhatiaShow/featured",
   },
   {
     id: 3,
