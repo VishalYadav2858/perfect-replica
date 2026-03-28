@@ -39,7 +39,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-background">
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-background/10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-background/10">
 
         {/* Brand */}
         <Link to="/" className="flex flex-col leading-[0.85] group shrink-0">
@@ -88,7 +88,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between gap-3">
         <p className="font-montserrat text-[9px] font-[500] text-background/20 tracking-[0.1em] uppercase">
           © 2026 DelightX Media. All rights reserved.
         </p>

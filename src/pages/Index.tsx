@@ -38,6 +38,7 @@ const Index = () => {
       <Navbar />
       <main>
         <HeroSection />
+        <div className="h-[1px] w-full bg-black/[0.05]" />
         
         <Suspense fallback={<SectionLoader />}>
           <AboutSection />

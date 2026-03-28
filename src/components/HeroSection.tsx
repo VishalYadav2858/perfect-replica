@@ -55,8 +55,8 @@ export default function HeroSection() {
     <section className="relative min-h-screen pt-20 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
 
       {/* ================= LEFT: TEXT ================= */}
-      <div className="relative z-20 w-full px-6 md:px-12 max-w-[1440px] mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
-        <div className="flex flex-col items-start justify-center w-full lg:w-[55%] pointer-events-auto">
+      <div className="relative z-20 w-full px-6 md:px-12 max-w-7xl mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
+        <div className="flex flex-col items-start justify-center w-full lg:w-[75%] pointer-events-auto">
 
           {/* Animated headline */}
           <div className="h-[75px] sm:h-[90px] md:h-[110px] lg:h-[130px] flex items-center justify-start overflow-hidden w-full relative">
@@ -111,23 +111,27 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats — pinned bottom left */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-6 md:left-12 z-30 hidden md:flex items-center gap-10 pointer-events-none"
-      >
-        <div className="flex flex-col gap-1">
-          <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">120+</span>
-          <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Happy Clients</span>
+      {/* Stats — Aligned with Container */}
+      <div className="absolute bottom-8 left-0 w-full z-30 hidden md:block pointer-events-none">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="flex items-center gap-10"
+          >
+            <div className="flex flex-col gap-1">
+              <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">120+</span>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Happy Clients</span>
+            </div>
+            <div className="w-[1px] h-12 bg-foreground/15" />
+            <div className="flex flex-col gap-1">
+              <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">30+</span>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Brand Partners</span>
+            </div>
+          </motion.div>
         </div>
-        <div className="w-[1px] h-12 bg-foreground/15" />
-        <div className="flex flex-col gap-1">
-          <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">30+</span>
-          <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Brand Partners</span>
-        </div>
-      </motion.div>
+      </div>
 
 
       {/* ================= RIGHT: FULL HEIGHT VERTICAL VIDEO SCROLL ================= */}
