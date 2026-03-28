@@ -107,12 +107,21 @@ export default function HeroSection() {
         
         <div 
           className="grid grid-cols-2 gap-4 md:gap-6 h-full w-full px-4 lg:px-8"
+          style={{
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden"
+          }}
         >
           
           {/* Column 1: Scrolling UP */}
-          <div className="relative h-full overflow-visible flex flex-col justify-start">
+          <div 
+            className="relative h-full overflow-visible flex flex-col justify-start"
+            style={{ transform: "translate3d(0,0,0)" }}
+          >
             <motion.div
               className="flex flex-col w-full gap-4 md:gap-6"
+              style={{ willChange: "transform" }}
               animate={{ y: ["0%", "-50%"] }}
               transition={{
                 ease: "linear",
@@ -124,6 +133,7 @@ export default function HeroSection() {
                 <div 
                   key={`col1-${idx}`} 
                   className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
+                  style={{ willChange: "transform" }}
                 >
                   <video
                     src={video}
@@ -140,9 +150,13 @@ export default function HeroSection() {
           </div>
 
           {/* Column 2: Scrolling DOWN & Staggered (50% offset) */}
-          <div className="relative h-full overflow-visible flex flex-col justify-start -translate-y-24 md:-translate-y-32">
+          <div 
+            className="relative h-full overflow-visible flex flex-col justify-start -translate-y-24 md:-translate-y-32"
+            style={{ transform: "translate3d(0,0,0)" }}
+          >
             <motion.div
               className="flex flex-col w-full gap-4 md:gap-6"
+              style={{ willChange: "transform" }}
               animate={{ y: ["-50%", "0%"] }}
               transition={{
                 ease: "linear",

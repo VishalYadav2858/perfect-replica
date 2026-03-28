@@ -56,7 +56,7 @@ export default function VideoScrollGrid() {
             trigger: sectionRef.current,
             start: "top top",
             end: isMob ? "+=800" : "+=1200",
-            scrub: 1,
+            scrub: 0.5,
             pin: true,
           },
         });
@@ -86,7 +86,10 @@ export default function VideoScrollGrid() {
           gridTemplateColumns: "repeat(3, 1fr)",
           gridTemplateRows: "repeat(3, 1fr)",
           gap: "3px",
-          transform: "scale(3)",
+          transform: "translate3d(0,0,0) scale(3)",
+          willChange: "transform",
+          backfaceVisibility: "hidden",
+          WebkitBackfaceVisibility: "hidden",
           transformOrigin: "center center",
         }}
       >
@@ -112,7 +115,14 @@ export default function VideoScrollGrid() {
                   }}
                 />
               ) : (
-                <div className="w-full h-full bg-black/5 flex items-center justify-center relative">
+                <div 
+                  className="w-full h-full bg-black/5 flex items-center justify-center relative"
+                  style={{
+                    willChange: "transform",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden"
+                  }}
+                >
                    <img
                     src={item.src}
                     alt=""
