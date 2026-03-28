@@ -70,7 +70,7 @@ export default function VideoScrollGrid() {
     <div
       ref={sectionRef}
       style={{
-        height: "100vh",
+        height: isMobile ? "56.25vw" : "100vh",
         overflow: "hidden",
         background: "#fff",
         position: "relative",
