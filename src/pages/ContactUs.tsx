@@ -60,46 +60,46 @@ const ContactUs = () => {
             className="lg:col-span-2 bg-foreground rounded-[32px] p-8 md:p-10 flex flex-col justify-between"
           >
             <div>
-              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-background/30 mb-6">
+              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-background/60 mb-6">
                 DelightX Media
               </p>
               <h1 className="font-satoshi text-[48px] md:text-[60px] font-[900] leading-[0.9] tracking-tight text-background mb-6">
                 Let's<br />
                 <span className="text-accent">Talk.</span>
               </h1>
-              <p className="font-montserrat text-[12px] font-[400] text-background/40 leading-[1.8] max-w-xs">
+              <p className="font-montserrat text-[12px] font-[400] text-background/70 leading-[1.8] max-w-xs">
                 Have a project in mind? Drop us a message and we'll get back within 24 hours.
               </p>
             </div>
 
             <div className="flex flex-col gap-5 mt-10">
               <a href="mailto:contact@delightxmedia.in" className="group flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
+                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
                   <Mail className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
                 </span>
                 <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/30 mb-0.5">Email</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background/70 group-hover:text-accent transition-colors">contact@delightxmedia.in</p>
+                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Email</p>
+                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">contact@delightxmedia.in</p>
                 </div>
               </a>
 
               <a href="tel:+919867949943" className="group flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
+                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
                   <Phone className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
                 </span>
                 <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/30 mb-0.5">Phone</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background/70 group-hover:text-accent transition-colors">+91-9867949943</p>
+                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Phone</p>
+                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">+91-9867949943</p>
                 </div>
               </a>
 
               <div className="flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
+                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0">
                   <MapPin className="w-3.5 h-3.5 text-accent" />
                 </span>
                 <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/30 mb-0.5">Location</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background/70">Mumbai, India</p>
+                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Location</p>
+                  <p className="font-satoshi text-[13px] font-[700] text-background">Mumbai, India</p>
                 </div>
               </div>
             </div>
@@ -121,7 +121,7 @@ const ContactUs = () => {
 
             <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-7 max-w-lg">
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/40">Your Name *</label>
+                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Your Name *</label>
                 <input
                   type="text" name="user_name" required placeholder="John Doe"
                   className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
@@ -129,7 +129,7 @@ const ContactUs = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/40">Email Address *</label>
+                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Email Address *</label>
                 <input
                   type="email" name="user_email" required placeholder="john@example.com"
                   className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
@@ -137,7 +137,7 @@ const ContactUs = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/40">Your Message *</label>
+                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Your Message *</label>
                 <textarea
                   name="message" rows={4} required placeholder="Tell us about your project..."
                   className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300 resize-none"

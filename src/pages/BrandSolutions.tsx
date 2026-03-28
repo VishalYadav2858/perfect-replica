@@ -37,9 +37,9 @@ const BrandSolutions = () => {
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/4 pointer-events-none z-0" />
 
       {/* Page Indicator */}
-      <div className="hidden xl:flex absolute top-40 left-6 h-40 items-center gap-4 origin-left -rotate-90 z-20 opacity-40 select-none pointer-events-none">
+      <div className="hidden xl:flex absolute top-40 left-6 h-40 items-center gap-4 origin-left -rotate-90 z-20 opacity-60 select-none pointer-events-none">
         <span className="font-montserrat text-[10px] font-[800] uppercase tracking-[0.4em] text-white">Solutions</span>
-        <div className="w-12 h-[1px] bg-white/30" />
+        <div className="w-12 h-[1px] bg-white/50" />
         <span className="font-montserrat text-[10px] font-[800] text-white">02</span>
       </div>
 
@@ -59,24 +59,24 @@ const BrandSolutions = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-2 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[32px] p-8 md:p-10 flex flex-col justify-between min-h-[400px] lg:min-h-[500px] shadow-2xl"
+            className="lg:col-span-2 bg-white/10 backdrop-blur-3xl border border-white/20 rounded-[32px] p-8 md:p-10 flex flex-col justify-between min-h-[400px] lg:min-h-[500px] shadow-2xl"
           >
             <div>
-              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-white/40 mb-6">
+              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-white/60 mb-6">
                 DelightX Studio
               </p>
               <h1 className="font-satoshi text-[48px] md:text-[60px] font-[900] uppercase leading-[0.9] tracking-tight text-white mb-6">
                 Brand<br />
-                <span className="text-accent underline decoration-white/10 underline-offset-[12px]">Solutions.</span>
+                <span className="text-accent underline decoration-white/30 underline-offset-[12px]">Solutions.</span>
               </h1>
-              <p className="font-montserrat text-[13px] font-[400] text-white/50 leading-[1.8] max-w-xs">
+              <p className="font-montserrat text-[13px] font-[400] text-white/80 leading-[1.8] max-w-xs">
                 Welcome to the studio. Here, we transform raw concepts into cinematic identities — blending photography, motion, and digital engineering.
               </p>
             </div>
             
             <div className="hidden lg:block">
-              <div className="w-full h-[1px] bg-white/10 mb-6" />
-              <p className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.2em] text-white/30">
+              <div className="w-full h-[1px] bg-white/20 mb-6" />
+              <p className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.2em] text-white/60">
                 SCROLL TO EXPLORE THE PORTFOLIO
               </p>
             </div>
@@ -99,9 +99,9 @@ const BrandSolutions = () => {
                       <div className="absolute inset-0 grayscale opacity-20">
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/40 backdrop-blur-[4px]">
-                        <span className="font-montserrat text-[7px] font-[800] uppercase tracking-[0.2em] text-white/30">Coming Soon</span>
-                        <h3 className="font-satoshi text-[24px] font-[900] tracking-tight text-white/40">{item.title}</h3>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 backdrop-blur-[4px]">
+                        <span className="font-montserrat text-[7px] font-[800] uppercase tracking-[0.2em] text-white/60">Coming Soon</span>
+                        <h3 className="font-satoshi text-[24px] font-[900] tracking-tight text-white/60">{item.title}</h3>
                       </div>
                     </div>
                   ) : (
@@ -120,10 +120,10 @@ const BrandSolutions = () => {
                           {item.title}
                         </h3>
                         <div className="flex items-center gap-2.5">
-                          <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                          <span className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
                             <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                           </span>
-                          <span className="font-montserrat text-[8px] font-[700] uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors">
+                          <span className="font-montserrat text-[8px] font-[700] uppercase tracking-[0.2em] text-white/80 group-hover:text-white transition-colors">
                             Explore Project
                           </span>
                         </div>

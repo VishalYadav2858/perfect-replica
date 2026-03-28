@@ -174,7 +174,7 @@ const Navbar = () => {
         {/* CTA */}
         <Link
           to="/contact-us"
-          className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
+          className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/50 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
         >
           GET IN TOUCH
         </Link>
@@ -259,7 +259,7 @@ const Navbar = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
-                className="inline-flex items-center justify-center w-fit px-8 py-3.5 rounded-full border border-foreground/30 text-foreground font-montserrat text-sm font-[600] uppercase tracking-wider mt-4"
+                className="inline-flex items-center justify-center w-fit px-8 py-3.5 rounded-full border border-foreground/50 text-foreground font-montserrat text-sm font-[600] uppercase tracking-wider mt-4"
               >
                 GET IN TOUCH
               </motion.button>

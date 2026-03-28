@@ -39,12 +39,12 @@ const Footer = () => {
 
   return (
     <footer className="bg-foreground text-background">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-background/10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-background/20">
 
         {/* Brand */}
         <Link to="/" className="flex flex-col leading-[0.85] group shrink-0">
           <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-background group-hover:text-accent transition-colors">DelightX</span>
-          <span className="font-montserrat text-[8px] font-[600] tracking-[0.2em] uppercase text-background/30 mt-1">Media</span>
+          <span className="font-montserrat text-[8px] font-[600] tracking-[0.2em] uppercase text-background/60 mt-1">Media</span>
         </Link>
 
         {/* Nav */}
@@ -54,7 +54,7 @@ const Footer = () => {
               <button
                 key={link.label}
                 onClick={() => handleNavClick(link.to, link.hash)}
-                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/50 hover:text-background transition-colors"
+                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/80 hover:text-background transition-colors"
               >
                 {link.label}
               </button>
@@ -62,7 +62,7 @@ const Footer = () => {
               <Link
                 key={link.label}
                 to={link.to}
-                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/50 hover:text-background transition-colors"
+                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/80 hover:text-background transition-colors"
               >
                 {link.label}
               </Link>
@@ -79,9 +79,9 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-8 h-8 rounded-full border border-background/20 hover:border-accent hover:bg-accent/10 flex items-center justify-center transition-all duration-300 group"
+              className="w-8 h-8 rounded-full border border-background/30 hover:border-accent hover:bg-accent/10 flex items-center justify-center transition-all duration-300 group"
             >
-              <Icon className="w-3.5 h-3.5 text-background/40 group-hover:text-accent transition-colors" />
+              <Icon className="w-3.5 h-3.5 text-background/70 group-hover:text-accent transition-colors" />
             </a>
           ))}
         </div>
@@ -89,10 +89,10 @@ const Footer = () => {
 
       {/* Bottom bar */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-4 flex items-center justify-between gap-3">
-        <p className="font-montserrat text-[9px] font-[500] text-background/20 tracking-[0.1em] uppercase">
+        <p className="font-montserrat text-[9px] font-[500] text-background/50 tracking-[0.1em] uppercase">
           © 2026 DelightX Media. All rights reserved.
         </p>
-        <p className="font-montserrat text-[9px] font-[500] text-background/20 tracking-[0.1em] uppercase">
+        <p className="font-montserrat text-[9px] font-[500] text-background/50 tracking-[0.1em] uppercase">
           Mumbai, India
         </p>
       </div>
