@@ -45,16 +45,16 @@ export default function AboutSection() {
         {/* Right side bento stats/images */}
         <motion.div variants={slideUp} className="hidden md:grid lg:col-span-5 grid-cols-2 gap-4 h-full min-h-[400px]">
           <div className="flex flex-col gap-4">
-            <div className="bg-muted/30 rounded-3xl p-6 flex flex-col justify-center items-center text-center flex-1 border border-border/50 transition-all hover:bg-muted/50">
+            <div className="bg-muted/30 rounded-xl p-6 flex flex-col justify-center items-center text-center flex-1 border border-border/50 transition-all hover:bg-muted/50">
               <span className="font-satoshi text-4xl md:text-5xl font-black text-accent mb-2">30+</span>
               <span className="font-montserrat text-xs tracking-wider uppercase text-foreground/60 font-bold">Brands Scaled</span>
             </div>
-            <div className="bg-foreground rounded-3xl p-6 flex flex-col justify-center items-center text-center flex-1 transition-transform hover:-translate-y-2 group shadow-xl">
+            <div className="bg-foreground rounded-xl p-6 flex flex-col justify-center items-center text-center flex-1 transition-transform hover:-translate-y-2 group shadow-xl">
               <span className="font-satoshi text-4xl md:text-5xl font-black text-background mb-2">98%</span>
               <span className="font-montserrat text-xs tracking-wider uppercase text-background/60 font-bold group-hover:text-background/90">Client Growth</span>
             </div>
           </div>
-          <div className="bg-accent/10 rounded-3xl p-6 flex flex-col justify-end overflow-hidden relative border border-accent/20">
+          <div className="bg-accent/10 rounded-xl p-6 flex flex-col justify-end overflow-hidden relative border border-accent/20">
 
 
              <div className="relative z-10">

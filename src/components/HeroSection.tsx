@@ -112,7 +112,7 @@ export default function HeroSection() {
           {/* Column 1: Scrolling UP */}
           <div className="relative h-full overflow-visible flex flex-col justify-start">
             <motion.div
-              className="flex flex-col w-full"
+              className="flex flex-col w-full gap-4 md:gap-6"
               animate={{ y: ["0%", "-50%"] }}
               transition={{
                 ease: "linear",
@@ -142,7 +142,7 @@ export default function HeroSection() {
           {/* Column 2: Scrolling DOWN & Staggered (50% offset) */}
           <div className="relative h-full overflow-visible flex flex-col justify-start -translate-y-24 md:-translate-y-32">
             <motion.div
-              className="flex flex-col w-full"
+              className="flex flex-col w-full gap-4 md:gap-6"
               animate={{ y: ["-50%", "0%"] }}
               transition={{
                 ease: "linear",
@@ -167,6 +167,7 @@ export default function HeroSection() {
                 </div>
               ))}
             </motion.div>
+
           </div>
 
         </div>
