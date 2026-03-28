@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import food from "@/assets/food.mp4";
 import f from "@/assets/f.mp4";
@@ -29,6 +29,15 @@ const MEDIA = [
 export default function VideoScrollGrid() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     let ctx: any;
@@ -80,34 +89,47 @@ export default function VideoScrollGrid() {
           transformOrigin: "center center",
         }}
       >
-        {MEDIA.map((item, i) => (
-          <div key={i} style={{ overflow: "hidden" }}>
-            {item.type === "video" ? (
-              <video
-                src={item.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            ) : (
-              <img
-                src={item.src}
-                alt=""
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
-            )}
-          </div>
-        ))}
+        {MEDIA.map((item, i) => {
+          // On mobile, play only a subset of videos to save resources
+          const shouldPlayVideo = item.type === "video" && (!isMobile || i % 2 === 0);
+          
+          return (
+            <div key={i} style={{ overflow: "hidden" }}>
+              {shouldPlayVideo ? (
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full bg-black/5 flex items-center justify-center relative">
+                   {/* Fallback to image if it's an image type or if video is disabled on mobile */}
+                   <img
+                    src={item.src}
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      opacity: item.type === "video" ? 0.6 : 1 // Dim disabled videos slightly
+                    }}
+                  />
+                  {item.type === "video" && (
+                    <div className="absolute inset-0 bg-black/10" />
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

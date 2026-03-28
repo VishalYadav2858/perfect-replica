@@ -18,6 +18,15 @@ const col2Videos = [p22, f, v1];
 export default function HeroSection() {
   const [currentWord, setCurrentWord] = useState(0);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length);
@@ -26,7 +35,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
+    <section className="relative min-h-screen pt-20 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
 
 
 
@@ -34,13 +43,13 @@ export default function HeroSection() {
       {/* ================= LEFT: TEXT ================= */}
       <div className="relative z-20 w-full px-6 md:px-12 max-w-[1440px] mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
         
-        <div className="flex flex-col items-start justify-center pt-10 lg:pt-0 w-full lg:w-[55%] pointer-events-auto">
+        <div className="flex flex-col items-start justify-center pt-0 lg:pt-0 w-full lg:w-[55%] pointer-events-auto">
           
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-4 mb-8 text-foreground/50 font-montserrat text-[10px] md:text-xs tracking-[0.2em] uppercase font-[800]"
+            className="hidden md:flex items-center gap-4 mb-8 text-foreground/50 font-montserrat text-[10px] md:text-xs tracking-[0.2em] uppercase font-[800]"
           >
             <span>120+ Happy Clients</span>
             <span className="w-1 h-1 rounded-full bg-accent/50" />
@@ -96,25 +105,25 @@ export default function HeroSection() {
       {/* Absolute positioned on the right half, pushed below the header. */}
       <div className="relative lg:absolute top-20 md:top-24 right-0 w-full lg:w-[45%] h-[600px] md:h-[800px] lg:h-[calc(100vh-6rem)] overflow-hidden z-10 pt-4 lg:pt-0">
         
-        {/* Gradients removed completely for full visibility */}
-        
-        <div className="grid grid-cols-2 gap-4 md:gap-6 h-full w-full px-4 lg:px-8">
+        <div 
+          className="grid grid-cols-2 gap-4 md:gap-6 h-full w-full px-4 lg:px-8"
+        >
           
           {/* Column 1: Scrolling UP */}
           <div className="relative h-full overflow-visible flex flex-col justify-start">
             <motion.div
-              className="flex flex-col gap-4 md:gap-6 w-full"
+              className="flex flex-col w-full"
               animate={{ y: ["0%", "-50%"] }}
               transition={{
                 ease: "linear",
-                duration: 45, // Slower
+                duration: isMobile ? 25 : 45, // Faster on mobile if fewer items
                 repeat: Infinity,
               }}
             >
-              {[...col1Videos, ...col1Videos, ...col1Videos, ...col1Videos].map((video, idx) => (
+              {(isMobile ? [...col1Videos, ...col1Videos] : [...col1Videos, ...col1Videos, ...col1Videos, ...col1Videos]).map((video, idx) => (
                 <div 
                   key={`col1-${idx}`} 
-                  className="w-full aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white relative flex-shrink-0 group"
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group"
                 >
                   <video
                     src={video}
@@ -122,6 +131,7 @@ export default function HeroSection() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     className="w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>
@@ -132,18 +142,18 @@ export default function HeroSection() {
           {/* Column 2: Scrolling DOWN & Staggered (50% offset) */}
           <div className="relative h-full overflow-visible flex flex-col justify-start -translate-y-24 md:-translate-y-32">
             <motion.div
-              className="flex flex-col gap-4 md:gap-6 w-full"
+              className="flex flex-col w-full"
               animate={{ y: ["-50%", "0%"] }}
               transition={{
                 ease: "linear",
-                duration: 55, // Slower
+                duration: isMobile ? 30 : 55, // Faster on mobile if fewer items
                 repeat: Infinity,
               }}
             >
-              {[...col2Videos, ...col2Videos, ...col2Videos, ...col2Videos].map((video, idx) => (
+              {(isMobile ? [...col2Videos, ...col2Videos] : [...col2Videos, ...col2Videos, ...col2Videos, ...col2Videos]).map((video, idx) => (
                 <div 
                   key={`col2-${idx}`} 
-                  className="w-full aspect-[3/4] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl bg-white relative flex-shrink-0 group"
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group"
                 >
                   <video
                     src={video}
@@ -151,6 +161,7 @@ export default function HeroSection() {
                     loop
                     muted
                     playsInline
+                    preload="metadata"
                     className="w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>

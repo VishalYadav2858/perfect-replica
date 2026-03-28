@@ -43,7 +43,7 @@ export default function AboutSection() {
         </motion.div>
         
         {/* Right side bento stats/images */}
-        <motion.div variants={slideUp} className="lg:col-span-5 grid grid-cols-2 gap-4 h-full min-h-[400px]">
+        <motion.div variants={slideUp} className="hidden md:grid lg:col-span-5 grid-cols-2 gap-4 h-full min-h-[400px]">
           <div className="flex flex-col gap-4">
             <div className="bg-muted/30 rounded-3xl p-6 flex flex-col justify-center items-center text-center flex-1 border border-border/50 transition-all hover:bg-muted/50">
               <span className="font-satoshi text-4xl md:text-5xl font-black text-accent mb-2">30+</span>

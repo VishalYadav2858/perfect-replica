@@ -71,10 +71,10 @@ const ContactUs = () => {
             className="flex flex-col space-y-12 order-2 lg:order-1 items-start"
           >
             <div className="mb-2">
-              <h2 className="font-satoshi text-[32px] md:text-[42px] lg:text-[54px] font-[900] text-foreground leading-[1.1] mb-6">
+              <h1 className="font-satoshi text-[32px] md:text-[42px] lg:text-[54px] font-[900] text-foreground leading-[1.1] mb-6">
                 Let's Build Your <br />
                 <span className="text-accent">Success Engine</span>
-              </h2>
+              </h1>
               <p className="font-montserrat text-[14px] md:text-[15px] text-foreground/50 leading-[1.7] max-w-sm">
                 Ready to transform your digital presence? Reach out to us and let's create something amazing together.
               </p>

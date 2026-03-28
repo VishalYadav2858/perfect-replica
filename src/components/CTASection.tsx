@@ -45,7 +45,7 @@ const CTASection = () => {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="rounded-[28px] overflow-hidden"
         >
-          <img src={ctaImage} alt="ADKO creative team" className="w-full h-full object-cover aspect-[4/3] lg:aspect-square" loading="lazy" />
+          <img src={ctaImage} alt="DelightX creative team" className="w-full h-full object-cover aspect-[4/3] lg:aspect-square" loading="lazy" />
         </motion.div>
       </div>
     </section>
