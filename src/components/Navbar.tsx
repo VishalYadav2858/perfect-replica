@@ -84,16 +84,17 @@ const Navbar = () => {
     >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
-        <div
-  onClick={() => window.location.href = "/"}
-  className="flex flex-col leading-[0.85] cursor-pointer"
->
-  <img
-    src={logo}
-    alt="DelightX Logo"
-    className="h-10 w-auto"
-  />
-</div>
+        <Link
+          to="/"
+          className="flex flex-col leading-[0.85] cursor-pointer"
+          aria-label="DelightX Media Home"
+        >
+          <img
+            src={logo}
+            alt="DelightX Logo"
+            className="h-10 w-auto"
+          />
+        </Link>
 
 
         {/* Desktop Nav */}
@@ -106,9 +107,11 @@ const Navbar = () => {
             <button 
               onClick={() => setWorkDropdown((v) => !v)} 
               className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1"
+              aria-expanded={workDropdown}
+              aria-haspopup="true"
             >
               OUR WORK
-              <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} aria-hidden="true" />
             </button>
 
             <AnimatePresence>
@@ -180,6 +183,8 @@ const Navbar = () => {
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="lg:hidden font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
+          aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+          aria-expanded={menuOpen}
         >
           {menuOpen ? "CLOSE" : "MENU"}
         </button>

@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MoveDown, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import LazyVideo from "./LazyVideo";
 
+// Video Assets
 import food from "@/assets/food.mp4";
 import f from "@/assets/f.mp4";
 import p11 from "@/assets/p1.mp4";
@@ -10,14 +12,29 @@ import p22 from "@/assets/p2.mp4";
 import v from "@/assets/v.mp4";
 import v1 from "@/assets/v1.mp4";
 
+// Poster Assets (Images to show before video loads)
+import p1Img from "@/assets/p1.jpg";
+import p2Img from "@/assets/p2.jpg";
+import h1Img from "@/assets/hero-1.jpg";
+import h2Img from "@/assets/hero-2.jpg";
+import h3Img from "@/assets/hero-3.jpg";
+import sVideoImg from "@/assets/service-video.jpg";
+
 const words = ["Creativity.", "Strategy.", "Growth.", "Content."];
 
-const col1Videos = [food, p11, v];
-const col2Videos = [p22, f, v1];
+const col1Videos = [
+  { src: food, poster: sVideoImg },
+  { src: p11, poster: p1Img },
+  { src: v, poster: h2Img }
+];
+const col2Videos = [
+  { src: p22, poster: p2Img },
+  { src: f, poster: h1Img },
+  { src: v1, poster: h3Img }
+];
 
 export default function HeroSection() {
   const [currentWord, setCurrentWord] = useState(0);
-
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -30,21 +47,15 @@ export default function HeroSection() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWord((prev) => (prev + 1) % words.length);
-    }, 3500); // slightly longer duration to match the elegance
+    }, 3500);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="relative min-h-screen pt-20 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
-
-
-
-
       {/* ================= LEFT: TEXT ================= */}
       <div className="relative z-20 w-full px-6 md:px-12 max-w-[1440px] mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
-        
         <div className="flex flex-col items-start justify-center pt-0 lg:pt-0 w-full lg:w-[55%] pointer-events-auto">
-          
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -56,7 +67,6 @@ export default function HeroSection() {
             <span>30+ Brand Partners</span>
           </motion.div>
 
-          {/* Elegant Changing Word */}
           <div className="h-[75px] sm:h-[90px] md:h-[110px] lg:h-[130px] flex items-center justify-start overflow-hidden w-full">
             <AnimatePresence mode="wait">
               <motion.h1
@@ -66,9 +76,7 @@ export default function HeroSection() {
                 exit={{ y: "-110%", opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
                 className="font-satoshi uppercase leading-[0.85] text-[50px] sm:text-[70px] md:text-[85px] lg:text-[100px] xl:text-[115px] tracking-tight font-black whitespace-nowrap text-foreground"
-                style={{
-                  letterSpacing: "-0.04em",
-                }}
+                style={{ letterSpacing: "-0.04em" }}
               >
                 {words[currentWord]}
               </motion.h1>
@@ -81,8 +89,7 @@ export default function HeroSection() {
             transition={{ delay: 0.6, duration: 1 }}
             className="font-montserrat text-sm md:text-lg text-foreground/60 leading-relaxed font-medium mt-6 mb-8 max-w-[450px]"
           >
-                 WE CREATE. WE STRATEGIZE. WE SCALE. 
-                 {/* <br />Your growth is our responsibility. */}
+            WE CREATE. WE STRATEGIZE. WE SCALE.
           </motion.p>
 
           <motion.div
@@ -102,9 +109,7 @@ export default function HeroSection() {
       </div>
 
       {/* ================= RIGHT: FULL HEIGHT VERTICAL VIDEO SCROLL ================= */}
-      {/* Absolute positioned on the right half, pushed below the header. */}
       <div className="relative lg:absolute top-20 md:top-24 right-0 w-full lg:w-[45%] h-[600px] md:h-[800px] lg:h-[calc(100vh-6rem)] overflow-hidden z-10 pt-4 lg:pt-0">
-        
         <div 
           className="grid grid-cols-2 gap-4 md:gap-6 h-full w-full px-4 lg:px-8"
           style={{
@@ -113,7 +118,6 @@ export default function HeroSection() {
             WebkitBackfaceVisibility: "hidden"
           }}
         >
-          
           {/* Column 1: Scrolling UP */}
           <div 
             className="relative h-full overflow-visible flex flex-col justify-start"
@@ -125,18 +129,20 @@ export default function HeroSection() {
               animate={{ y: ["0%", "-50%"] }}
               transition={{
                 ease: "linear",
-                duration: isMobile ? 25 : 45, // Faster on mobile if fewer items
+                duration: isMobile ? 20 : 45,
                 repeat: Infinity,
               }}
             >
-              {(isMobile ? [...col1Videos, ...col1Videos] : [...col1Videos, ...col1Videos, ...col1Videos, ...col1Videos]).map((video, idx) => (
+              {(isMobile ? [...col1Videos.slice(0, 2)] : [...col1Videos, ...col1Videos]).map((video, idx) => (
                 <div 
                   key={`col1-${idx}`} 
                   className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
                   style={{ willChange: "transform" }}
                 >
-                  <video
-                    src={video}
+                  <LazyVideo
+                    src={video.src}
+                    poster={video.poster}
+                    fetchpriority={idx === 0 ? "high" : "auto"}
                     autoPlay
                     loop
                     muted
@@ -160,17 +166,19 @@ export default function HeroSection() {
               animate={{ y: ["-50%", "0%"] }}
               transition={{
                 ease: "linear",
-                duration: isMobile ? 30 : 55, // Faster on mobile if fewer items
+                duration: isMobile ? 24 : 55,
                 repeat: Infinity,
               }}
             >
-              {(isMobile ? [...col2Videos, ...col2Videos] : [...col2Videos, ...col2Videos, ...col2Videos, ...col2Videos]).map((video, idx) => (
+              {(isMobile ? [...col2Videos.slice(0, 2)] : [...col2Videos, ...col2Videos]).map((video, idx) => (
                 <div 
                   key={`col2-${idx}`} 
                   className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
                 >
-                  <video
-                    src={video}
+                  <LazyVideo
+                    src={video.src}
+                    poster={video.poster}
+                    fetchpriority={idx === 0 ? "high" : "auto"}
                     autoPlay
                     loop
                     muted
@@ -181,9 +189,7 @@ export default function HeroSection() {
                 </div>
               ))}
             </motion.div>
-
           </div>
-
         </div>
       </div>
 

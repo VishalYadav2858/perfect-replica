@@ -16,13 +16,12 @@ const Footer = () => {
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Connect</span>
             <div className="flex flex-col">
-              <a href="tel:+917798351934" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">+91-9867949943</a>
-              <a href="tel:+917058455963" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors"></a>
+              <a href="tel:+917798351934" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors" aria-label="Call +9-1-9-8-6-7-9-4-9-9-4-3">+91-9867949943</a>
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Enquire</span>
-            <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">contact@delightxmedia.in</a>
+            <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors" aria-label="Email contact at delightxmedia.in">contact@delightxmedia.in</a>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Location</span>
@@ -32,7 +31,14 @@ const Footer = () => {
 
         <div className="flex gap-10">
           {["Instagram", "LinkedIn", "Twitter"].map((social) => (
-             <a key={social} href={`https://${social.toLowerCase()}.com`} target="_blank" rel="noopener noreferrer" className="relative font-montserrat text-[11px] font-[700] uppercase tracking-[0.15em] text-foreground/50 hover:text-foreground transition-colors group">
+             <a 
+               key={social} 
+               href={`https://${social.toLowerCase()}.com/delightxmedia`} 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               className="relative font-montserrat text-[11px] font-[700] uppercase tracking-[0.15em] text-foreground/50 hover:text-foreground transition-colors group"
+               aria-label={`Follow DelightX Media on ${social}`}
+             >
                {social}
                <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
              </a>
