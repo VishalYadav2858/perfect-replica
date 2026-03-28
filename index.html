@@ -2,24 +2,106 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- TODO: Set the document title to the name of your application -->
-    <title>DelightX | Digital Marketing & Creative Agency</title>
-    <meta name="description" content="DelightX is a full-service agency offering digital marketing, branding, content, design, web, film solutions - everything your brand needs under one roof." />
-    <!-- <meta name="author" content="Lovable" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    
+    <!-- Primary SEO -->
+    <title>DelightX Media | Creative Agency – Branding, Content, Web & Film</title>
+    <meta name="description" content="DelightX Media is a full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing for startups and enterprises." />
+    <meta name="keywords" content="creative agency, branding agency, digital marketing, content creation, videography, photography, web development, UI UX design, brand identity, logo design, social media marketing, Delhi, India" />
+    <meta name="author" content="DelightX Media" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://delightxmedia.in/" />
 
-    <!-- TODO: Update og:title to match your application name -->
-    <!-- <meta property="og:title" content="Lovable App" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" /> -->
+    <meta property="og:url" content="https://delightxmedia.in/" />
+    <meta property="og:title" content="DelightX Media | Creative Agency – Branding, Content, Web & Film" />
+    <meta property="og:description" content="Full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing." />
+    <meta property="og:image" content="https://delightxmedia.in/og-image.jpg" />
+    <meta property="og:site_name" content="DelightX Media" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@Lovable" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" /> -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://delightxmedia.in/" />
+    <meta name="twitter:title" content="DelightX Media | Creative Agency" />
+    <meta name="twitter:description" content="Full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing." />
+    <meta name="twitter:image" content="https://delightxmedia.in/og-image.jpg" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
+
+    <!-- Theme Color (for mobile browser chrome) -->
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="msapplication-TileColor" content="#8A2BE2" />
+
+    <!-- Performance: Preconnect to critical origins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Performance: Preload critical font -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" />
+
+    <!-- Structured Data: Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "DelightX Media",
+      "url": "https://delightxmedia.in",
+      "logo": "https://delightxmedia.in/logo.png",
+      "description": "Full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing.",
+      "sameAs": [
+        "https://instagram.com/delightxmedia",
+        "https://linkedin.com/company/delightxmedia",
+        "https://twitter.com/delightxmedia"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "rushikesh@delightxmedia.in"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN"
+      }
+    }
+    </script>
+
+    <!-- Structured Data: Local Business Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "DelightX Media",
+      "url": "https://delightxmedia.in",
+      "priceRange": "$$",
+      "description": "Creative agency offering branding, content, web development, videography, photography, and digital marketing services.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Creative Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding & Logo Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Videography" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Photography" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "UI/UX Design" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Development" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing" } }
+        ]
+      }
+    }
+    </script>
   </head>
 
   <body>
+    <!-- Noscript fallback for SEO crawlers -->
+    <noscript>
+      <h1>DelightX Media – Creative Agency</h1>
+      <p>Full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing for startups and enterprises.</p>
+      <p>Services: Branding, Videography, Photography, UI/UX Design, Web Development, Digital Marketing</p>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

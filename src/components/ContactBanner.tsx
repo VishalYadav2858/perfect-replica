@@ -4,31 +4,18 @@ import { Link } from "react-router-dom";
 
 const ContactBanner = () => {
   return (
-    <section className="py-0 bg-foreground overflow-hidden cursor-pointer group">
-      <Link to="/contact-us" className="block">
-        {/* Top marquee */}
-        <div className="py-4 overflow-hidden border-b border-background/10">
-          <div className="flex animate-contact-marquee items-center" style={{ width: "fit-content" }}>
-            {Array.from({ length: 10 }).map((_, i) => (
-              <div key={i} className="flex items-center gap-6 mx-6 flex-shrink-0">
-                <span className="font-montserrat text-[13px] md:text-[15px] font-[600] uppercase tracking-[0.15em] text-background whitespace-nowrap">
-                  contact us
-                </span>
-                <ArrowRight className="w-3.5 h-3.5 text-background/50" />
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Bottom subtitle */}
+    <section className="bg-background pt-0 pb-20 md:pb-32 px-6 lg:px-12 flex justify-center w-full relative z-10 -mt-16 md:-mt-20 pointer-events-none">
+      <Link to="/contact-us" className="group block w-full pointer-events-auto">
         <motion.div
-          initial={{ opacity: 1 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="py-4 text-center"
+          className="flex items-center justify-between gap-4 px-8 py-4 md:px-12 md:py-5 w-full rounded-2xl md:rounded-full bg-foreground text-background font-satoshi shadow-xl hover:shadow-2xl hover:shadow-[#8A2BE2]/40 hover:-translate-y-1 transition-all duration-300 hover:bg-[#8A2BE2] hover:text-white"
         >
-          <span className="font-montserrat text-[12px] md:text-[14px] font-[400] text-background/50 tracking-[0.1em]">
+          <span className="text-[18px] md:text-[22px] font-[900] tracking-tight uppercase">
             Let's create something together
           </span>
+          <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300" />
         </motion.div>
       </Link>
     </section>

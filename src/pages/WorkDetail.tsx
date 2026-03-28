@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
 import hero1 from "@/assets/hero-1.jpg";
 import hero2 from "@/assets/hero-2.jpg";
+import { pageTransition, staggerContainer, slideUp } from "@/lib/animations";
 
 const worksData: Record<string, { title: string; category: string; description: string; heroImage: string; gallery: string[] }> = {
   "google-fpv": {
@@ -46,38 +48,68 @@ const WorkDetail = () => {
 
   if (!work) {
     return (
-      <div className="min-h-screen bg-background">
+      <motion.div 
+        variants={pageTransition}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="min-h-screen bg-background noise-bg flex flex-col"
+      >
         <Navbar />
-        <div className="pt-36 text-center">
-          <h1 className="font-montserrat text-[48px] font-[900] text-foreground">Project not found</h1>
+        <div className="flex-grow pt-36 text-center flex items-center justify-center">
+          <h1 className="font-satoshi text-[48px] font-[900] text-foreground/50">
+            Project not found
+          </h1>
         </div>
         <Footer />
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="min-h-screen bg-background noise-bg flex flex-col"
+    >
       <Navbar />
-      <main className="pt-28 md:pt-36 pb-24">
-        <div className="px-6 lg:px-12 max-w-[1440px] mx-auto">
+      <SEO 
+        title={work.title}
+        description={work.description}
+        canonical={`/works/${slug}`}
+        keywords={`${work.title}, ${work.category}, DelightX Media projects`}
+      />
+      
+      <main className="flex-grow pt-32 md:pt-48 pb-24 relative z-10 w-full">
+
+
+
+        <div className="px-6 lg:px-12 max-w-[1440px] mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            variants={staggerContainer}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl"
           >
-            <Link to="/" className="inline-flex items-center gap-2 font-montserrat text-[11px] font-[700] uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors mb-10">
-              <ArrowLeft className="w-4 h-4" /> Back to Home
-            </Link>
-            <p className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.35em] text-accent mb-4 mt-6">
+            <motion.div variants={slideUp}>
+              <Link to="/#work" className="inline-flex items-center gap-2 font-montserrat text-[10px] md:text-[11px] font-[700] uppercase tracking-[0.2em] text-foreground/80 hover:text-foreground transition-colors mb-10 bg-black/5 py-2 px-4 rounded-full border border-black/10 hover:bg-black/10">
+                <ArrowLeft className="w-4 h-4" /> Back to Work
+              </Link>
+            </motion.div>
+
+            <motion.p variants={slideUp} className="font-montserrat text-[10px] md:text-xs font-[700] uppercase tracking-[0.35em] text-accent mb-6">
               {work.category}
-            </p>
-            <h1 className="font-montserrat text-[48px] md:text-[72px] lg:text-[96px] font-[900] uppercase leading-[0.9] tracking-[-0.04em] text-foreground mb-8">
+            </motion.p>
+            
+            <motion.h1 variants={slideUp} className="font-satoshi text-[60px] md:text-[80px] lg:text-[100px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground mb-10">
               {work.title}
-            </h1>
-            <p className="font-montserrat text-[15px] md:text-[17px] font-[400] text-muted-foreground max-w-2xl leading-[1.8] mb-16">
+            </motion.h1>
+            
+            <motion.p variants={slideUp} className="font-montserrat text-[14px] md:text-[16px] font-[500] text-foreground max-w-2xl leading-[1.8] mb-16">
               {work.description}
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Hero Image */}
@@ -85,13 +117,14 @@ const WorkDetail = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-[28px] overflow-hidden aspect-[16/9] mb-12"
+            className="rounded-[32px] overflow-hidden aspect-[16/9] mb-12 relative group"
           >
-            <img src={work.heroImage} alt={work.title} className="w-full h-full object-cover" />
+
+            <img src={work.heroImage} alt={work.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" />
           </motion.div>
 
           {/* Gallery */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {work.gallery.map((img, i) => (
               <motion.div
                 key={i}
@@ -99,16 +132,17 @@ const WorkDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.12, duration: 0.7 }}
-                className="rounded-[20px] overflow-hidden aspect-[16/10]"
+                className="rounded-[24px] overflow-hidden aspect-[16/10] group relative"
               >
-                <img src={img} alt={`${work.title} ${i + 1}`} className="w-full h-full object-cover" loading="lazy" />
+
+                <img src={img} alt={`${work.title} ${i + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" loading="lazy" />
               </motion.div>
             ))}
           </div>
         </div>
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

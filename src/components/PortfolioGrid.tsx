@@ -1,223 +1,114 @@
-import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+"use client";
+import { useEffect, useRef } from "react";
 
-/* ---------- IMAGES ---------- */
-/* Put these inside: src/assets/ */
+import food from "@/assets/food.mp4";
+import f from "@/assets/f.mp4";
+import p11 from "@/assets/p1.mp4";
+import p22 from "@/assets/p2.mp4";
+import v11 from "@/assets/video 1.mp4";
 
-import gazi from "@/assets/gazi.jpg";
-import Nachiket from "@/assets/Nachiket.jpg";
-import dose from "@/assets/dose.jpg";
-import parth from "@/assets/parth.jpg";
+// import p3 from "@/assets/profile 3.png";
+import p3 from "@/assets/profile 3.png";
+import p2 from "@/assets/profile2.jpg";
+import p from "@/assets/p.mp4";
 
-/* ---------- PROJECT DATA ---------- */
+const MEDIA = [
+  { type: "video", src: food },
+  { type: "video", src: v11 },
+  { type: "image", src: p3 },
 
-const projects = [
-  {
-    id: 1,
-    title: "Gazi",
-    category: "YouTube Channel",
-    description:
-      "Transformed a tech channel from 10K to 189K subscribers in 8 months",
-    image: gazi,
-    link: "https://www.youtube.com/@gaziai/featured",
-  },
-  {
-    id: 2,
-    title: "The Nachiket Bhatia Show",
-    category: "YouTube Channel",
-    description:
-      "Multi-platform generating 15M+ impressions",
-    image: Nachiket,
-    link: "https://www.youtube.com/@TheNachiketBhatiaShow/featured",
-  },
-  {
-    id: 3,
-    title: "Dose of Devy",
-    category: "Education Channel",
-    description:
-      "Complete rebrand and growth strategy for exam preparation",
-    image: dose,
-    link: "https://www.youtube.com/@doseofdevy/featured",
-  },
-  {
-    id: 4,
-    title: "Parth Goyal",
-    category: "Education",
-    description:
-      "End-to-end content creation and brand partnership management",
-    image: parth,
-    link: "https://www.youtube.com/@ParthGoyal",
-  },
+  { type: "video", src: f },
+  { type: "video", src: food },
+  { type: "image", src: p2 },
+
+  { type: "video", src: p22 },
+  { type: "video", src: p11 },
+  { type: "video", src: p},
 ];
 
-/* ---------- ANIMATION ---------- */
+export default function VideoScrollGrid() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 50 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      delay: i * 0.12,
-      ease: [0.22, 1, 0.36, 1] as const,
-    },
-  }),
-};
+  useEffect(() => {
+    let ctx: any;
 
-/* ---------- COMPONENT ---------- */
+    const init = async () => {
+      const { gsap } = await import("gsap");
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
 
-export default function PortfolioGrid() {
+      ctx = gsap.context(() => {
+        gsap.to(gridRef.current, {
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=1200",
+            scrub: 1,
+            pin: true,
+          },
+        });
+      });
+    };
+
+    init();
+    return () => ctx?.revert();
+  }, []);
+
   return (
-    <section
-      id="work"   /* 🔥 IMPORTANT — Navbar scroll target */
-      className="
-        py-24 md:py-32
-        px-6 lg:px-12
-        max-w-[1440px]
-        mx-auto
-        bg-white
-      "
+    <div
+      ref={sectionRef}
+      style={{
+        height: "100vh",
+        overflow: "hidden",
+        background: "#fff",
+        position: "relative",
+      }}
     >
-      {/* ---------- HEADING ---------- */}
-
-      <div className="mb-16 text-center">
-
-        <h2
-          className="
-            font-satoshi
-            uppercase
-            text-[36px]
-            md:text-[56px]
-            font-black
-            tracking-[-0.03em]
-            text-[#2C2D2F]
-          "
-        >
-          Creator Case Studies
-        </h2>
-
-        <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-          Real creators. Real growth. Real measurable impact.
-        </p>
-
-      </div>
-
-      {/* ---------- GRID ---------- */}
-
-      <div className="grid md:grid-cols-2 gap-6">
-
-        {projects.map((project, i) => (
-          
-          <motion.div
-            key={project.id}
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            custom={i}
-
-            className="
-              group
-              border
-              border-gray-200
-              rounded-[22px]
-              overflow-hidden
-              bg-white
-              hover:shadow-xl
-              transition-all
-              duration-500
-            "
-          >
-
-            {/* IMAGE */}
-
-            <div className="relative overflow-hidden">
-
+      <div
+        ref={gridRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateRows: "repeat(3, 1fr)",
+          gap: "3px",
+          transform: "scale(3)",
+          transformOrigin: "center center",
+        }}
+      >
+        {MEDIA.map((item, i) => (
+          <div key={i} style={{ overflow: "hidden" }}>
+            {item.type === "video" ? (
+              <video
+                src={item.src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            ) : (
               <img
-                src={project.image}
-                alt={project.title}
-                className="
-                  w-full
-                  h-[260px]
-                  object-cover
-                  group-hover:scale-[1.05]
-                  transition-transform
-                  duration-700
-                "
+                src={item.src}
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
               />
-
-              <div
-                className="
-                  absolute
-                  inset-0
-                  bg-black/0
-                  group-hover:bg-black/10
-                  transition-colors
-                  duration-500
-                "
-              />
-
-            </div>
-
-            {/* CONTENT */}
-
-            <div className="p-6">
-
-              <div className="flex justify-between items-center mb-3">
-
-                <span
-                  className="
-                    text-[11px]
-                    uppercase
-                    tracking-[0.15em]
-                    text-gray-500
-                    font-satoshi
-                  "
-                >
-                  {project.category}
-                </span>
-
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="opacity-70 hover:opacity-100 transition"
-                >
-                  <ExternalLink size={16} />
-                </a>
-
-              </div>
-
-              <h3
-                className="
-                  font-satoshi
-                  text-[18px]
-                  font-bold
-                  text-[#2C2D2F]
-                "
-              >
-                {project.title}
-              </h3>
-
-              <p
-                className="
-                  text-gray-500
-                  text-[13px]
-                  mt-2
-                  leading-[1.7]
-                "
-              >
-                {project.description}
-              </p>
-
-            </div>
-
-          </motion.div>
-
+            )}
+          </div>
         ))}
-
       </div>
-    </section>
+    </div>
   );
 }

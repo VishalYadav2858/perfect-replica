@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import { pageTransition } from "@/lib/animations";
 
 /* -------------------- IMAGES -------------------- */
 
@@ -41,8 +43,12 @@ import v1 from "@/assets/v1.mp4";
 import wb from "@/assets/wb.jpg";
 import web from "@/assets/web.jpg";
 
+
 import m from "@/assets/m.jpeg";
 import m1 from "@/assets/m1.jpeg";
+
+
+
 /* -------------------- TYPES -------------------- */
 
 interface WorkItem {
@@ -53,7 +59,7 @@ interface WorkItem {
 }
 
 /* -------------------- DATA -------------------- */
-
+// Unchanged data structure
 const serviceData: Record<
   string,
   {
@@ -110,29 +116,30 @@ const serviceData: Record<
       { type: "image", src: wb, category: "Web Apps" },
       { type: "image", src: m, category: "Mobile Apps" },
       { type: "image", src: m1, category: "Mobile Apps" },
-      
-      // { type: "image", src: hero4, category: "Dashboards" },
-      // { type: "image", src: portfolio1, category: "Web Apps" },
-      // { type: "image", src: portfolio3, category: "Dashboards" },
     ],
   },
 
-  "Branding": {
+  "branding": {
     title: "Branding",
-    tagline: "Bringing Ideas to Life",
+    tagline: "Building Brands for Startups",
     filters: [
       "All Work",
-      "Product Viz",
-      "Motion Graphics",
-      "Character Animation",
+      "Logo Design",
+      "Brand Identity",
+      "Packaging",
+      "Social Media Kits",
     ],
     works: [
-      { type: "image", src: serviceCgi, category: "Product Viz" },
-      { type: "image", src: hero5, category: "Motion Graphics" },
-      { type: "image", src: portfolio2, category: "Character Animation" },
-      { type: "image", src: hero3, category: "Product Viz" },
-      { type: "image", src: hero1, category: "Motion Graphics" },
-      { type: "image", src: portfolio1, category: "Character Animation" },
+      { type: "image", src: hero1, category: "Logo Design" },
+      { type: "image", src: hero5, category: "Logo Design" },
+      { type: "image", src: portfolio1, category: "Brand Identity" },
+      { type: "image", src: portfolio2, category: "Brand Identity" },
+      { type: "image", src: hero3, category: "Packaging" },
+      { type: "image", src: serviceCgi, category: "Packaging" },
+      { type: "image", src: serviceWeb, category: "Social Media Kits" },
+      { type: "image", src: hero2, category: "Social Media Kits" },
+      { type: "image", src: hero4, category: "Brand Identity" },
+      { type: "image", src: portfolio3, category: "Logo Design" },
     ],
   },
 };
@@ -147,15 +154,21 @@ const ServiceDetail = () => {
 
   if (!service) {
     return (
-      <div className="min-h-screen bg-background">
+      <motion.div 
+        variants={pageTransition}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="min-h-screen bg-background noise-bg flex flex-col"
+      >
         <Navbar />
-        <div className="pt-36 text-center">
-          <h1 className="font-montserrat text-[48px] font-[900] text-foreground">
+        <div className="flex-grow pt-36 text-center flex items-center justify-center">
+          <h1 className="font-satoshi text-[48px] font-[900] text-foreground/50">
             Service not found
           </h1>
         </div>
         <Footer />
-      </div>
+      </motion.div>
     );
   }
 
@@ -167,43 +180,60 @@ const ServiceDetail = () => {
         );
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="min-h-screen bg-background noise-bg flex flex-col"
+    >
       <Navbar />
+      <SEO 
+        title={service.title}
+        description={service.tagline}
+        canonical={location.pathname}
+        keywords={`${service.title}, ${service.filters.join(", ")}, DelightX Media services`}
+      />
 
-      <main className="pt-28 md:pt-36 pb-24">
+      <main className="flex-grow pt-32 md:pt-48 pb-24 relative z-10 w-full">
+        
+
+
+
         {/* HEADER */}
-
-        <div className="text-center px-6 mb-16">
+        <div className="text-center px-6 mb-16 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="inline-flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-accent" />
-              <span className="font-montserrat text-[11px] font-[700] uppercase tracking-[0.25em]">
+            <div className="inline-flex items-center gap-3 mb-6 bg-black/5 border border-black/10 rounded-full px-4 py-2">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="font-montserrat text-[10px] md:text-xs font-[700] uppercase tracking-[0.25em] text-foreground">
                 {service.tagline}
               </span>
-              <span className="w-2 h-2 rounded-full bg-accent" />
             </div>
 
-            <h1 className="font-montserrat text-[48px] md:text-[72px] lg:text-[96px] font-[900] uppercase leading-[0.9]">
-              {service.title}
+            <h1 className="font-satoshi text-[48px] md:text-[80px] lg:text-[100px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground">
+              {service.title.split(" ").map((word, i, arr) => (
+                <span key={i} className={i === arr.length - 1 ? "text-foreground" : "text-foreground"}>
+                  {word}{" "}
+                </span>
+              ))}
             </h1>
           </motion.div>
         </div>
 
         {/* FILTERS */}
-
-        <div className="flex flex-wrap justify-center gap-3 px-6 mb-16">
+        <div className="flex flex-wrap justify-center gap-3 px-6 mb-20 relative z-10 max-w-4xl mx-auto">
           {service.filters.map((filter, i) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(i)}
-              className={`px-7 py-3.5 rounded-full text-[11px] font-[800] uppercase border transition ${
+              className={`px-6 py-3 rounded-full text-[10px] md:text-[11px] font-[800] uppercase transition-all duration-300 ${
                 activeFilter === i
-                  ? "bg-accent text-white border-accent"
-                  : "border-gray-400"
+                  ? "bg-foreground text-background shadow-[0_4px_10px_rgba(0,0,0,0.15)]"
+                  : "bg-black/5 text-foreground/90 border border-black/10 hover:bg-black/10 hover:text-foreground"
               }`}
             >
               {filter}
@@ -212,50 +242,59 @@ const ServiceDetail = () => {
         </div>
 
         {/* GRID */}
-
-        <div className="px-6 lg:px-12 max-w-[1440px] mx-auto">
-          <div
-            className={`grid gap-2 sm:gap-4 ${
+        <div className="px-4 md:px-8 lg:px-12 max-w-[1440px] mx-auto relative z-10">
+          <motion.div
+            layout
+            className={`grid gap-4 md:gap-6 ${
               slug === "ui-ux"
-                ? "grid-cols-2 md:grid-cols-2"
-                : "grid-cols-2 md:grid-cols-3"
+                ? "grid-cols-1 md:grid-cols-2"
+                : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
             }`}
           >
             {filteredWorks.map((work, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 }}
-                className={`rounded-[16px] overflow-hidden bg-black ${
-                  slug === "ui-ux" ? "aspect-[16/10]" : "aspect-[4/6]"
+                layout
+                key={work.src + i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                className={`rounded-[24px] overflow-hidden group relative bg-black/5 ${
+                  slug === "ui-ux" ? "aspect-[16/10]" : "aspect-[3/4] md:aspect-[4/5]"
                 }`}
               >
+
+
                 {work.type === "image" ? (
                   <img
                     src={work.src}
                     alt={work.category}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
                     loading="lazy"
                   />
                 ) : (
                   <video
                     src={work.src}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out"
                     autoPlay
                     loop
                     muted
                     playsInline
                   />
                 )}
+                <div className="absolute bottom-6 left-6 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none">
+                  <span className="font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-white/80 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                    {work.category}
+                  </span>
+                </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </main>
 
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 

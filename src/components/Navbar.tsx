@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import servicePhoto from "@/assets/service-photo.jpg";
@@ -12,30 +12,52 @@ const workCategories = [
   { title: "OUR PHOTOGRAPHY", image: servicePhoto, link: "/photography" },
   { title: "OUR VIDEOGRAPHY", image: serviceVideo, link: "/videography" },
   { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
-  { title: "BRANDING", image: serviceCgi, link: "/3d-animation-and-cgi" },
+  { title: "BRANDING", image: serviceCgi, link: "/branding" },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [workDropdown, setWorkDropdown] = useState(false);
   const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() || 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+      setWorkDropdown(false);
+    } else {
+      setHidden(false);
+    }
+    setScrolled(latest > 50);
+  });
 
   const scrollToSection = (sectionId: string) => {
+    const executeScroll = () => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const offset = 80; // Navbar height offset
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    };
+
     if (location.pathname !== "/") {
       navigate("/");
-      setTimeout(() => document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" }), 400);
+      setTimeout(executeScroll, 400);
     } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
+      executeScroll();
     }
   };
 
@@ -49,8 +71,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <motion.nav
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
         scrolled ? "bg-background/90 backdrop-blur-lg shadow-sm" : "bg-transparent"
       }`}
     >
@@ -117,6 +145,7 @@ const Navbar = () => {
                               src={cat.image}
                               alt={cat.title}
                               className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                              loading="lazy"
                             />
                           </div>
                         </Link>
@@ -131,12 +160,12 @@ const Navbar = () => {
           <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             OUR SERVICES
           </button>
-          <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            OUR TALENTS
-          </button>
-          <Link to="/about" className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+           {/* <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+            CAMPAIGNS
+          </button> */}
+          <button onClick={() => scrollToSection("about")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
             ABOUT US
-          </Link>
+          </button>
         </div>
 
         {/* CTA */}
@@ -206,8 +235,8 @@ const Navbar = () => {
 
               {[
                 { label: "OUR SERVICES", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
-                { label: "OUR CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
-                { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => navigate("/about"), 300); } },
+                // { label: "CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+                { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("about"), 300); } },
               ].map((item, i) => (
                 <motion.button
                   key={item.label}
@@ -233,7 +262,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </motion.nav>
   );
 };
 

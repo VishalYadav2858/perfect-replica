@@ -17,7 +17,7 @@ const CTASection = () => {
             Ready to bring your vision to life?
           </h2>
           <h3 className="font-montserrat text-[28px] md:text-[38px] lg:text-[48px] font-[900] uppercase leading-[0.95] tracking-[-0.03em] text-foreground mb-10">
-            Contact ADKO today!
+            Contact Deligh today!
           </h3>
 
           <Link to="/contact-us">

@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { pageTransition } from "@/lib/animations";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -12,7 +15,17 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <motion.div 
+      className="min-h-screen bg-background overflow-x-hidden noise-bg"
+      variants={pageTransition}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
+      <SEO 
+        canonical="/"
+        keywords="creative agency, branding, content creation, videography, photography, web development, UI UX design, digital marketing, startup branding, Delhi, India"
+      />
       <Navbar />
       <main>
         <HeroSection />
@@ -22,10 +35,9 @@ const Index = () => {
         <ContactBanner />
         <PortfolioGrid />
         <VisionSection />
-      
       </main>
       <Footer />
-    </div>
+    </motion.div>
   );
 };
 
