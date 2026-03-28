@@ -82,7 +82,7 @@ const Navbar = () => {
         scrolled ? "bg-background/95 md:bg-background/90 md:backdrop-blur-lg shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
         {/* Logo */}
         <Link
           to="/"

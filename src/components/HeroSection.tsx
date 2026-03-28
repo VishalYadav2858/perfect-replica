@@ -53,28 +53,20 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen pt-20 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
+
       {/* ================= LEFT: TEXT ================= */}
       <div className="relative z-20 w-full px-6 md:px-12 max-w-[1440px] mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
-        <div className="flex flex-col items-start justify-center pt-0 lg:pt-0 w-full lg:w-[55%] pointer-events-auto">
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden md:flex items-center gap-4 mb-8 text-foreground/50 font-montserrat text-[10px] md:text-xs tracking-[0.2em] uppercase font-[800]"
-          >
-            <span>120+ Happy Clients</span>
-            <span className="w-1 h-1 rounded-full bg-accent/50" />
-            <span>30+ Brand Partners</span>
-          </motion.div>
+        <div className="flex flex-col items-start justify-center w-full lg:w-[55%] pointer-events-auto">
 
-          <div className="h-[75px] sm:h-[90px] md:h-[110px] lg:h-[130px] flex items-center justify-start overflow-hidden w-full">
+          {/* Animated headline */}
+          <div className="h-[75px] sm:h-[90px] md:h-[110px] lg:h-[130px] flex items-center justify-start overflow-hidden w-full relative">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={currentWord}
-                initial={{ y: "110%", opacity: 0, scale: 0.98 }}
-                animate={{ y: "0%", opacity: 1, scale: 1 }}
-                exit={{ y: "-110%", opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+                initial={{ y: "110%", opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                animate={{ y: "0%", opacity: 1, filter: "blur(0px)", scale: 1 }}
+                exit={{ y: "-110%", opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className="font-satoshi uppercase leading-[0.85] text-[50px] sm:text-[70px] md:text-[85px] lg:text-[100px] xl:text-[115px] tracking-tight font-black whitespace-nowrap text-foreground"
                 style={{ letterSpacing: "-0.04em" }}
               >
@@ -83,19 +75,30 @@ export default function HeroSection() {
             </AnimatePresence>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="font-montserrat text-sm md:text-lg text-foreground/60 leading-relaxed font-medium mt-6 mb-8 max-w-[450px]"
-          >
-            WE CREATE. WE STRATEGIZE. WE SCALE.
-          </motion.p>
+          {/* Tagline — Staggered Reveal */}
+          <div className="flex items-center gap-x-3 md:gap-x-6 mt-4 mb-10 overflow-hidden whitespace-nowrap">
+            {["We Create.", "We Strategize.", "We Scale."].map((text, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 1 + (i * 0.15),
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
+                className="font-montserrat text-[10px] sm:text-[12px] md:text-[14px] font-[700] uppercase tracking-[0.15em] md:tracking-[0.25em] text-foreground"
+              >
+                {text}
+              </motion.span>
+            ))}
+          </div>
 
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
           >
             <Link
               to="/contact-us"
@@ -107,6 +110,25 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
+
+      {/* Stats — pinned bottom left */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 left-6 md:left-12 z-30 hidden md:flex items-center gap-10 pointer-events-none"
+      >
+        <div className="flex flex-col gap-1">
+          <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">120+</span>
+          <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Happy Clients</span>
+        </div>
+        <div className="w-[1px] h-12 bg-foreground/15" />
+        <div className="flex flex-col gap-1">
+          <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">30+</span>
+          <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Brand Partners</span>
+        </div>
+      </motion.div>
+
 
       {/* ================= RIGHT: FULL HEIGHT VERTICAL VIDEO SCROLL ================= */}
       <div className="relative lg:absolute top-20 md:top-24 right-0 w-full lg:w-[45%] h-[600px] md:h-[800px] lg:h-[calc(100vh-6rem)] overflow-hidden z-10 pt-4 lg:pt-0">

@@ -71,6 +71,7 @@ export default function VideoScrollGrid() {
 
   return (
     <div
+      id="work"
       ref={sectionRef}
       style={{
         height: "100vh",

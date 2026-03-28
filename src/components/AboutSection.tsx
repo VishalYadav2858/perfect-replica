@@ -5,8 +5,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative py-24 md:py-36 px-6 lg:px-12 max-w-[1440px] mx-auto overflow-hidden">
-
+    <section id="about" className="relative py-24 md:py-36 px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
 
       <motion.div
         initial="hidden"
@@ -21,13 +20,14 @@ export default function AboutSection() {
         {/* Left main text block */}
         <motion.div variants={slideUp} className="lg:col-span-7 flex flex-col justify-center">
           <h2 className="font-satoshi text-[40px] md:text-[60px] lg:text-[75px] font-black leading-[1] tracking-tight text-foreground mb-6">
-            WE GET  <br className="hidden md:block" />
-            <span className="text-accent">THINGS DONE</span>
+            We get  <br className="hidden md:block" />
+            <span className="text-accent">things done</span>
           </h2>
           <p className="font-montserrat text-sm md:text-lg font-medium text-foreground/70 max-w-2xl leading-[1.8] mb-10 border-l-2 border-accent pl-6">
-            We’re a digital marketing team delivering end-to-end solutions that help creators and businesses get things done. From content creation and brand building to performance marketing, website development, and creative production, we offer a complete suite of services designed to meet diverse needs seamlessly under one roof.
+            We're a digital marketing team delivering end-to-end solutions that help creators and businesses get things done. From content creation and brand building to performance marketing, website development, and creative production, we offer a complete suite of services designed to meet diverse needs seamlessly under one roof.
           </p>
           
+          {/* 
           <div className="flex items-center gap-6">
             <Link to="/brand-solutions">
               <motion.button
@@ -40,6 +40,7 @@ export default function AboutSection() {
               </motion.button>
             </Link>
           </div>
+          */}
         </motion.div>
         
         {/* Right side bento stats/images */}
@@ -55,12 +56,10 @@ export default function AboutSection() {
             </div>
           </div>
           <div className="bg-accent/10 rounded-xl p-6 flex flex-col justify-end overflow-hidden relative border border-accent/20">
-
-
-             <div className="relative z-10">
-               <h3 className="font-satoshi text-2xl font-black text-foreground leading-tight mb-2">Data-Driven Creativity</h3>
-               <p className="font-montserrat text-xs text-foreground/70 leading-relaxed font-medium">Where analytical precision meets unapologetic design.</p>
-             </div>
+            <div className="relative z-10">
+              <h3 className="font-satoshi text-2xl font-black text-foreground leading-tight mb-2">Data-Driven Creativity</h3>
+              <p className="font-montserrat text-xs text-foreground/70 leading-relaxed font-medium">Where analytical precision meets unapologetic design.</p>
+            </div>
           </div>
         </motion.div>
       </motion.div>

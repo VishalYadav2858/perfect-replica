@@ -35,7 +35,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 /* ---------- COMPONENT ---------- */
 export default function VisionSection() {
   return (
-    <section className="relative py-20 md:py-28 px-6 lg:px-12 max-w-[1440px] mx-auto overflow-hidden">
+    <section className="relative py-20 md:py-28 px-6 lg:px-12 max-w-7xl mx-auto overflow-hidden">
 
 
 
@@ -53,10 +53,17 @@ export default function VisionSection() {
             Transforming Brands<br />
             <span className="text-accent">With Vision & Craft</span>
           </h2>
-          <div className="lg:col-span-5 flex flex-col justify-end">
+          <div className="lg:col-span-5 flex flex-col justify-end gap-8">
             <p className="font-montserrat text-sm md:text-[15px] font-medium text-foreground/60 leading-[1.8] border-l-2 border-accent pl-6">
               A creative agency specializing in branding, web development, motion graphics, and art direction to bring your ideas to life.
             </p>
+            <Link
+              to="/contact-us"
+              className="group self-start flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-montserrat text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/30"
+            >
+              Start a Project
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </motion.div>
 
@@ -78,19 +85,7 @@ export default function VisionSection() {
           ))}
         </motion.div>
 
-        {/* Row 3: CTA */}
-        <motion.div variants={slideUp} className="mt-10 flex items-center justify-between border-t border-black/5 pt-8">
-          <p className="font-montserrat text-[10px] font-bold uppercase tracking-[0.2em] text-foreground/40">
-            Measurable Growth. Proven Impact.
-          </p>
-          <Link
-            to="/contact-us"
-            className="group flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-montserrat text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/30"
-          >
-            Start a Project
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
+
       </motion.div>
     </section>
   );

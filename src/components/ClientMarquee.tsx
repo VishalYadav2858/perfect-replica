@@ -13,7 +13,7 @@ const clients = [
 
 const ClientMarquee = () => {
   return (
-    <section className="py-16 border-y border-black/5 overflow-hidden bg-background relative">
+    <section className="py-6 border-y border-black/5 overflow-hidden bg-background relative">
 
 
       

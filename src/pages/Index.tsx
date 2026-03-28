@@ -9,7 +9,7 @@ import HeroSection from "@/components/HeroSection";
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const ClientMarquee = lazy(() => import("@/components/ClientMarquee"));
 const ServicesSection = lazy(() => import("@/components/ServicesSection"));
-const ContactBanner = lazy(() => import("@/components/ContactBanner"));
+
 const PortfolioGrid = lazy(() => import("@/components/PortfolioGrid"));
 const VisionSection = lazy(() => import("@/components/VisionSection"));
 const Footer = lazy(() => import("@/components/Footer"));
@@ -34,6 +34,7 @@ const Index = () => {
         canonical="/"
         keywords="creative agency, branding, content creation, videography, photography, web development, UI UX design, digital marketing, startup branding, Delhi, India"
       />
+      
       <Navbar />
       <main>
         <HeroSection />
@@ -42,7 +43,6 @@ const Index = () => {
           <AboutSection />
           <ClientMarquee />
           <ServicesSection />
-          <ContactBanner />
           <PortfolioGrid />
           <VisionSection />
         </Suspense>

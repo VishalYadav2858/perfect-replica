@@ -1,54 +1,99 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Instagram, Linkedin, Twitter } from "lucide-react";
+
+const navLinks = [
+  { label: "Home",            to: "/",                 hash: "__home__"  },
+  { label: "About",          to: "/",                 hash: "about"     },
+  { label: "Services",       to: "/",                 hash: "services"  },
+  { label: "Our Work",       to: "/",                 hash: "work"      },
+  { label: "Brand Solutions", to: "/brand-solutions", hash: ""          },
+  { label: "Contact",        to: "/contact-us",       hash: ""          },
+];
+
+const socials = [
+  { label: "Instagram", icon: Instagram, href: "https://instagram.com/delightxmedia" },
+  { label: "LinkedIn",  icon: Linkedin,  href: "https://linkedin.com/company/delightxmedia" },
+  { label: "Twitter",   icon: Twitter,   href: "https://twitter.com/delightxmedia" },
+];
 
 const Footer = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleNavClick = (to: string, hash: string) => {
+    if (hash === "__home__") {
+      navigate("/");
+      setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 100);
+      return;
+    }
+    if (!hash) return;
+    if (location.pathname === "/") {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+  };
+
   return (
-    <footer className="border-t border-black/5 py-16 px-6 lg:px-12 bg-background relative overflow-hidden">
+    <footer className="bg-foreground text-background">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-10 flex flex-col md:flex-row items-center justify-between gap-8 border-b border-background/10">
 
-
-      <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-12 relative z-10 mb-16">
-        <Link to="/" className="flex flex-col leading-[0.85] cursor-pointer group">
-          <span className="font-montserrat text-[28px] font-[900] tracking-[-0.06em] text-foreground group-hover:text-accent transition-colors">DelightX</span>
-          <span className="font-montserrat text-[10px] font-[600] tracking-[0.2em] uppercase text-foreground/40 mt-1">Media</span>
+        {/* Brand */}
+        <Link to="/" className="flex flex-col leading-[0.85] group shrink-0">
+          <span className="font-montserrat text-[22px] font-[900] tracking-[-0.06em] text-background group-hover:text-accent transition-colors">DelightX</span>
+          <span className="font-montserrat text-[8px] font-[600] tracking-[0.2em] uppercase text-background/30 mt-1">Media</span>
         </Link>
 
-        {/* Contact Info Group */}
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16 items-center text-center md:text-left">
-          <div className="flex flex-col gap-1.5">
-            <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Connect</span>
-            <div className="flex flex-col">
-              <a href="tel:+917798351934" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors" aria-label="Call +9-1-9-8-6-7-9-4-9-9-4-3">+91-9867949943</a>
-            </div>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Enquire</span>
-            <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors" aria-label="Email contact at delightxmedia.in">contact@delightxmedia.in</a>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Location</span>
-            <span className="font-satoshi text-[13px] font-[700] text-foreground/80">Mumbai, India</span>
-          </div>
-        </div>
+        {/* Nav */}
+        <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          {navLinks.map((link) =>
+            link.hash ? (
+              <button
+                key={link.label}
+                onClick={() => handleNavClick(link.to, link.hash)}
+                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/50 hover:text-background transition-colors"
+              >
+                {link.label}
+              </button>
+            ) : (
+              <Link
+                key={link.label}
+                to={link.to}
+                className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.15em] text-background/50 hover:text-background transition-colors"
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+        </nav>
 
-        <div className="flex gap-10">
-          {["Instagram", "LinkedIn", "Twitter"].map((social) => (
-             <a 
-               key={social} 
-               href={`https://${social.toLowerCase()}.com/delightxmedia`} 
-               target="_blank" 
-               rel="noopener noreferrer" 
-               className="relative font-montserrat text-[11px] font-[700] uppercase tracking-[0.15em] text-foreground/50 hover:text-foreground transition-colors group"
-               aria-label={`Follow DelightX Media on ${social}`}
-             >
-               {social}
-               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-accent transition-all duration-300 group-hover:w-full" />
-             </a>
+        {/* Socials */}
+        <div className="flex gap-3 shrink-0">
+          {socials.map(({ label, icon: Icon, href }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="w-8 h-8 rounded-full border border-background/20 hover:border-accent hover:bg-accent/10 flex items-center justify-center transition-all duration-300 group"
+            >
+              <Icon className="w-3.5 h-3.5 text-background/40 group-hover:text-accent transition-colors" />
+            </a>
           ))}
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto pt-8 border-t border-black/5 flex justify-center md:justify-start">
-        <p className="font-montserrat text-[10px] font-[500] text-foreground/30 tracking-[0.1em] uppercase">
-          © 2026 DelightX. All rights reserved.
+      {/* Bottom bar */}
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-4 flex items-center justify-between gap-3">
+        <p className="font-montserrat text-[9px] font-[500] text-background/20 tracking-[0.1em] uppercase">
+          © 2026 DelightX Media. All rights reserved.
+        </p>
+        <p className="font-montserrat text-[9px] font-[500] text-background/20 tracking-[0.1em] uppercase">
+          Mumbai, India
         </p>
       </div>
     </footer>

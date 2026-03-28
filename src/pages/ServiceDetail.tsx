@@ -172,6 +172,50 @@ const ServiceDetail = () => {
     );
   }
 
+  // Branding — Coming Soon full page
+  if (slug === "branding") {
+    return (
+      <motion.div
+        variants={pageTransition}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        className="min-h-screen bg-background noise-bg flex flex-col"
+      >
+        <Navbar />
+        <SEO
+          title="Branding — Coming Soon"
+          description="DelightX Media will be offering branding services soon. Stay tuned."
+          canonical="/branding"
+          keywords="branding, coming soon, DelightX Media"
+        />
+        <main className="flex-grow flex flex-col items-center justify-center text-center px-6 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center gap-6 max-w-lg"
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+              <span className="font-montserrat text-[10px] font-[800] uppercase tracking-[0.25em] text-accent">Coming Soon</span>
+            </div>
+            <h1 className="font-satoshi text-[56px] md:text-[80px] font-[900] leading-[0.9] tracking-tight text-foreground">
+              Branding
+            </h1>
+            <p className="font-montserrat text-[14px] font-[500] text-foreground/50 leading-[1.8]">
+              We're working on something special. Our full branding service — strategy, identity, and visual design — will be available soon.
+            </p>
+            <p className="font-montserrat text-[11px] font-[700] uppercase tracking-[0.2em] text-foreground/30">
+              Will update soon 🚀
+            </p>
+          </motion.div>
+        </main>
+        <Footer />
+      </motion.div>
+    );
+  }
+
   const filteredWorks =
     activeFilter === 0
       ? service.works
@@ -296,6 +340,27 @@ const ServiceDetail = () => {
                 </div>
               </motion.div>
             ))}
+
+            {/* Coming Soon — only on Branding page */}
+            {slug === "branding" && (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="rounded-[24px] overflow-hidden aspect-[3/4] md:aspect-[4/5] border-2 border-dashed border-black/15 flex flex-col items-center justify-center gap-4 bg-black/[0.02]"
+              >
+                <span className="text-3xl">🚀</span>
+                <div className="text-center px-6">
+                  <p className="font-satoshi text-[15px] font-[800] text-foreground/40 tracking-tight mb-1">
+                    Coming Soon
+                  </p>
+                  <p className="font-montserrat text-[10px] font-[600] uppercase tracking-[0.18em] text-foreground/25">
+                    More work dropping soon
+                  </p>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </main>

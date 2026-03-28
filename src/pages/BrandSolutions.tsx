@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -23,8 +24,25 @@ const BrandSolutions = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="min-h-screen bg-background noise-bg flex flex-col"
+      className="min-h-screen bg-black flex flex-col relative overflow-hidden text-white"
+      style={{
+        backgroundColor: '#000000',
+        '--foreground': '0 0% 100%',
+        '--background': '0 0% 0%',
+        '--border': '0 0% 100% / 0.1',
+      } as any}
     >
+      {/* Visual distinction — intensified background glow */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/15 rounded-full blur-[160px] -translate-y-1/2 translate-x-1/4 pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[140px] translate-y-1/2 -translate-x-1/4 pointer-events-none z-0" />
+
+      {/* Page Indicator */}
+      <div className="hidden xl:flex absolute top-40 left-6 h-40 items-center gap-4 origin-left -rotate-90 z-20 opacity-40 select-none pointer-events-none">
+        <span className="font-montserrat text-[10px] font-[800] uppercase tracking-[0.4em] text-white">Solutions</span>
+        <div className="w-12 h-[1px] bg-white/30" />
+        <span className="font-montserrat text-[10px] font-[800] text-white">02</span>
+      </div>
+
       <Navbar />
       <SEO 
         title="Our Services"
@@ -33,56 +51,90 @@ const BrandSolutions = () => {
         keywords="creative services, videography, web design, branding solutions, photography agency"
       />
       
-      <main className="flex-grow pt-32 md:pt-48 pb-24 px-6 lg:px-12 max-w-[1440px] mx-auto w-full relative z-10">
-        
-        {/* Glow orbit */}
+      <main className="flex-grow pt-28 md:pt-32 pb-20 px-6 lg:px-12 max-w-7xl mx-auto w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+          
+          {/* LEFT — glass card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-2 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[32px] p-8 md:p-10 flex flex-col justify-between min-h-[400px] lg:min-h-[500px] shadow-2xl"
+          >
+            <div>
+              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-white/40 mb-6">
+                DelightX Studio
+              </p>
+              <h1 className="font-satoshi text-[48px] md:text-[60px] font-[900] uppercase leading-[0.9] tracking-tight text-white mb-6">
+                Brand<br />
+                <span className="text-accent underline decoration-white/10 underline-offset-[12px]">Solutions.</span>
+              </h1>
+              <p className="font-montserrat text-[13px] font-[400] text-white/50 leading-[1.8] max-w-xs">
+                Welcome to the studio. Here, we transform raw concepts into cinematic identities — blending photography, motion, and digital engineering.
+              </p>
+            </div>
+            
+            <div className="hidden lg:block">
+              <div className="w-full h-[1px] bg-white/10 mb-6" />
+              <p className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.2em] text-white/30">
+                SCROLL TO EXPLORE THE PORTFOLIO
+              </p>
+            </div>
+          </motion.div>
 
+          {/* RIGHT — service cards */}
+          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+            {solutions.map((item, i) => {
+              const isComingSoon = item.title === "Branding";
 
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {isComingSoon ? (
+                    <div className="group block rounded-[24px] overflow-hidden relative aspect-square bg-white/5 border border-white/5 cursor-default">
+                      <div className="absolute inset-0 grayscale opacity-20">
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/40 backdrop-blur-[4px]">
+                        <span className="font-montserrat text-[7px] font-[800] uppercase tracking-[0.2em] text-white/30">Coming Soon</span>
+                        <h3 className="font-satoshi text-[24px] font-[900] tracking-tight text-white/40">{item.title}</h3>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link 
+                      to={item.link} 
+                      className="group block rounded-[24px] overflow-hidden relative aspect-square bg-[#0a0a0a] hover:-translate-y-1.5 transition-all duration-500 shadow-2xl border border-white/5 hover:border-white/10"
+                    >
+                      <div className="absolute inset-0 overflow-hidden">
+                        <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1200ms] ease-out opacity-60 group-hover:opacity-100" />
+                      </div>
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
+                      
+                      <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                        <h3 className="font-satoshi text-[20px] md:text-[24px] font-[900] tracking-tight text-white mb-3">
+                          {item.title}
+                        </h3>
+                        <div className="flex items-center gap-2.5">
+                          <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-accent transition-colors duration-300">
+                            <ArrowUpRight className="w-3.5 h-3.5 text-white" />
+                          </span>
+                          <span className="font-montserrat text-[8px] font-[700] uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors">
+                            Explore Project
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="mb-20 md:mb-32 max-w-4xl"
-        >
-          <motion.p variants={slideUp} className="font-montserrat text-[10px] md:text-xs font-[700] uppercase tracking-[0.35em] text-accent mb-6">
-            Our Services
-          </motion.p>
-          <motion.h1 variants={slideUp} className="font-satoshi text-[60px] md:text-[100px] lg:text-[120px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground">
-            Brand<br /><span className="text-muted-foreground">Solutions.</span>
-          </motion.h1>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {solutions.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Link to={item.link} className="group block rounded-[32px] overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative">
-                <div className="aspect-[4/3] overflow-hidden relative">
-
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1200ms] ease-out" loading="lazy" />
-                </div>
-                <div className="absolute bottom-0 left-0 w-full p-8 md:p-10 z-20">
-                  <h3 className="font-satoshi text-[24px] md:text-[32px] font-[900] tracking-[-0.02em] text-white mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                    {item.title}
-                  </h3>
-                  <div className="inline-flex items-center gap-3">
-                    <span className="w-10 h-10 rounded-full bg-white/20 glass flex items-center justify-center border border-white/20 group-hover:bg-accent group-hover:border-accent group-hover:text-background transition-all text-white">
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                    </span>
-                    <span className="font-montserrat text-[10px] font-[700] uppercase tracking-[0.2em] text-white/80 group-hover:text-white transition-colors">
-                      Explore Details
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
         </div>
       </main>
       <Footer />

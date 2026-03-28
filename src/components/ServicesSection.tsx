@@ -2,6 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { slideUp } from "@/lib/animations";
 
 const services = [
   {
@@ -135,6 +138,10 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
               fontWeight: 800,
               letterSpacing: "-0.025em",
               lineHeight: 1,
+              display: "flex",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: "12px",
             }}
           >
             {service.title}
@@ -146,14 +153,13 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
               transition={{ duration: 0.3 }}
               style={{
                 display: "inline-block",
-                marginLeft: "20px",
                 fontFamily: "'Satoshi', sans-serif",
                 fontSize: "10px",
                 fontWeight: 800,
                 letterSpacing: "0.15em",
                 color: "rgba(0,0,0,0.3)",
                 textTransform: "uppercase",
-                verticalAlign: "middle"
+                marginTop: "4px",
               }}
             >
               Explore
@@ -218,64 +224,72 @@ export default function ServicesSection() {
       className="scroll-mt-24 py-24 md:py-32"
       style={{ backgroundColor: "#ffffff" }}
     >
-      <div style={{ maxWidth: "1400px", margin: "0 auto", padding: "0 24px" }}>
-        {/* HEADING */}
-        <div ref={headingRef} style={{ marginBottom: "64px" }}>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            style={{
-              fontFamily: "'Satoshi', sans-serif",
-              fontSize: "12px",
-              letterSpacing: "0.2em",
-              color: "hsl(var(--accent))",
-              textTransform: "uppercase",
-              fontWeight: 600,
-              marginBottom: "14px",
-            }}
-          >
-            What We Do
-          </motion.p>
-
-          <div style={{ overflow: "hidden" }}>
-            <motion.h2
-              initial={{ y: "110%" }}
-              animate={inView ? { y: "0%" } : {}}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontFamily: "'Satoshi', sans-serif",
-                fontSize: "clamp(52px, 9vw, 120px)",
-                fontWeight: 900,
-                color: "#111111",
-                letterSpacing: "-0.04em",
-                lineHeight: 0.92,
-                display: "block",
-              }}
-            >
-              Our
-            </motion.h2>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        {/* GRID HEADING BLOCK */}
+        <motion.div
+          ref={headingRef}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={{ visible: { transition: { staggerChildren: 0.12 } }, hidden: {} }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-16"
+        >
+          {/* Left: Heading */}
+          <div className="lg:col-span-7">
+            <div style={{ overflow: "hidden" }}>
+              <motion.h2
+                variants={slideUp}
+                style={{
+                  fontFamily: "'Satoshi', sans-serif",
+                  fontSize: "clamp(40px, 6vw, 75px)",
+                  fontWeight: 900,
+                  color: "#111111",
+                  letterSpacing: "-0.04em",
+                  lineHeight: 0.92,
+                  display: "block",
+                }}
+              >
+                Our
+              </motion.h2>
+            </div>
+            <div style={{ overflow: "hidden" }}>
+              <motion.h2
+                variants={slideUp}
+                style={{
+                  fontFamily: "'Satoshi', sans-serif",
+                  fontSize: "clamp(40px, 6vw, 75px)",
+                  fontWeight: 900,
+                  color: "hsl(var(--accent))",
+                  letterSpacing: "-0.04em",
+                  lineHeight: 0.92,
+                  display: "block",
+                }}
+              >
+                Expertise.
+              </motion.h2>
+            </div>
           </div>
 
-          <div style={{ overflow: "hidden" }}>
-            <motion.h2
-              initial={{ y: "110%" }}
-              animate={inView ? { y: "0%" } : {}}
-              transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                fontFamily: "'Satoshi', sans-serif",
-                fontSize: "clamp(52px, 9vw, 120px)",
-                fontWeight: 900,
-                color: "hsl(var(--accent))",
-                letterSpacing: "-0.04em",
-                lineHeight: 0.92,
-                display: "block",
-              }}
+          {/* Right: Description + CTA */}
+          <div className="lg:col-span-5 flex flex-col justify-end gap-8">
+            <motion.p
+              variants={slideUp}
+              className="font-montserrat text-sm md:text-[15px] font-medium text-foreground/60 leading-[1.8] border-l-2 border-accent pl-6"
             >
-              Expertise.
-            </motion.h2>
+              We provide end-to-end digital solutions from high-impact content and branding to technical engineering and social growth all designed to scale your vision.
+            </motion.p>
+            <motion.div variants={slideUp}>
+              <Link
+                to="/contact-us"
+                className="group self-start flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-montserrat text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/30 w-fit"
+              >
+                Start a Project
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
+
 
         {/* ROWS */}
         <div
@@ -300,8 +314,9 @@ export default function ServicesSection() {
           transition={{ duration: 0.5, delay: 0.3 }}
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            marginTop: "28px",
+            justifyContent: "center",
+            gap: "40px",
+            marginTop: "32px",
             padding: "0 12px",
           }}
         >
