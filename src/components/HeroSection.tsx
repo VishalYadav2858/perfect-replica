@@ -123,7 +123,7 @@ export default function HeroSection() {
               {(isMobile ? [...col1Videos, ...col1Videos] : [...col1Videos, ...col1Videos, ...col1Videos, ...col1Videos]).map((video, idx) => (
                 <div 
                   key={`col1-${idx}`} 
-                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group"
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
                 >
                   <video
                     src={video}
@@ -153,7 +153,7 @@ export default function HeroSection() {
               {(isMobile ? [...col2Videos, ...col2Videos] : [...col2Videos, ...col2Videos, ...col2Videos, ...col2Videos]).map((video, idx) => (
                 <div 
                   key={`col2-${idx}`} 
-                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group"
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
                 >
                   <video
                     src={video}
