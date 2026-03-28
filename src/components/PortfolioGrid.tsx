@@ -48,13 +48,14 @@ export default function VideoScrollGrid() {
       gsap.registerPlugin(ScrollTrigger);
 
       ctx = gsap.context(() => {
+        const isMob = window.innerWidth < 768;
         gsap.to(gridRef.current, {
           scale: 1,
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=1200",
+            end: isMob ? "+=800" : "+=1200",
             scrub: 1,
             pin: true,
           },
@@ -70,7 +71,7 @@ export default function VideoScrollGrid() {
     <div
       ref={sectionRef}
       style={{
-        height: isMobile ? "56.25vw" : "100vh",
+        height: "100vh",
         overflow: "hidden",
         background: "#fff",
         position: "relative",
@@ -90,8 +91,9 @@ export default function VideoScrollGrid() {
         }}
       >
         {MEDIA.map((item, i) => {
-          // On mobile, play only a subset of videos to save resources
-          const shouldPlayVideo = item.type === "video" && (!isMobile || i % 2 === 0);
+          // Keep the resource optimization for mobile
+          const isMob = typeof window !== "undefined" ? window.innerWidth < 768 : false;
+          const shouldPlayVideo = item.type === "video" && (!isMob || i % 2 === 0);
           
           return (
             <div key={i} style={{ overflow: "hidden" }}>
@@ -111,7 +113,6 @@ export default function VideoScrollGrid() {
                 />
               ) : (
                 <div className="w-full h-full bg-black/5 flex items-center justify-center relative">
-                   {/* Fallback to image if it's an image type or if video is disabled on mobile */}
                    <img
                     src={item.src}
                     alt=""
@@ -119,7 +120,7 @@ export default function VideoScrollGrid() {
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
-                      opacity: item.type === "video" ? 0.6 : 1 // Dim disabled videos slightly
+                      opacity: item.type === "video" ? 0.6 : 1
                     }}
                   />
                   {item.type === "video" && (
