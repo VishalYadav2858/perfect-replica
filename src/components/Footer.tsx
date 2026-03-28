@@ -16,13 +16,13 @@ const Footer = () => {
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Connect</span>
             <div className="flex flex-col">
-              <a href="tel:+917798351934" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">+91 7798351934</a>
-              <a href="tel:+917058455963" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">+91 7058455963</a>
+              <a href="tel:+917798351934" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">+91-9867949943</a>
+              <a href="tel:+917058455963" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors"></a>
             </div>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Enquire</span>
-            <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">rushikesh@delightxmedia.in</a>
+            <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[13px] font-[700] text-foreground/80 hover:text-accent transition-colors">contact@delightxmedia.in</a>
           </div>
           <div className="flex flex-col gap-1.5">
             <span className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30">Location</span>

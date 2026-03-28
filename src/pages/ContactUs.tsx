@@ -91,8 +91,8 @@ const ContactUs = () => {
                 <h3 className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.25em] text-foreground/30 mb-1">
                   Email Us
                 </h3>
-                <a href="mailto:rushikesh@delightxmedia.in" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
-                  rushikesh@delightxmedia.in
+                <a href="mailto:contact@delightxmedia.in" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
+                  contact@delightxmedia.in
                 </a>
               </div>
             </div>
@@ -109,11 +109,11 @@ const ContactUs = () => {
                   Call Us
                 </h3>
                 <div className="flex flex-col">
-                  <a href="tel:+917798351934" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
-                    +91 7798351934
+                  <a href="tel:+919867949943" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
+                    +91-9867949943
                   </a>
-                  <a href="tel:+917058455963" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
-                    +91 7058455963
+                  <a href="tel:+919867949943" className="font-satoshi text-[16px] md:text-[18px] font-[700] text-foreground hover:text-accent transition-colors">
+                    
                   </a>
                 </div>
               </div>
