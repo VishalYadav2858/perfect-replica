@@ -17,11 +17,19 @@ const ClientMarquee = () => {
 
 
       
-      <div className="flex animate-marquee items-center" style={{ width: "fit-content" }}>
+      <div 
+        className="flex animate-marquee items-center" 
+        style={{ 
+          width: "fit-content",
+          willChange: "transform",
+          transform: "translate3d(0,0,0)"
+        }}
+      >
         {[...clients, ...clients, ...clients, ...clients].map((client, i) => (
           <div 
             key={`${client.name}-${i}`} 
             className="flex-shrink-0 mx-12 md:mx-20 flex items-center justify-center opacity-100 transition-opacity duration-500"
+            style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
           >
             <img
               src={client.logo}

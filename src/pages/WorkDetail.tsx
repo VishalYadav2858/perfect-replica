@@ -118,9 +118,15 @@ const WorkDetail = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="rounded-[32px] overflow-hidden aspect-[16/9] mb-12 relative group"
+            style={{ willChange: "transform" }}
           >
 
-            <img src={work.heroImage} alt={work.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" />
+            <img 
+              src={work.heroImage} 
+              alt={work.title} 
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" 
+              style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
+            />
           </motion.div>
 
           {/* Gallery */}
@@ -135,7 +141,13 @@ const WorkDetail = () => {
                 className="rounded-[24px] overflow-hidden aspect-[16/10] group relative"
               >
 
-                <img src={img} alt={`${work.title} ${i + 1}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" loading="lazy" />
+                <img 
+                  src={img} 
+                  alt={`${work.title} ${i + 1}`} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1200ms] ease-out" 
+                  loading="lazy" 
+                  style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
+                />
               </motion.div>
             ))}
           </div>

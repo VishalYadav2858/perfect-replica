@@ -172,6 +172,7 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
               marginTop: hovered ? 16 : 0 
             }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            style={{ willChange: "height, opacity" }}
           >
             <p
               style={{

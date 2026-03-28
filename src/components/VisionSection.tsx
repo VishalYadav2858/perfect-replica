@@ -66,6 +66,7 @@ export default function VisionSection() {
             <div
               key={i}
               className="rounded-3xl p-6 md:p-8 flex flex-col justify-center items-center text-center transition-all hover:-translate-y-1 duration-300 bg-accent/10 border border-accent/20"
+              style={{ willChange: "transform", transform: "translate3d(0,0,0)" }}
             >
               <span className="font-satoshi text-3xl md:text-4xl font-black mb-2 text-foreground">
                 <Counter value={stat.value} suffix={stat.suffix} />

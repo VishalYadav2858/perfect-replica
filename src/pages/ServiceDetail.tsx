@@ -262,6 +262,12 @@ const ServiceDetail = () => {
                 className={`rounded-[24px] overflow-hidden group relative bg-black/5 ${
                   slug === "ui-ux" ? "aspect-[16/10]" : "aspect-[3/4] md:aspect-[4/5]"
                 }`}
+                style={{
+                  willChange: "transform",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
+                  transform: "translate3d(0,0,0)"
+                }}
               >
 
 
