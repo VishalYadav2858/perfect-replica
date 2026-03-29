@@ -86,6 +86,12 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
+          onClick={(e) => {
+            if (location.pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="flex flex-col leading-[0.85] cursor-pointer"
           aria-label="DelightX Media Home"
         >

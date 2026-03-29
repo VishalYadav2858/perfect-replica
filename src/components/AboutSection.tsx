@@ -51,8 +51,8 @@ export default function AboutSection() {
               <span className="font-montserrat text-xs tracking-wider uppercase text-foreground/60 font-bold">Brands Scaled</span>
             </div>
             <div className="bg-foreground rounded-xl p-6 flex flex-col justify-center items-center text-center flex-1 transition-transform hover:-translate-y-2 group shadow-xl">
-              <span className="font-satoshi text-4xl md:text-5xl font-black text-background mb-2">98%</span>
-              <span className="font-montserrat text-xs tracking-wider uppercase text-background/80 font-bold group-hover:text-background/95">Client Growth</span>
+              <span className="font-satoshi text-4xl md:text-5xl font-black text-background mb-2">999+</span>
+              <span className="font-montserrat text-xs tracking-wider uppercase text-background/80 font-bold group-hover:text-background/95">Videos Edited</span>
             </div>
           </div>
           <div className="bg-accent/10 rounded-xl p-6 flex flex-col justify-end overflow-hidden relative border border-accent/20">

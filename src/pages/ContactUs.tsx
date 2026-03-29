@@ -81,13 +81,13 @@ const ContactUs = () => {
             </div>
 
             <div className="flex flex-col gap-5 mt-10">
-              <a href="mailto:vishal@delightxmedia.in" className="group flex items-center gap-4">
+              <a href="mailto:contact@delightxmedia.in" className="group flex items-center gap-4">
                 <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
                   <Mail className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
                 </span>
                 <div>
                   <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Email</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">vishal@delightxmedia.in</p>
+                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">contact@delightxmedia.in</p>
                 </div>
               </a>
 

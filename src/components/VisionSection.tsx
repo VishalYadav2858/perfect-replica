@@ -7,7 +7,7 @@ import { slideUp } from "@/lib/animations";
 /* ---------- STATS ---------- */
 const stats = [
   { value: 30, suffix: "+", label: "Brands Scaled" },
-  { value: 5, suffix: "X", label: "Engagement Boost" },
+  { value: 999, suffix: "+", label: "Videos Edited" },
   { value: 60, suffix: "%", label: "Watch Time Growth" },
   { value: 98, suffix: "%", label: "Client Retention" },
 ];

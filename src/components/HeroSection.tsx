@@ -67,7 +67,7 @@ export default function HeroSection() {
                 animate={{ y: "0%", opacity: 1, filter: "blur(0px)", scale: 1 }}
                 exit={{ y: "-110%", opacity: 0, filter: "blur(10px)", scale: 0.95 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="font-satoshi uppercase leading-[0.85] text-[50px] sm:text-[70px] md:text-[85px] lg:text-[100px] xl:text-[115px] tracking-tight font-black whitespace-nowrap text-foreground"
+                className="font-satoshi uppercase leading-[0.85] text-[38px] sm:text-[60px] md:text-[85px] lg:text-[100px] xl:text-[115px] tracking-tight font-black whitespace-nowrap text-foreground"
                 style={{ letterSpacing: "-0.04em" }}
               >
                 {words[currentWord]}
