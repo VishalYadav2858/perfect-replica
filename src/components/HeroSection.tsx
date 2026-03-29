@@ -84,7 +84,7 @@ export default function HeroSection() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ 
                   duration: 0.8, 
-                  delay: 1 + (i * 0.15),
+                  delay: i * 0.05,
                   ease: [0.22, 1, 0.36, 1] 
                 }}
                 className="font-montserrat text-[10px] sm:text-[12px] md:text-[14px] font-[700] uppercase tracking-[0.15em] md:tracking-[0.25em] text-foreground"
@@ -98,7 +98,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6, duration: 0.8, ease: "easeOut" }}
+            transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
           >
             <Link
               to="/contact-us"
@@ -117,7 +117,7 @@ export default function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 0, duration: 0.8 }}
             className="flex items-center gap-10"
           >
             <div className="flex flex-col gap-1">

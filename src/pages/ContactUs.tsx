@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Mail, Phone, MapPin } from "lucide-react";
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
@@ -16,18 +15,27 @@ const ContactUs = () => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
+    
+    const formData = new FormData(e.target as HTMLFormElement);
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_ACCESS_KEY);
+
     try {
-      if (form.current) {
-        await emailjs.sendForm(
-          import.meta.env.VITE_EMAIL_SERVICE_ID,
-          import.meta.env.VITE_EMAIL_TEMPLATE_ID,
-          form.current,
-          import.meta.env.VITE_EMAIL_PUBLIC_KEY
-        );
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
         setStatus("success");
-        (form.current as HTMLFormElement).reset();
+        (e.target as HTMLFormElement).reset();
+      } else {
+        console.error("Error", data);
+        setStatus("error");
       }
-    } catch {
+    } catch (error) {
+      console.error("Error", error);
       setStatus("error");
     }
     setLoading(false);
@@ -73,13 +81,13 @@ const ContactUs = () => {
             </div>
 
             <div className="flex flex-col gap-5 mt-10">
-              <a href="mailto:contact@delightxmedia.in" className="group flex items-center gap-4">
+              <a href="mailto:vishal@delightxmedia.in" className="group flex items-center gap-4">
                 <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
                   <Mail className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
                 </span>
                 <div>
                   <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Email</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">contact@delightxmedia.in</p>
+                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">vishal@delightxmedia.in</p>
                 </div>
               </a>
 
@@ -123,7 +131,7 @@ const ContactUs = () => {
               <div className="flex flex-col gap-2">
                 <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Your Name *</label>
                 <input
-                  type="text" name="user_name" required placeholder="John Doe"
+                  type="text" name="name" required placeholder="John Doe"
                   className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
                 />
               </div>
@@ -131,7 +139,7 @@ const ContactUs = () => {
               <div className="flex flex-col gap-2">
                 <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Email Address *</label>
                 <input
-                  type="email" name="user_email" required placeholder="john@example.com"
+                  type="email" name="email" required placeholder="john@example.com"
                   className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
                 />
               </div>
