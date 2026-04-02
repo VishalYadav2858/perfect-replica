@@ -8,40 +8,38 @@ import SEO from "@/components/SEO";
 import { pageTransition } from "@/lib/animations";
 
 const ContactUs = () => {
-  const form = useRef(null);
+  const form = useRef<HTMLFormElement | null>(null);
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setStatus(null);
+  e.preventDefault();
+  setLoading(true);
+  setStatus(null);
 
-    const formData = new FormData(e.currentTarget);
-    const templateParams = {
-      user_name: formData.get("user_name"),
-      user_email: formData.get("user_email"),
-      message: formData.get("message"),
-    };
+  try {
+    const result = await emailjs.sendForm(
+      import.meta.env.VITE_EMAIL_SERVICE_ID as string,
+      import.meta.env.VITE_EMAIL_TEMPLATE_ID as string,
+      form.current!,
+      import.meta.env.VITE_EMAIL_PUBLIC_KEY as string
+    );
 
-    try {
-      const result = await emailjs.send(
-        import.meta.env.VITE_EMAIL_SERVICE_ID,
-        import.meta.env.VITE_EMAIL_TEMPLATE_ID,
-        templateParams,
-        import.meta.env.VITE_EMAIL_PUBLIC_KEY
-      );
-      console.log("Email successfully sent!", result.text);
+    if (result.status === 200) {
+      console.log("SUCCESS:", result.text);
       setStatus("success");
-      e.currentTarget.reset();
-    } catch (error: any) {
-      console.error("Failed to send email. Error:", error);
-      setStatus("error");
-    } finally {
-      setLoading(false);
+      form.current?.reset();
+    } else {
+      throw new Error("Email not sent");
     }
-  };
 
+  } catch (error) {
+    console.error("REAL ERROR:", error);
+    setStatus("error");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <motion.div
       variants={pageTransition}
@@ -51,6 +49,7 @@ const ContactUs = () => {
       className="min-h-screen bg-background noise-bg flex flex-col"
     >
       <Navbar />
+
       <SEO
         title="Contact Us"
         description="Get in touch with DelightX Media. We'd love to hear about your project."
@@ -59,115 +58,106 @@ const ContactUs = () => {
       />
 
       <main className="flex-grow pt-28 md:pt-32 pb-20 px-6 lg:px-12 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8 min-h-[600px]">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
 
-          {/* LEFT — black card */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-2 bg-foreground rounded-[32px] p-8 md:p-10 flex flex-col justify-between"
-          >
+          {/* LEFT */}
+          <motion.div className="lg:col-span-2 bg-foreground rounded-[32px] p-8 md:p-10 flex flex-col justify-between">
             <div>
-              <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-background/60 mb-6">
+              <p className="text-xs uppercase text-background/60 mb-6">
                 DelightX Media
               </p>
-              <h1 className="font-satoshi text-[48px] md:text-[60px] font-[900] leading-[0.9] tracking-tight text-background mb-6">
-                Let's<br />
-                <span className="text-accent">Talk.</span>
+              <h1 className="text-5xl font-black text-background mb-6">
+                Let's <span className="text-accent">Talk.</span>
               </h1>
-              <p className="font-montserrat text-[12px] font-[400] text-background/70 leading-[1.8] max-w-xs">
+              <p className="text-background/70 text-sm">
                 Have a project in mind? Drop us a message and we'll get back within 24 hours.
               </p>
             </div>
 
-            <div className="space-y-10">
-              <a href="mailto:vishal@delightxmedia.in" className="group flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center">
-                  <Mail className="w-5 h-5 text-background" />
-                </div>
-                <div className="flex flex-col">
-                  <h3 className="font-satoshi text-xs font-[800] uppercase tracking-[0.1em] text-foreground/45 mb-0.5">Email Us</h3>
-                  <p className="font-satoshi text-[13px] font-[700] text-foreground group-hover:text-accent transition-colors">vishal@delightxmedia.in</p>
-                </div>
+            <div className="space-y-6 mt-10">
+              <a href="mailto:vishal@delightxmedia.in" className="flex items-center gap-3">
+                <Mail className="text-background" />
+                <span className="text-background">vishal@delightxmedia.in</span>
               </a>
 
-              <a href="tel:+919867949943" className="group flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
-                  <Phone className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
-                </span>
-                <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Phone</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">+91-9867949943</p>
-                </div>
+              <a href="tel:+919867949943" className="flex items-center gap-3">
+                <Phone className="text-background" />
+                <span className="text-background">+91-9867949943</span>
               </a>
 
-              <div className="flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0">
-                  <MapPin className="w-3.5 h-3.5 text-accent" />
-                </span>
-                <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Location</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background">Mumbai, India</p>
-                </div>
+              <div className="flex items-center gap-3">
+                <MapPin className="text-background" />
+                <span className="text-background">Mumbai, India</span>
               </div>
             </div>
           </motion.div>
 
-          {/* RIGHT — form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-3 flex flex-col justify-center py-8 lg:py-0 lg:pl-8"
-          >
-            <p className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.3em] text-accent mb-4">
-              Send a Message
-            </p>
-            <h2 className="font-satoshi text-[32px] md:text-[44px] font-[900] leading-[0.95] tracking-tight text-foreground mb-10">
-              Tell us about<br />your project.
+          {/* RIGHT */}
+          <motion.div className="lg:col-span-3 flex flex-col justify-center py-8 lg:py-0 lg:pl-8 w-full">
+            <p className="text-accent text-xs uppercase mb-4">Send a Message</p>
+
+            <h2 className="text-3xl md:text-4xl font-bold mb-10">
+              Tell us about your project.
             </h2>
 
-            <form ref={form} onSubmit={sendEmail} className="flex flex-col gap-7 max-w-lg">
+            <form
+              ref={form}
+              onSubmit={sendEmail}
+              className="flex flex-col gap-8 max-w-lg w-full"
+            >
+
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Your Name *</label>
+                <label>Your Name *</label>
                 <input
-                  type="text" name="user_name" required placeholder="John Doe"
-                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
+                  type="text"
+                  name="user_name"
+                  required
+                  placeholder="John Doe"
+                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 pt-2 outline-none"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Email Address *</label>
+                <label>Email Address *</label>
                 <input
-                  type="email" name="user_email" required placeholder="john@example.com"
-                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300"
+                  type="email"
+                  name="user_email"
+                  required
+                  placeholder="john@example.com"
+                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 pt-2 outline-none"
                 />
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-montserrat text-[9px] font-[800] uppercase tracking-[0.22em] text-foreground/65">Your Message *</label>
+                <label>Your Message *</label>
                 <textarea
-                  name="message" rows={4} required placeholder="Tell us about your project..."
-                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 font-satoshi text-[16px] text-foreground placeholder:text-foreground/20 focus:outline-none transition-colors duration-300 resize-none"
+                  name="message"
+                  rows={4}
+                  required
+                  placeholder="Tell us about your project..."
+                  className="w-full bg-transparent border-b border-black/15 focus:border-accent pb-3 pt-2 outline-none resize-none"
                 />
               </div>
 
               {status === "success" && (
-                <p className="font-montserrat text-[11px] text-green-600 font-[700] uppercase tracking-widest">✓ Message sent!</p>
+                <p className="text-green-600 text-sm">✓ Message sent!</p>
               )}
+
               {status === "error" && (
-                <p className="font-montserrat text-[11px] text-red-500 font-[700] uppercase tracking-widest">Something went wrong. Email us directly.</p>
+                <p className="text-red-500 text-sm">
+                  Something went wrong. Check console.
+                </p>
               )}
 
               <motion.button
-                type="submit" disabled={loading}
-                whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
-                className="self-start flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-montserrat text-[11px] font-[800] uppercase tracking-widest hover:bg-accent transition-colors duration-300 disabled:opacity-50"
+                type="submit"
+                disabled={loading}
+                className="self-start flex items-center gap-2 px-6 py-3 bg-black text-white rounded-full disabled:opacity-50"
               >
                 {loading ? "Sending..." : "Send Message"}
-                {!loading && <ArrowUpRight className="w-4 h-4" />}
+                {!loading && <ArrowUpRight />}
               </motion.button>
+
             </form>
           </motion.div>
 
