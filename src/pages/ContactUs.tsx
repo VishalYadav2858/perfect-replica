@@ -179,3 +179,12 @@ const ContactUs = () => {
 };
 
 export default ContactUs;
+
+
+
+
+
+
+// template id - template_ixqiy2w
+// service id -service_jim5eqn
+// public key- l7-pyfdAh_QQwrKBt
