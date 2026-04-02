@@ -12,22 +12,30 @@ const ContactUs = () => {
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
-  const sendEmail = async (e: React.FormEvent) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setStatus(null);
 
+    const formData = new FormData(e.currentTarget);
+    const templateParams = {
+      user_name: formData.get("user_name"),
+      user_email: formData.get("user_email"),
+      message: formData.get("message"),
+    };
+
     try {
-      await emailjs.sendForm(
+      const result = await emailjs.send(
         import.meta.env.VITE_EMAIL_SERVICE_ID,
         import.meta.env.VITE_EMAIL_TEMPLATE_ID,
-        form.current!,
-        { publicKey: import.meta.env.VITE_EMAIL_PUBLIC_KEY }
+        templateParams,
+        import.meta.env.VITE_EMAIL_PUBLIC_KEY
       );
+      console.log("Email successfully sent!", result.text);
       setStatus("success");
-      (form.current as HTMLFormElement).reset();
-    } catch (error) {
-      console.error("EmailJS error:", error);
+      e.currentTarget.reset();
+    } catch (error: any) {
+      console.error("Failed to send email. Error:", error);
       setStatus("error");
     } finally {
       setLoading(false);
@@ -73,14 +81,14 @@ const ContactUs = () => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-5 mt-10">
-              <a href="mailto:contact@delightxmedia.in" className="group flex items-center gap-4">
-                <span className="w-9 h-9 rounded-full bg-accent/30 flex items-center justify-center shrink-0 group-hover:bg-accent transition-colors duration-300">
-                  <Mail className="w-3.5 h-3.5 text-accent group-hover:text-white transition-colors" />
-                </span>
-                <div>
-                  <p className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-background/60 mb-0.5">Email</p>
-                  <p className="font-satoshi text-[13px] font-[700] text-background group-hover:text-accent transition-colors">contact@delightxmedia.in</p>
+            <div className="space-y-10">
+              <a href="mailto:vishal@delightxmedia.in" className="group flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-foreground flex items-center justify-center">
+                  <Mail className="w-5 h-5 text-background" />
+                </div>
+                <div className="flex flex-col">
+                  <h3 className="font-satoshi text-xs font-[800] uppercase tracking-[0.1em] text-foreground/45 mb-0.5">Email Us</h3>
+                  <p className="font-satoshi text-[13px] font-[700] text-foreground group-hover:text-accent transition-colors">vishal@delightxmedia.in</p>
                 </div>
               </a>
 
