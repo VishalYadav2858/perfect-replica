@@ -95,14 +95,80 @@ const BrandSolutions = () => {
                   transition={{ duration: 0.6, delay: 0.1 * i, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {isComingSoon ? (
-                    <div className="group block rounded-[24px] overflow-hidden relative aspect-square bg-white/5 border border-white/5 cursor-default">
-                      <div className="absolute inset-0 grayscale opacity-20">
+                    <div className="group block rounded-[24px] overflow-hidden relative aspect-square cursor-default"
+                      style={{
+                        background: "linear-gradient(135deg, #0a0a0a 0%, #111 50%, #0f0f0f 100%)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        boxShadow: "0 0 0 1px rgba(255,92,0,0.15), inset 0 1px 0 rgba(255,255,255,0.05)",
+                      }}
+                    >
+                      {/* Blurred BG image */}
+                      <div className="absolute inset-0 grayscale opacity-10 scale-110">
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/60 backdrop-blur-[4px]">
-                        <span className="font-montserrat text-[7px] font-[800] uppercase tracking-[0.2em] text-white/60">Coming Soon</span>
-                        <h3 className="font-satoshi text-[24px] font-[900] tracking-tight text-white/60">{item.title}</h3>
+
+                      {/* Animated glow ring */}
+                      <div className="absolute inset-0 rounded-[24px] pointer-events-none"
+                        style={{
+                          background: "radial-gradient(ellipse at 50% 0%, rgba(255,92,0,0.18) 0%, transparent 65%)",
+                          animation: "pulseGlow 3s ease-in-out infinite",
+                        }}
+                      />
+
+                      {/* Corner accent lines */}
+                      <div className="absolute top-5 left-5 w-6 h-6 border-t-2 border-l-2 border-accent/60 rounded-tl-sm" />
+                      <div className="absolute top-5 right-5 w-6 h-6 border-t-2 border-r-2 border-accent/60 rounded-tr-sm" />
+                      <div className="absolute bottom-5 left-5 w-6 h-6 border-b-2 border-l-2 border-accent/60 rounded-bl-sm" />
+                      <div className="absolute bottom-5 right-5 w-6 h-6 border-b-2 border-r-2 border-accent/60 rounded-br-sm" />
+
+                      {/* Content */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6">
+                        {/* Pulsing badge */}
+                        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full"
+                          style={{
+                            background: "rgba(255,92,0,0.15)",
+                            border: "1px solid rgba(255,92,0,0.4)",
+                            backdropFilter: "blur(8px)",
+                          }}
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent"
+                            style={{ animation: "ping 1.5s ease-in-out infinite", display: "inline-block" }}
+                          />
+                          <span className="font-montserrat text-[8px] font-[800] uppercase tracking-[0.25em] text-accent">
+                            Coming Soon
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <div className="text-center">
+                          <h3 className="font-satoshi text-[30px] md:text-[32px] font-[900] tracking-tight text-white leading-none mb-2">
+                            {item.title}
+                          </h3>
+                          <p className="font-montserrat text-[9px] font-[600] uppercase tracking-[0.25em] text-white/40">
+                            Identity · Strategy · Design
+                          </p>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="w-10 h-[1px] bg-accent/40" />
+
+                        {/* Teaser line */}
+                        <p className="font-montserrat text-[10px] font-[500] text-white/50 text-center leading-[1.7] max-w-[160px]">
+                          Something bold is in the works. Stay tuned.
+                        </p>
                       </div>
+
+                      {/* Inline keyframes */}
+                      <style>{`
+                        @keyframes pulseGlow {
+                          0%, 100% { opacity: 0.6; }
+                          50% { opacity: 1; }
+                        }
+                        @keyframes ping {
+                          0%, 100% { transform: scale(1); opacity: 1; }
+                          50% { transform: scale(1.5); opacity: 0.5; }
+                        }
+                      `}</style>
                     </div>
                   ) : (
                     <Link 

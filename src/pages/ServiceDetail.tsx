@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -172,8 +172,9 @@ const ServiceDetail = () => {
     );
   }
 
-  // Branding — Coming Soon full page
-  if (slug === "branding") {
+  // Branding & Web Design — Coming Soon full pages (Standard Light Theme)
+  if (slug === "branding" || slug === "website-design") {
+    const isBranding = slug === "branding";
     return (
       <motion.div
         variants={pageTransition}
@@ -184,33 +185,56 @@ const ServiceDetail = () => {
       >
         <Navbar />
         <SEO
-          title="Branding — Coming Soon"
-          description="DelightX Media will be offering branding services soon. Stay tuned."
-          canonical="/branding"
-          keywords="branding, coming soon, DelightX Media"
+          title={isBranding ? "Branding — Coming Soon" : "Website Design — Coming Soon"}
+          description={`DelightX Media ${isBranding ? "branding services" : "web design expertise"} will be available soon. Stay tuned for something bold.`}
+          canonical={location.pathname}
+          keywords="coming soon, delightx media, branding, web design"
         />
-        <main className="flex-grow flex flex-col items-center justify-center text-center px-6 gap-8">
+        
+        <main className="flex-grow pt-32 md:pt-48 pb-24 relative z-10 w-full flex flex-col items-center justify-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col items-center gap-6 max-w-lg"
+            className="flex flex-col items-center gap-8 max-w-2xl px-6"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
+            {/* Tagline Pill (Matches standard header style) */}
+            <div className="inline-flex items-center gap-3 mb-2 bg-black/5 border border-black/10 rounded-full px-4 py-2">
               <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-              <span className="font-montserrat text-[10px] font-[800] uppercase tracking-[0.25em] text-accent">Coming Soon</span>
+              <span className="font-montserrat text-[10px] md:text-xs font-[700] uppercase tracking-[0.25em] text-foreground">
+                Coming Soon
+              </span>
             </div>
-            <h1 className="font-satoshi text-[56px] md:text-[80px] font-[900] leading-[0.9] tracking-tight text-foreground">
-              Branding
-            </h1>
-            <p className="font-montserrat text-[14px] font-[500] text-foreground/50 leading-[1.8]">
-              We're working on something special. Our full branding service — strategy, identity, and visual design — will be available soon.
-            </p>
-            <p className="font-montserrat text-[11px] font-[700] uppercase tracking-[0.2em] text-foreground/30">
-              Will update soon 🚀
-            </p>
+
+            {/* Title & Slogan (Matches standard header size) */}
+            <div className="space-y-6">
+              <h1 className="font-satoshi text-[48px] md:text-[80px] lg:text-[100px] font-[900] uppercase leading-[0.85] tracking-[-0.04em] text-foreground">
+                {isBranding ? "Branding" : "Website"}<br />
+                <span className="text-foreground/30">{isBranding ? "Identity" : "Design"}</span>
+              </h1>
+              <p className="font-montserrat text-[14px] md:text-[16px] font-[500] text-foreground/60 max-w-lg mx-auto leading-relaxed">
+                We're engineering a new standard for {isBranding ? "brand storytelling" : "digital experiences"}. 
+                The full portfolio is currently under construction.
+              </p>
+            </div>
+
+            {/* Aesthetic Divider */}
+            <div className="w-12 h-[1px] bg-accent/30 my-2" />
+
+            <div className="flex flex-col items-center gap-5">
+              <p className="font-montserrat text-[11px] font-[700] uppercase tracking-[0.25em] text-accent">
+                Dropping Soon 🚀
+              </p>
+              <Link
+                to="/contact-us"
+                className="font-montserrat text-[10px] font-bold uppercase tracking-widest text-foreground/40 hover:text-accent transition-colors border-b border-black/10 hover:border-accent/40 pb-1"
+              >
+                Inquire Early
+              </Link>
+            </div>
           </motion.div>
         </main>
+        
         <Footer />
       </motion.div>
     );

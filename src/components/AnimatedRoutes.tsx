@@ -9,6 +9,9 @@ const About = lazy(() => import("../pages/About"));
 const BrandSolutions = lazy(() => import("../pages/BrandSolutions"));
 const ServiceDetail = lazy(() => import("../pages/ServiceDetail"));
 const WorkDetail = lazy(() => import("../pages/WorkDetail"));
+const YouTubeEditing = lazy(() => import("../pages/YouTubeEditing"));
+const GrowthAgency = lazy(() => import("../pages/GrowthAgency"));
+const DoctorsEditing = lazy(() => import("../pages/DoctorsEditing"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 
 // Simple loading fallback
@@ -41,6 +44,11 @@ export default function AnimatedRoutes() {
           <Route path="/ui-ux" element={<ServiceDetail />} />
           <Route path="/branding" element={<ServiceDetail />} />
           <Route path="/photography" element={<ServiceDetail />} />
+          
+          <Route path="/youtube-video-editing" element={<YouTubeEditing />} />
+          <Route path="/youtube-growth-agency" element={<GrowthAgency />} />
+          <Route path="/video-editing-for-doctors" element={<DoctorsEditing />} />
+
           <Route path="/works/:slug" element={<WorkDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
