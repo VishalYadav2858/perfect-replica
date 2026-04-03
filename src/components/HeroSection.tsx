@@ -85,7 +85,7 @@ export default function HeroSection() {
 
           {/* Tagline — Staggered Reveal */}
           <div className="flex items-center gap-x-3 md:gap-x-6 mt-4 mb-10 overflow-hidden whitespace-nowrap">
-            {["We Create.", "We Strategize.", "We Scale."].map((text, i) => (
+            {["Empowering Creators.", "Elevating Brands.", ""].map((text, i) => (
               <motion.span
                 key={i}
                 initial={{ y: 20, opacity: 0 }}
@@ -160,7 +160,7 @@ export default function HeroSection() {
                   20+
                 </motion.div>
               </div>
-              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground/40">Creators Network</span>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-black text-foreground/40">Creators Network</span>
             </div>
           </motion.div>
         </div>
