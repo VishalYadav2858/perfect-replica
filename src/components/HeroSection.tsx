@@ -33,6 +33,14 @@ const col2Videos = [
   { src: v1, poster: h3Img }
 ];
 
+// Creator Avatars for Hero Glimpse
+import creator1 from "@/assets/anirudh.jpg";
+import creator2 from "@/assets/gazi.jpg";
+import creator3 from "@/assets/parth.jpg";
+import creator4 from "@/assets/atharva.jpg";
+
+const creatorAvatars = [creator1, creator2, creator3, creator4];
+
 export default function HeroSection() {
   const [currentWord, setCurrentWord] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -128,6 +136,31 @@ export default function HeroSection() {
             <div className="flex flex-col gap-1">
               <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">30+</span>
               <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Brand Partners</span>
+            </div>
+            <div className="w-[1px] h-12 bg-foreground/15" />
+            <div className="flex flex-col gap-2">
+              <div className="flex -space-x-3">
+                {creatorAvatars.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 + i * 0.1 }}
+                    className="w-10 h-10 rounded-full border-2 border-background overflow-hidden bg-muted"
+                  >
+                    <img src={img} alt="Creator" className="w-full h-full object-cover" />
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.9 }}
+                  className="w-10 h-10 rounded-full border-2 border-background bg-accent flex items-center justify-center font-montserrat text-[10px] font-bold text-white uppercase tracking-tighter"
+                >
+                  50+
+                </motion.div>
+              </div>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground/40">Creators Network</span>
             </div>
           </motion.div>
         </div>
