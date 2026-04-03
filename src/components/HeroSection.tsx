@@ -155,9 +155,9 @@ export default function HeroSection() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.9 }}
-                  className="w-10 h-10 rounded-full border-2 border-background bg-accent flex items-center justify-center font-montserrat text-[10px] font-bold text-white uppercase tracking-tighter"
+                  className="w-10 h-10 rounded-full border-2 border-background bg-accent flex items-center justify-center font-montserrat text-[10px] font-bold text-black uppercase tracking-tighter"
                 >
-                  50+
+                  20+
                 </motion.div>
               </div>
               <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground/40">Creators Network</span>
