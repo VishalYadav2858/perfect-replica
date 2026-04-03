@@ -75,9 +75,9 @@ const ContactUs = () => {
             </div>
 
             <div className="space-y-6 mt-10">
-              <a href="mailto:vishal@delightxmedia.in" className="flex items-center gap-3">
+              <a href="mailto:contact@delightxmedia.in" className="flex items-center gap-3">
                 <Mail className="text-background" />
-                <span className="text-background">vishal@delightxmedia.in</span>
+                <span className="text-background">contact@delightxmedia.in</span>
               </a>
 
               <a href="tel:+919867949943" className="flex items-center gap-3">
