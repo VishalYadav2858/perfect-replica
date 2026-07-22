@@ -33,7 +33,7 @@ export default function StoriesSection() {
   const [visibleCount, setVisibleCount] = useState(6);
 
   return (
-    <section className="py-20 md:py-32 px-4 md:px-8 bg-background">
+    <section className="py-20 md:py-32 px-4 md:px-8 bg-black">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
@@ -46,7 +46,7 @@ export default function StoriesSection() {
           <p className="font-montserrat text-[10px] md:text-[11px] font-[700] uppercase tracking-[0.35em] text-accent mb-5">
             Our Works
           </p>
-          <h2 className="font-display text-[48px] sm:text-[72px] md:text-[110px] lg:text-[140px] leading-[0.9] uppercase text-foreground">
+          <h2 className="font-display text-[48px] sm:text-[72px] md:text-[110px] lg:text-[140px] leading-[0.9] uppercase text-white">
             Stories we<br className="md:hidden" /> have told
           </h2>
         </motion.div>
