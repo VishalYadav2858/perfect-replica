@@ -33,7 +33,7 @@ export default function StoriesSection() {
   const [visibleCount, setVisibleCount] = useState(6);
 
   return (
-    <section className="py-20 md:py-32 px-4 md:px-8 bg-black">
+    <section className="py-20 md:py-32 px-4 md:px-8 bg-black -mt-[1px]">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
