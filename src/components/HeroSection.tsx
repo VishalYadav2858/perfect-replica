@@ -48,9 +48,9 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-[820px] md:h-[1040px] pt-28 md:pt-36 overflow-hidden bg-background">
+    <section className="relative h-[700px] md:h-[1010px] pt-24 md:pt-32 overflow-hidden bg-background">
       <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-col items-center px-6 text-center">
-        <div className="flex h-[86px] w-full items-center justify-center overflow-hidden sm:h-[118px] md:h-[156px] lg:h-[176px]">
+        <div className="flex h-[92px] w-full items-center justify-center overflow-hidden sm:h-[118px] md:h-[156px] lg:h-[176px]">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={currentWord}
@@ -58,7 +58,7 @@ export default function HeroSection() {
                 animate={{ rotateX: 0, y: "0%", opacity: 1 }}
                 exit={{ rotateX: 90, y: "-90%", opacity: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="font-adko-heading whitespace-nowrap uppercase text-[64px] leading-[0.92] text-foreground sm:text-[96px] md:text-[132px] lg:text-[150px]"
+                className="font-adko-heading whitespace-nowrap uppercase text-[76px] leading-[0.92] text-foreground sm:text-[96px] md:text-[132px] lg:text-[150px]"
                 style={{ transformOrigin: "50% 50% -48px" }}
               >
                 {words[currentWord]}
@@ -70,17 +70,17 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-2 font-montserrat text-[13px] font-[800] uppercase leading-tight tracking-[-0.03em] text-foreground sm:text-[18px] md:text-[22px]"
+          className="mt-1 font-montserrat text-[14px] font-[800] uppercase leading-tight tracking-[-0.03em] text-foreground sm:text-[18px] md:text-[22px]"
         >
           We lead with content. We scale with digital.
         </motion.p>
       </div>
 
       <motion.div
-        initial={{ opacity: 0, x: isMobile ? -120 : -300, y: isMobile ? 70 : 120, rotateX: 20, rotateY: 19, rotateZ: -20, skewX: 8, skewY: 11 }}
-        animate={{ opacity: 1, x: isMobile ? -40 : -210, y: isMobile ? 36 : 92, rotateX: 20, rotateY: 19, rotateZ: -20, skewX: 8, skewY: 11 }}
+        initial={{ opacity: 0, x: isMobile ? -230 : -430, y: isMobile ? 90 : 110, rotateX: 20, rotateY: 19, rotateZ: -20, skewX: 8, skewY: 11 }}
+        animate={{ opacity: 1, x: isMobile ? -150 : -330, y: isMobile ? 52 : 78, rotateX: 20, rotateY: 19, rotateZ: -20, skewX: 8, skewY: 11 }}
         transition={{ duration: 1.15, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute left-1/2 top-[330px] z-10 flex w-max origin-center gap-4 md:top-[410px] md:gap-6"
+        className="absolute left-1/2 top-[292px] z-10 flex w-max origin-center gap-4 md:top-[392px] md:gap-6"
         style={{ transformStyle: "preserve-3d", willChange: "transform" }}
       >
         <motion.div
@@ -91,7 +91,7 @@ export default function HeroSection() {
           {[...heroVideos, ...heroVideos].map((video, idx) => (
             <div
               key={`hero-card-${idx}`}
-              className="relative h-[350px] w-[240px] flex-none overflow-hidden rounded-[20px] bg-muted md:h-[550px] md:w-[480px] md:rounded-[40px]"
+              className="relative h-[370px] w-[250px] flex-none overflow-hidden rounded-[20px] bg-muted md:h-[550px] md:w-[480px] md:rounded-[40px]"
             >
               <LazyVideo
                 src={video.src}
