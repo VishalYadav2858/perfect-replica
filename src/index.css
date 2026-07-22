@@ -1,6 +1,6 @@
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=khand@400,500,600,700&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Varela&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -93,6 +93,22 @@
   }
   .font-satoshi {
     font-family: 'Satoshi', sans-serif;
+  }
+  .font-anton {
+    font-family: 'Anton', 'Oswald', sans-serif;
+    letter-spacing: -0.01em;
+  }
+  .font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0.01em;
+  }
+  .font-khand {
+    font-family: 'Khand', 'Oswald', sans-serif;
+  }
+  .font-display {
+    font-family: 'Anton', 'Bebas Neue', 'Oswald', sans-serif;
+    letter-spacing: -0.02em;
+    font-weight: 400;
   }
 
   /* Sophisticated Glassmorphism for Light Mode */

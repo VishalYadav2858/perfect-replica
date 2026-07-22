@@ -16,6 +16,10 @@ export default {
       satoshi: ["Satoshi", "sans-serif"],
       montserrat: ["Montserrat", "sans-serif"],
       varela: ["Varela", "sans-serif"],
+      anton: ["Anton", "Oswald", "sans-serif"],
+      bebas: ["Bebas Neue", "sans-serif"],
+      khand: ["Khand", "Oswald", "sans-serif"],
+      display: ["Anton", "Bebas Neue", "Oswald", "sans-serif"],
     },
     extend: {
       colors: {
