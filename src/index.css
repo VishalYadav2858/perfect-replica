@@ -106,9 +106,9 @@
     font-family: 'Khand', 'Oswald', sans-serif;
   }
   .font-display {
-    font-family: 'Anton', 'Bebas Neue', 'Oswald', sans-serif;
-    letter-spacing: -0.02em;
-    font-weight: 400;
+    font-family: 'Satoshi', sans-serif;
+    letter-spacing: -0.04em;
+    font-weight: 900;
   }
 
   /* Sophisticated Glassmorphism for Light Mode */
