@@ -41,7 +41,6 @@ const Index = () => {
         <div className="h-[1px] w-full bg-black/[0.05]" />
         
         <Suspense fallback={<SectionLoader />}>
-          <StoriesSection />
           <AboutSection />
           <ClientMarquee />
           <ServicesSection />
