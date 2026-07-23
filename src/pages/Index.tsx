@@ -9,7 +9,6 @@ import HeroSection from "@/components/HeroSection";
 const AboutSection = lazy(() => import("@/components/AboutSection"));
 const ClientMarquee = lazy(() => import("@/components/ClientMarquee"));
 const ServicesSection = lazy(() => import("@/components/ServicesSection"));
-const StoriesSection = lazy(() => import("@/components/StoriesSection"));
 
 const PortfolioGrid = lazy(() => import("@/components/PortfolioGrid"));
 const VisionSection = lazy(() => import("@/components/VisionSection"));
