@@ -1,352 +1,276 @@
-"use client";
-
-import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MoveDown, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import { slideUp } from "@/lib/animations";
+import LazyVideo from "./LazyVideo";
 
-const services = [
-  {
-    index: "01",
-    title: "Video Production",
-    description:
-      "We create content that connects with your audience — built on strategy, guided by insight, and designed to deliver across platforms.",
-    tag: "Content & Strategy",
-  },
-  {
-    index: "02",
-    title: "Website Design & Development",
-    description:
-      "We design user experiences that are intuitive, goal-driven, and built around real user behavior — turning complexity into clarity.",
-    tag: "UX / Engineering",
-  },
-  {
-    index: "03",
-    title: "Personal Branding",
-    description:
-      "Your brand is not confined to a niche. We craft a narrative that spans various facets of your personality and accomplishments.",
-    tag: "Identity & Narrative",
-  },
-  {
-    index: "04",
-    title: "Social Media Growth",
-    description:
-      "Data-driven strategies to accelerate brand growth and maximize monetization. Your social media is our responsibility.",
-    tag: "Growth & Analytics",
-  },
-  {
-    index: "05",
-    title: "Performance Marketing",
-    description:
-      "Precision-targeted campaigns designed to maximize ROI and scale your business across Facebook, Instagram, and Google.",
-    tag: "Performance & Scaling",
-  },
+// Video Assets
+import food from "@/assets/food.mp4";
+import f from "@/assets/f.mp4";
+import p11 from "@/assets/p1.mp4";
+import p22 from "@/assets/p2.mp4";
+import v from "@/assets/v.mp4";
+import v1 from "@/assets/v1.mp4";
+
+// Poster Assets (Images to show before video loads)
+import p1Img from "@/assets/p1.jpg";
+import p2Img from "@/assets/p2.jpg";
+import h1Img from "@/assets/hero-1.jpg";
+import h2Img from "@/assets/hero-2.jpg";
+import h3Img from "@/assets/hero-3.jpg";
+import sVideoImg from "@/assets/service-video.jpg";
+
+const words = ["Creativity.", "Strategy.", "Growth.", "Content."];
+
+
+const col1Videos = [
+  { src: food, poster: sVideoImg },
+  { src: p11, poster: p1Img },
+  { src: v, poster: h2Img }
+];
+const col2Videos = [
+  { src: p22, poster: p2Img },
+  { src: f, poster: h1Img },
+  { src: v1, poster: h3Img }
 ];
 
-const ACCENT = "hsl(var(--accent))";
+// Creator Avatars for Hero Glimpse
+import creator1 from "@/assets/anirudh.jpg";
+import creator2 from "@/assets/gazi.jpg";
+import creator3 from "@/assets/parth.jpg";
+import creator4 from "@/assets/atharva.jpg";
 
-function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }) {
-  const [hovered, setHovered] = useState(false);
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+const creatorAvatars = [creator1, creator2, creator3, creator4];
+
+export default function HeroSection() {
+  const [currentWord, setCurrentWord] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % words.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 48 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      className="relative overflow-hidden cursor-default border-t border-black/10 group bg-black/[0.01] hover:bg-black/[0.03] transition-colors duration-500"
-    >
-      {/* Left Accent Bar */}
-      <motion.div
-        initial={{ height: 0 }}
-        animate={{ height: hovered ? "100%" : 0 }}
-        transition={{ duration: 0.4 }}
-        style={{
-          position: "absolute",
-          left: 0,
-          top: 0,
-          width: "4px",
-          backgroundColor: ACCENT,
-          zIndex: 20,
-        }}
-      />
-      {/* Sliding fill */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: hovered ? 1 : 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundColor: ACCENT,
-          transformOrigin: "left",
-          zIndex: 0,
-          opacity: 0.1,
-        }}
-      />
+    <section className="relative min-h-screen pt-20 pb-20 md:pt-0 md:pb-0 overflow-hidden bg-background flex flex-col justify-center">
 
-      <div
-        className="relative z-10 px-6 md:px-10 py-4 md:py-6"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "48px 1fr",
-          gridTemplateRows: "auto",
-          rowGap: "0px",
-          columnGap: "24px",
-        }}
-      >
-        {/* Index */}
-        <motion.span
-          animate={{ color: hovered ? "hsl(var(--accent))" : "rgba(0, 0, 0, 0.4)" }}
-          transition={{ duration: 0.3 }}
-          style={{
-            fontFamily: "'Satoshi', sans-serif",
-            fontSize: "11px",
-            letterSpacing: "0.1em",
-            fontWeight: 500,
-            paddingTop: "4px",
-            gridRow: "1 / 2",
-            gridColumn: "1 / 2",
-          }}
-        >
-          {service.index}
-        </motion.span>
+      {/* ================= LEFT: TEXT ================= */}
+      <div className="relative z-20 w-full px-6 md:px-12 max-w-7xl mx-auto flex items-center h-full min-h-[60vh] md:min-h-screen pointer-events-none">
+        <div className="flex flex-col items-start justify-center w-full lg:w-[75%] pointer-events-auto">
 
-        {/* Title + tag */}
-        <div
-          style={{
-            gridRow: "1 / 2",
-            gridColumn: "2 / 3",
-            display: "flex",
-            alignItems: "baseline",
-            justifyContent: "space-between",
-            gap: "16px",
-            flexWrap: "wrap",
-          }}
-        >
-          <motion.h3
-            animate={{ color: hovered ? "hsl(var(--accent))" : "#111111" }}
-            transition={{ duration: 0.3 }}
-            style={{
-              fontFamily: "'Satoshi', sans-serif",
-              fontSize: "clamp(22px, 3.5vw, 46px)",
-              fontWeight: 800,
-              letterSpacing: "-0.025em",
-              lineHeight: 1,
-              display: "flex",
-              alignItems: "center",
-              flexWrap: "wrap",
-              gap: "12px",
-            }}
-          >
-            {service.title}
-            <motion.span
-              animate={{ 
-                opacity: hovered ? 0 : 1,
-                x: hovered ? 5 : 0
-              }}
-              transition={{ duration: 0.3 }}
-              style={{
-                display: "inline-block",
-                fontFamily: "'Satoshi', sans-serif",
-                fontSize: "10px",
-                fontWeight: 800,
-                letterSpacing: "0.15em",
-                color: "rgba(0,0,0,0.3)",
-                textTransform: "uppercase",
-                marginTop: "4px",
-              }}
-            >
-              Explore
-            </motion.span>
-          </motion.h3>
+          {/* Animated headline */}
+          <div className="h-[75px] sm:h-[90px] md:h-[110px] lg:h-[130px] flex items-center justify-start overflow-hidden w-full relative">
+            <AnimatePresence mode="wait">
+              <motion.h1
+                key={currentWord}
+                initial={{ y: "110%", opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                animate={{ y: "0%", opacity: 1, filter: "blur(0px)", scale: 1 }}
+                exit={{ y: "-110%", opacity: 0, filter: "blur(10px)", scale: 0.95 }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className="font-satoshi uppercase leading-[0.85] text-[38px] sm:text-[60px] md:text-[85px] lg:text-[100px] xl:text-[115px] tracking-tight font-black whitespace-nowrap text-foreground"
+                style={{ letterSpacing: "-0.04em" }}
+              >
+                {words[currentWord]}
+              </motion.h1>
+            </AnimatePresence>
+          </div>
 
-        </div>
+          {/* Tagline — Staggered Reveal */}
+          <div className="flex items-center gap-x-3 md:gap-x-6 mt-4 mb-10 overflow-hidden whitespace-nowrap">
+            {["Empowering Creators.", "Elevating Brands.", ""].map((text, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: i * 0.05,
+                  ease: [0.22, 1, 0.36, 1] 
+                }}
+                className="font-montserrat text-[10px] sm:text-[12px] md:text-[14px] font-[700] uppercase tracking-[0.15em] md:tracking-[0.25em] text-foreground"
+              >
+                {text}
+              </motion.span>
+            ))}
+          </div>
 
-        {/* Description - Animated on Hover */}
-        <div style={{ gridRow: "2 / 3", gridColumn: "2 / 3", overflow: "hidden" }}>
+          {/* CTA */}
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ 
-              height: hovered ? "auto" : 0, 
-              opacity: hovered ? 1 : 0,
-              marginTop: hovered ? 16 : 0 
-            }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            style={{ willChange: "height, opacity" }}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
           >
-            <p
-              style={{
-                fontFamily: "'Satoshi', sans-serif",
-                fontSize: "15px",
-                lineHeight: "1.7",
-                fontWeight: 400,
-                color: "#111111",
-                maxWidth: "620px",
-              }}
+            <Link
+              to="/contact-us"
+              className="group flex items-center gap-3 px-8 py-4 rounded-full bg-foreground text-background font-montserrat text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/30 w-fit"
             >
-              {service.description}
-            </p>
+              Get in Touch
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
         </div>
       </div>
 
-      {/* Right side icon - Pulsing Plus */}
-      <div style={{ position: "absolute", right: "32px", top: "40px", transform: "translateY(-50%)" }}>
-        <motion.div
-          animate={{ 
-            rotate: hovered ? 45 : 0, 
-            color: hovered ? "hsl(var(--accent))" : "#111111",
-            scale: hovered ? 1.1 : 1
-          }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{ fontSize: "24px", fontWeight: 700, lineHeight: 1 }}
-        >
-          +
-        </motion.div>
+      {/* Stats — Aligned with Container */}
+      <div className="absolute bottom-8 left-0 w-full z-30 hidden md:block pointer-events-none">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0, duration: 0.8 }}
+            className="flex items-center gap-10"
+          >
+            <div className="flex flex-col gap-1">
+              <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">120+</span>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Happy Clients</span>
+            </div>
+            <div className="w-[1px] h-12 bg-foreground/15" />
+            <div className="flex flex-col gap-1">
+              <span className="font-satoshi text-[44px] font-[900] text-foreground leading-none">30+</span>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-foreground">Brand Partners</span>
+            </div>
+            <div className="w-[1px] h-12 bg-foreground/15" />
+            <div className="flex flex-col gap-2">
+              <div className="flex -space-x-3">
+                {creatorAvatars.map((img, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 + i * 0.1 }}
+                    className="w-10 h-10 rounded-full border-2 border-background overflow-hidden bg-muted"
+                  >
+                    <img src={img} alt="Creator" className="w-full h-full object-cover" />
+                  </motion.div>
+                ))}
+                <motion.div
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.9 }}
+                  className="w-10 h-10 rounded-full border-2 border-background bg-accent flex items-center justify-center font-montserrat text-[10px] font-bold text-black uppercase tracking-tighter"
+                >
+                  20+
+                </motion.div>
+              </div>
+              <span className="font-montserrat text-[9px] font-[700] uppercase tracking-[0.2em] text-black text-foreground/40">Creators Network</span>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </motion.div>
-  );
-}
 
-export default function ServicesSection() {
-  const headingRef = useRef(null);
-  const inView = useInView(headingRef, { once: true });
 
-  return (
-    <section
-      id="services"
-      className="scroll-mt-24 py-24 md:py-32"
-      style={{ backgroundColor: "#ffffff" }}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* GRID HEADING BLOCK */}
-        <motion.div
-          ref={headingRef}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.12 } }, hidden: {} }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-16"
+      {/* ================= RIGHT: FULL HEIGHT VERTICAL VIDEO SCROLL ================= */}
+      <div className="relative lg:absolute top-20 md:top-24 right-0 w-full lg:w-[45%] h-[600px] md:h-[800px] lg:h-[calc(100vh-6rem)] overflow-hidden z-10 pt-4 lg:pt-0">
+        <div 
+          className="grid grid-cols-2 gap-4 md:gap-6 h-full w-full px-4 lg:px-8"
+          style={{
+            willChange: "transform",
+            backfaceVisibility: "hidden",
+            WebkitBackfaceVisibility: "hidden"
+          }}
         >
-          {/* Left: Heading */}
-          <div className="lg:col-span-7">
-            <div style={{ overflow: "hidden" }}>
-              <motion.h2
-                variants={slideUp}
-                style={{
-                  fontFamily: "'Satoshi', sans-serif",
-                  fontSize: "clamp(40px, 6vw, 75px)",
-                  fontWeight: 900,
-                  color: "#111111",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 0.92,
-                  display: "block",
-                }}
-              >
-                Our
-              </motion.h2>
-            </div>
-            <div style={{ overflow: "hidden" }}>
-              <motion.h2
-                variants={slideUp}
-                style={{
-                  fontFamily: "'Satoshi', sans-serif",
-                  fontSize: "clamp(40px, 6vw, 75px)",
-                  fontWeight: 900,
-                  color: "hsl(var(--accent))",
-                  letterSpacing: "-0.04em",
-                  lineHeight: 0.92,
-                  display: "block",
-                }}
-              >
-                Expertise.
-              </motion.h2>
-            </div>
-          </div>
-
-          {/* Right: Description + CTA */}
-          <div className="lg:col-span-5 flex flex-col justify-end gap-8">
-            <motion.p
-              variants={slideUp}
-              className="font-montserrat text-sm md:text-[15px] font-medium text-foreground/60 leading-[1.8] border-l-2 border-accent pl-6"
+          {/* Column 1: Scrolling UP */}
+          <div 
+            className="relative h-full overflow-visible flex flex-col justify-start"
+            style={{ transform: "translate3d(0,0,0)" }}
+          >
+            <motion.div
+              className="flex flex-col w-full gap-4 md:gap-6"
+              style={{ willChange: "transform" }}
+              animate={{ y: ["0%", "-50%"] }}
+              transition={{
+                ease: "linear",
+                duration: isMobile ? 20 : 45,
+                repeat: Infinity,
+              }}
             >
-              We provide end-to-end digital solutions from high-impact content and branding to technical engineering and social growth all designed to scale your vision.
-            </motion.p>
-            <motion.div variants={slideUp}>
-              <Link
-                to="/contact-us"
-                className="group self-start flex items-center gap-3 px-7 py-3.5 rounded-full bg-foreground text-background font-montserrat text-xs font-bold uppercase tracking-widest transition-all hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/30 w-fit"
-              >
-                Start a Project
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              {(isMobile ? [...col1Videos.slice(0, 2)] : [...col1Videos, ...col1Videos]).map((video, idx) => (
+                <div 
+                  key={`col1-${idx}`} 
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
+                  style={{ willChange: "transform" }}
+                >
+                  <LazyVideo
+                    src={video.src}
+                    poster={video.poster}
+                    fetchpriority={idx === 0 ? "high" : "auto"}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              ))}
             </motion.div>
           </div>
-        </motion.div>
 
-
-        {/* ROWS */}
-        <div
-          className="rounded-[32px] overflow-hidden"
-          style={{
-            border: "1px solid rgba(0, 0, 0, 0.08)",
-            background: "#ffffff",
-          }}
-        >
-          <div className="rounded-[32px] overflow-hidden">
-            {services.map((s, i) => (
-              <ServiceRow key={s.index} service={s} i={i} />
-            ))}
+          {/* Column 2: Scrolling DOWN & Staggered (50% offset) */}
+          <div 
+            className="relative h-full overflow-visible flex flex-col justify-start -translate-y-24 md:-translate-y-32"
+            style={{ transform: "translate3d(0,0,0)" }}
+          >
+            <motion.div
+              className="flex flex-col w-full gap-4 md:gap-6"
+              style={{ willChange: "transform" }}
+              animate={{ y: ["-50%", "0%"] }}
+              transition={{
+                ease: "linear",
+                duration: isMobile ? 24 : 55,
+                repeat: Infinity,
+              }}
+            >
+              {(isMobile ? [...col2Videos.slice(0, 2)] : [...col2Videos, ...col2Videos]).map((video, idx) => (
+                <div 
+                  key={`col2-${idx}`} 
+                  className="w-full aspect-[3/4] overflow-hidden relative flex-shrink-0 group rounded-xl"
+                >
+                  <LazyVideo
+                    src={video.src}
+                    poster={video.poster}
+                    fetchpriority={idx === 0 ? "high" : "auto"}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="metadata"
+                    className="w-full h-full object-cover scale-[1.02] group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
-
-        {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "40px",
-            marginTop: "32px",
-            padding: "0 12px",
-          }}
-        >
-          <span
-            style={{
-              fontFamily: "'Satoshi', sans-serif",
-              fontSize: "11px",
-              letterSpacing: "0.15em",
-              color: "rgba(0, 0, 0, 0.5)",
-              textTransform: "uppercase",
-            }}
-          >
-            Hover to explore
-          </span>
-          <span
-            style={{
-              fontFamily: "'Satoshi', sans-serif",
-              fontSize: "11px",
-              letterSpacing: "0.15em",
-              color: "rgba(0, 0, 0, 0.5)",
-            }}
-          >
-            5 Services
-          </span>
-        </motion.div>
       </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-foreground/30 md:hidden z-30 pointer-events-none"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <MoveDown className="w-4 h-4 text-accent" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
 
 
 
-// hello change
+// hello
