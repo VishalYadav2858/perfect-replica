@@ -1,27 +1,18 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import servicePhoto from "@/assets/service-photo.jpg";
-import serviceVideo from "@/assets/service-video.jpg";
-import serviceWeb from "@/assets/service-web.jpg";
-import serviceCgi from "@/assets/service-cgi.jpg";
 import logo from "@/assets/logo.png";
-
-const workCategories = [
-  { title: "OUR PHOTOGRAPHY", image: servicePhoto, link: "/photography" },
-  { title: "OUR VIDEOGRAPHY", image: serviceVideo, link: "/videography" },
-  { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
-  { title: "BRANDING", image: serviceCgi, link: "/branding" },
-];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [workDropdown, setWorkDropdown] = useState(false);
-  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
+
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,26 +20,29 @@ const Navbar = () => {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() || 0;
+
     if (latest > previous && latest > 150) {
       setHidden(true);
-      setWorkDropdown(false);
     } else {
       setHidden(false);
     }
+
     setScrolled(latest > 50);
   });
 
   const scrollToSection = (sectionId: string) => {
     const executeScroll = () => {
       const element = document.getElementById(sectionId);
+
       if (element) {
-        const offset = 80; // Navbar height offset
+        const offset = 80;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - offset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
     };
@@ -61,15 +55,6 @@ const Navbar = () => {
     }
   };
 
-  const openDropdown = () => {
-    clearTimeout(dropdownTimeout.current);
-    setWorkDropdown(true);
-  };
-
-  const closeDropdown = () => {
-    dropdownTimeout.current = setTimeout(() => setWorkDropdown(false), 200);
-  };
-
   return (
     <motion.nav
       variants={{
@@ -79,7 +64,9 @@ const Navbar = () => {
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
-        scrolled ? "bg-background/95 md:bg-background/90 md:backdrop-blur-lg shadow-sm" : "bg-transparent"
+        scrolled
+          ? "bg-background/95 md:bg-background/90 md:backdrop-blur-lg shadow-sm"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
@@ -89,7 +76,10 @@ const Navbar = () => {
           onClick={(e) => {
             if (location.pathname === "/") {
               e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
             }
           }}
           className="flex flex-col leading-[0.85] cursor-pointer"
@@ -102,77 +92,27 @@ const Navbar = () => {
           />
         </Link>
 
-
         {/* Desktop Nav */}
         <div className="hidden lg:flex items-center gap-10">
-          <div
-            className="relative"
-            onMouseEnter={openDropdown}
-            onMouseLeave={closeDropdown}
+
+          <Link
+            to="/videography"
+            className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
           >
-            <button 
-              onClick={() => setWorkDropdown((v) => !v)} 
-              className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1"
-              aria-expanded={workDropdown}
-              aria-haspopup="true"
-            >
-              OUR WORK
-              <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} aria-hidden="true" />
-            </button>
+            OUR WORK
+          </Link>
 
-            <AnimatePresence>
-              {workDropdown && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="fixed left-0 right-0 top-20 bg-white shadow-xl"
-                  style={{ 
-                    marginLeft: 'calc(-50vw + 50%)',
-                    marginRight: 'calc(-50vw + 50%)',
-                    width: '100vw'
-                  }}
-                >
-                  <div className="max-w-[1800px] mx-auto px-6 lg:px-6 py-6">
-                    <div className="grid grid-cols-4 gap-16">
-                      {workCategories.map((cat) => (
-                        <Link
-                          key={cat.title}
-                          to={cat.link}
-                          onClick={() => setWorkDropdown(false)}
-                          className="group block"
-                        >
-                          <h4 className="font-montserrat text-[13px] font-[600] tracking-[0.1em] text-foreground mb-2">
-                            {cat.title}
-                          </h4>
-                          <span className="font-montserrat text-[11px] font-[500] uppercase tracking-[0.15em] text-foreground/70 group-hover:text-foreground transition-colors border-b border-transparent group-hover:border-foreground pb-0.5">
-                            EXPLORE
-                          </span>
-                          <div className="mt-4 overflow-hidden">
-                            <img
-                              src={cat.image}
-                              alt={cat.title}
-                              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                              loading="lazy"
-                            />
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-
-          <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+          <button
+            onClick={() => scrollToSection("services")}
+            className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
+          >
             OUR SERVICES
           </button>
-           {/* <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
-            CAMPAIGNS
-          </button> */}
-          <button onClick={() => scrollToSection("about")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+
+          <button
+            onClick={() => scrollToSection("about")}
+            className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
+          >
             ABOUT US
           </button>
         </div>
@@ -185,7 +125,7 @@ const Navbar = () => {
           GET IN TOUCH
         </Link>
 
-        {/* Mobile Menu Toggle */}
+        {/* Mobile Toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="lg:hidden font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
@@ -195,7 +135,7 @@ const Navbar = () => {
           {menuOpen ? "CLOSE" : "MENU"}
         </button>
       </div>
-
+      
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
@@ -207,61 +147,58 @@ const Navbar = () => {
             className="lg:hidden fixed inset-0 top-20 bg-background z-40 overflow-hidden"
           >
             <div className="flex flex-col gap-6 p-10">
-              {/* OUR WORK - expandable */}
+
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ delay: 0, duration: 0.5 }}
               >
-                <button
-                  onClick={() => setMobileWorkOpen((v) => !v)}
-                  className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left flex items-center gap-2"
+                <Link
+                  to="/videography"
+                  onClick={() => setMenuOpen(false)}
+                  className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground"
                 >
                   OUR WORK
-                  <ChevronRight className={`w-6 h-6 transition-transform duration-300 ${mobileWorkOpen ? "rotate-90" : ""}`} />
-                </button>
-                <AnimatePresence>
-                  {mobileWorkOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden ml-4 mt-3 flex flex-col gap-3"
-                    >
-                      {workCategories.map((cat) => (
-                        <Link
-                          key={cat.title}
-                          to={cat.link}
-                          onClick={() => setMenuOpen(false)}
-                          className="font-montserrat text-lg font-[600] uppercase tracking-wide text-foreground/70 hover:text-foreground transition-colors"
-                        >
-                          {cat.title}
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                </Link>
               </motion.div>
 
               {[
-                { label: "OUR SERVICES", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
-                // { label: "CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
-                { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("about"), 300); } },
+                {
+                  label: "OUR SERVICES",
+                  action: () => {
+                    setMenuOpen(false);
+                    setTimeout(() => scrollToSection("services"), 300);
+                  },
+                },
+                {
+                  label: "ABOUT US",
+                  action: () => {
+                    setMenuOpen(false);
+                    setTimeout(() => scrollToSection("about"), 300);
+                  },
+                },
               ].map((item, i) => (
                 <motion.button
                   key={item.label}
                   onClick={item.action}
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (i + 1) * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{
+                    delay: (i + 1) * 0.08,
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left"
                 >
                   {item.label}
                 </motion.button>
               ))}
+
               <motion.button
-                onClick={() => { setMenuOpen(false); setTimeout(() => navigate("/contact-us"), 300); }}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setTimeout(() => navigate("/contact-us"), 300);
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.4 }}
@@ -269,6 +206,7 @@ const Navbar = () => {
               >
                 GET IN TOUCH
               </motion.button>
+
             </div>
           </motion.div>
         )}
@@ -278,3 +216,310 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 
+// 
+// 
+// 
+// 
+// 
+// import { useState, useEffect, useRef } from "react";
+// import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+// // import { ChevronDown, ChevronRight } from "lucide-react";
+// import { Link, useNavigate, useLocation } from "react-router-dom";
+// // import servicePhoto from "@/assets/service-photo.jpg";
+// import serviceVideo from "@/assets/service-video.jpg";
+// // import serviceWeb from "@/assets/service-web.jpg";
+// // import serviceCgi from "@/assets/service-cgi.jpg";
+// import logo from "@/assets/logo.png";
+// 
+// // const workCategories = [
+// //   // { title: "OUR PHOTOGRAPHY", image: servicePhoto, link: "/photography" },
+// //   { title: "OUR VIDEOGRAPHY", image: serviceVideo, link: "/videography" },
+// //   // { title: "UI / UX", image: serviceWeb, link: "/ui-ux" },
+// //   // { title: "BRANDING", image: serviceCgi, link: "/branding" },
+// // ];
+// 
+// const Navbar = () => {
+//   const [menuOpen, setMenuOpen] = useState(false);
+//   // const [workDropdown, setWorkDropdown] = useState(false);
+//   // const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
+//   const [hidden, setHidden] = useState(false);
+//   const [scrolled, setScrolled] = useState(false);
+//   const dropdownTimeout = useRef<ReturnType<typeof setTimeout>>();
+//   const navigate = useNavigate();
+//   const location = useLocation();
+// 
+//   const { scrollY } = useScroll();
+// 
+//   useMotionValueEvent(scrollY, "change", (latest) => {
+//     const previous = scrollY.getPrevious() || 0;
+//     if (latest > previous && latest > 150) {
+//       setHidden(true);
+//       setWorkDropdown(false);
+//     } else {
+//       setHidden(false);
+//     }
+//     setScrolled(latest > 50);
+//   });
+// 
+//   const scrollToSection = (sectionId: string) => {
+//     const executeScroll = () => {
+//       const element = document.getElementById(sectionId);
+//       if (element) {
+//         const offset = 80; // Navbar height offset
+//         const elementPosition = element.getBoundingClientRect().top;
+//         const offsetPosition = elementPosition + window.pageYOffset - offset;
+// 
+//         window.scrollTo({
+//           top: offsetPosition,
+//           behavior: "smooth"
+//         });
+//       }
+//     };
+// 
+//     if (location.pathname !== "/") {
+//       navigate("/");
+//       setTimeout(executeScroll, 400);
+//     } else {
+//       executeScroll();
+//     }
+//   };
+// 
+//   const openDropdown = () => {
+//     clearTimeout(dropdownTimeout.current);
+//     setWorkDropdown(true);
+//   };
+// 
+//   const closeDropdown = () => {
+//     dropdownTimeout.current = setTimeout(() => setWorkDropdown(false), 200);
+//   };
+// 
+//   return (
+//     <motion.nav
+//       variants={{
+//         visible: { y: 0 },
+//         hidden: { y: "-100%" },
+//       }}
+//       animate={hidden ? "hidden" : "visible"}
+//       transition={{ duration: 0.35, ease: "easeInOut" }}
+//       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
+//         scrolled ? "bg-background/95 md:bg-background/90 md:backdrop-blur-lg shadow-sm" : "bg-transparent"
+//       }`}
+//     >
+//       <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
+//         {/* Logo */}
+//         <Link
+//           to="/"
+//           onClick={(e) => {
+//             if (location.pathname === "/") {
+//               e.preventDefault();
+//               window.scrollTo({ top: 0, behavior: "smooth" });
+//             }
+//           }}
+//           className="flex flex-col leading-[0.85] cursor-pointer"
+//           aria-label="DelightX Media Home"
+//         >
+//           <img
+//             src={logo}
+//             alt="DelightX Logo"
+//             className="h-10 w-auto"
+//           />
+//         </Link>
+// 
+// 
+//         {/* Desktop Nav */}
+//         <div className="hidden lg:flex items-center gap-10">
+//           <div
+//             className="relative"
+//             onMouseEnter={openDropdown}
+//             onMouseLeave={closeDropdown}
+//           >
+//             <button 
+//               onClick={() => setWorkDropdown((v) => !v)} 
+//               className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground inline-flex items-center gap-1"
+//               aria-expanded={workDropdown}
+//               aria-haspopup="true"
+//             >
+//               OUR WORK
+//               <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${workDropdown ? "rotate-180" : ""}`} aria-hidden="true" />
+//             </button>
+// 
+//             <AnimatePresence>
+//               {workDropdown && (
+//                 <motion.div
+//                   initial={{ opacity: 0, y: 10 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   exit={{ opacity: 0, y: 10 }}
+//                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+//                   className="fixed left-0 right-0 top-20 bg-white shadow-xl"
+//                   style={{ 
+//                     marginLeft: 'calc(-50vw + 50%)',
+//                     marginRight: 'calc(-50vw + 50%)',
+//                     width: '100vw'
+//                   }}
+//                 >
+//                   <div className="max-w-[1800px] mx-auto px-6 lg:px-6 py-6">
+//                     <div className="grid grid-cols-4 gap-16">
+//                       {workCategories.map((cat) => (
+//                         <Link
+//                           key={cat.title}
+//                           to={cat.link}
+//                           onClick={() => setWorkDropdown(false)}
+//                           className="group block"
+//                         >
+//                           <h4 className="font-montserrat text-[13px] font-[600] tracking-[0.1em] text-foreground mb-2">
+//                             {cat.title}
+//                           </h4>
+//                           <span className="font-montserrat text-[11px] font-[500] uppercase tracking-[0.15em] text-foreground/70 group-hover:text-foreground transition-colors border-b border-transparent group-hover:border-foreground pb-0.5">
+//                             EXPLORE
+//                           </span>
+//                           <div className="mt-4 overflow-hidden">
+//                             <img
+//                               src={cat.image}
+//                               alt={cat.title}
+//                               className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+//                               loading="lazy"
+//                             />
+//                           </div>
+//                         </Link>
+//                       ))}
+//                     </div>
+//                   </div>
+//                 </motion.div>
+//               )}
+//             </AnimatePresence>
+//           </div>
+// 
+//           <button onClick={() => scrollToSection("services")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+//             OUR SERVICES
+//           </button>
+//            {/* <button onClick={() => scrollToSection("work")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+//             CAMPAIGNS
+//           </button> */}
+//           <button onClick={() => scrollToSection("about")} className="link-underline font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground">
+//             ABOUT US
+//           </button>
+//         </div>
+// 
+//         {/* CTA */}
+//         <Link
+//           to="/contact-us"
+//           className="hidden lg:flex items-center px-7 py-2.5 rounded-full border border-foreground/50 text-foreground font-montserrat text-[11px] font-[600] tracking-[0.08em] uppercase hover:bg-foreground hover:text-background transition-all duration-400"
+//         >
+//           GET IN TOUCH
+//         </Link>
+// 
+//         {/* Mobile Menu Toggle */}
+//         <button
+//           onClick={() => setMenuOpen(!menuOpen)}
+//           className="lg:hidden font-montserrat text-[11px] font-[800] uppercase tracking-[0.15em] text-foreground"
+//           aria-label={menuOpen ? "Close Menu" : "Open Menu"}
+//           aria-expanded={menuOpen}
+//         >
+//           {menuOpen ? "CLOSE" : "MENU"}
+//         </button>
+//       </div>
+// 
+//       {/* Mobile Menu */}
+//       <AnimatePresence>
+//         {menuOpen && (
+//           <motion.div
+//             initial={{ opacity: 0, height: 0 }}
+//             animate={{ opacity: 1, height: "100vh" }}
+//             exit={{ opacity: 0, height: 0 }}
+//             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+//             className="lg:hidden fixed inset-0 top-20 bg-background z-40 overflow-hidden"
+//           >
+//             <div className="flex flex-col gap-6 p-10">
+//               {/* OUR WORK - expandable */}
+//               <motion.div
+//                 initial={{ opacity: 0, x: -30 }}
+//                 animate={{ opacity: 1, x: 0 }}
+//                 transition={{ delay: 0, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+//               >
+//                 <button
+//                   onClick={() => setMobileWorkOpen((v) => !v)}
+//                   className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left flex items-center gap-2"
+//                 >
+//                   OUR WORK
+//                   <ChevronRight className={`w-6 h-6 transition-transform duration-300 ${mobileWorkOpen ? "rotate-90" : ""}`} />
+//                 </button>
+//                 <AnimatePresence>
+//                   {mobileWorkOpen && (
+//                     <motion.div
+//                       initial={{ height: 0, opacity: 0 }}
+//                       animate={{ height: "auto", opacity: 1 }}
+//                       exit={{ height: 0, opacity: 0 }}
+//                       transition={{ duration: 0.3 }}
+//                       className="overflow-hidden ml-4 mt-3 flex flex-col gap-3"
+//                     >
+//                       {workCategories.map((cat) => (
+//                         <Link
+//                           key={cat.title}
+//                           to={cat.link}
+//                           onClick={() => setMenuOpen(false)}
+//                           className="font-montserrat text-lg font-[600] uppercase tracking-wide text-foreground/70 hover:text-foreground transition-colors"
+//                         >
+//                           {cat.title}
+//                         </Link>
+//                       ))}
+//                     </motion.div>
+//                   )}
+//                 </AnimatePresence>
+//               </motion.div>
+// 
+//               {[
+//                 { label: "OUR SERVICES", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("services"), 300); } },
+//                 // { label: "CAMPAIGNS", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("work"), 300); } },
+//                 { label: "ABOUT US", action: () => { setMenuOpen(false); setTimeout(() => scrollToSection("about"), 300); } },
+//               ].map((item, i) => (
+//                 <motion.button
+//                   key={item.label}
+//                   onClick={item.action}
+//                   initial={{ opacity: 0, x: -30 }}
+//                   animate={{ opacity: 1, x: 0 }}
+//                   transition={{ delay: (i + 1) * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+//                   className="font-montserrat text-3xl font-[900] uppercase tracking-tight text-foreground text-left"
+//                 >
+//                   {item.label}
+//                 </motion.button>
+//               ))}
+//               <motion.button
+//                 onClick={() => { setMenuOpen(false); setTimeout(() => navigate("/contact-us"), 300); }}
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 transition={{ delay: 0.4 }}
+//                 className="inline-flex items-center justify-center w-fit px-8 py-3.5 rounded-full border border-foreground/50 text-foreground font-montserrat text-sm font-[600] uppercase tracking-wider mt-4"
+//               >
+//                 GET IN TOUCH
+//               </motion.button>
+//             </div>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </motion.nav>
+//   );
+// };
+// 
+// export default Navbar;

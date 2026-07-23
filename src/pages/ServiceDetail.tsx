@@ -84,7 +84,7 @@ const serviceData: Record<
 > = {
   videography: {
     title: "Our Videography",
-    tagline: "Visual Stories in Motion",
+    tagline: "Visual Stories in Motion",  
     filters: [
       "All Videos",
       "Medical",
