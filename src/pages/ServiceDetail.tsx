@@ -49,12 +49,7 @@ import web from "@/assets/web.jpg";
 import m from "@/assets/m.jpeg";
 import m1 from "@/assets/m1.jpeg";
 
-import k1 from "@/assets/k1.mp4";
-import k2 from "@/assets/k2.mp4";
-import k3 from "@/assets/k3.mp4";
-import k4 from "@/assets/k4.mp4";
-import k5 from "@/assets/k5.mp4";
-import k6 from "@/assets/k6.mp4";
+import medicalVideo from "@/assets/video 1.mp4";
 
 
 
@@ -97,12 +92,8 @@ const serviceData: Record<
       { type: "video", src: f, category: "Food & Beverages" },
       { type: "video", src: p11, category: "Products and Accessories" },
       { type: "video", src: v, category: "Ed-Tech" },
-      { type: "video", src: k1, category: "Medical" },
-      { type: "video", src: k2, category: "Medical" },
-      { type: "video", src: k3, category: "Medical" },
-      { type: "video", src: k4, category: "Medical" },
-      { type: "video", src: k5, category: "Medical" },
-      { type: "video", src: k6, category: "Medical" },
+      { type: "video", src: medicalVideo, category: "Medical" },
+      { type: "video", src: p, category: "Medical" },
       
     ],
   },
