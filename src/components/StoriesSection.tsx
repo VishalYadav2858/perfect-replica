@@ -129,3 +129,4 @@
 //     </section>
 //   );
 // }
+export default function StoriesSection() { return null; }
