@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { Analytics } from "@vercel/analytics/react";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -19,6 +20,7 @@ const App = () => (
           <ScrollToTop />
           <AnimatedRoutes />
         </BrowserRouter>
+        <Analytics />
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
