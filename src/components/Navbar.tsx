@@ -88,7 +88,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="DelightX Logo"
-            className="h-10 w-auto"
+            className="h-12 w-auto"
           />
         </Link>
 

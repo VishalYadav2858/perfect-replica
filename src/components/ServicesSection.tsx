@@ -1,7 +1,5 @@
-"use client";
-
 import { useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { slideUp } from "@/lib/animations";
@@ -9,44 +7,50 @@ import { slideUp } from "@/lib/animations";
 const services = [
   {
     index: "01",
-    title: "Video Production",
+    title: "Personal Branding",
     description:
-      "We create content that connects with your audience — built on strategy, guided by insight, and designed to deliver across platforms.",
-    tag: "Content & Strategy",
+      "We build personal brands that attract attention, build authority, and turn your expertise into content that brings you leads, opportunities, and more business.",
+    tag: "Brand & Growth",
   },
   {
     index: "02",
-    title: "Website Design & Development",
+    title: "Video Production",
     description:
-      "We design user experiences that are intuitive, goal-driven, and built around real user behavior — turning complexity into clarity.",
-    tag: "UX / Engineering",
+      "From concept and scripting to shoots, editing, and final delivery, we create high-impact video content for brands, creators, and personal brands built to perform organically.",
+    tag: "Content Production",
   },
   {
     index: "03",
-    title: "Personal Branding",
+    title: "Social Media Growth",
     description:
-      "Your brand is not confined to a niche. We craft a narrative that spans various facets of your personality and accomplishments.",
-    tag: "Identity & Narrative",
+      "We manage your social media end-to-end — strategy, content planning, execution, publishing, community, and optimization — building a consistent content engine designed for organic growth.",
+    tag: "Organic Growth",
   },
   {
     index: "04",
-    title: "Social Media Growth",
+    title: "Influencer Marketing",
     description:
-      "Data-driven strategies to accelerate brand growth and maximize monetization. Your social media is our responsibility.",
-    tag: "Growth & Analytics",
+      "We connect brands with the right creators and build authentic influencer campaigns that reach the right audience, strengthen brand awareness, and deliver measurable results.",
+    tag: "Creators & Campaigns",
   },
   {
     index: "05",
-    title: "Performance Marketing",
+    title: "Talent Management",
     description:
-      "Precision-targeted campaigns designed to maximize ROI and scale your business across Facebook, Instagram, and Google.",
-    tag: "Performance & Scaling",
+      "We help creators build sustainable careers through strategic positioning, content direction, brand partnerships, and long-term opportunities that turn influence into a business.",
+    tag: "Talent & Partnerships",
   },
 ];
 
 const ACCENT = "hsl(var(--accent))";
 
-function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }) {
+function ServiceRow({
+  service,
+  i,
+}: {
+  service: (typeof services)[0];
+  i: number;
+}) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
@@ -56,7 +60,11 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
       ref={ref}
       initial={{ opacity: 0, y: 48 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.65,
+        delay: i * 0.1,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="relative overflow-hidden cursor-default border-t border-black/10 group bg-black/[0.01] hover:bg-black/[0.03] transition-colors duration-500"
@@ -75,11 +83,15 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
           zIndex: 20,
         }}
       />
-      {/* Sliding fill */}
+
+      {/* Sliding Fill */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: hovered ? 1 : 0 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        transition={{
+          duration: 0.55,
+          ease: [0.22, 1, 0.36, 1],
+        }}
         style={{
           position: "absolute",
           inset: 0,
@@ -102,7 +114,11 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
       >
         {/* Index */}
         <motion.span
-          animate={{ color: hovered ? "hsl(var(--accent))" : "rgba(0, 0, 0, 0.4)" }}
+          animate={{
+            color: hovered
+              ? "hsl(var(--accent))"
+              : "rgba(0, 0, 0, 0.4)",
+          }}
           transition={{ duration: 0.3 }}
           style={{
             fontFamily: "'Satoshi', sans-serif",
@@ -117,7 +133,7 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
           {service.index}
         </motion.span>
 
-        {/* Title + tag */}
+        {/* Title */}
         <div
           style={{
             gridRow: "1 / 2",
@@ -130,7 +146,9 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
           }}
         >
           <motion.h3
-            animate={{ color: hovered ? "hsl(var(--accent))" : "#111111" }}
+            animate={{
+              color: hovered ? "hsl(var(--accent))" : "#111111",
+            }}
             transition={{ duration: 0.3 }}
             style={{
               fontFamily: "'Satoshi', sans-serif",
@@ -145,10 +163,11 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
             }}
           >
             {service.title}
+
             <motion.span
-              animate={{ 
+              animate={{
                 opacity: hovered ? 0 : 1,
-                x: hovered ? 5 : 0
+                x: hovered ? 5 : 0,
               }}
               transition={{ duration: 0.3 }}
               style={{
@@ -165,20 +184,30 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
               Explore
             </motion.span>
           </motion.h3>
-
         </div>
 
-        {/* Description - Animated on Hover */}
-        <div style={{ gridRow: "2 / 3", gridColumn: "2 / 3", overflow: "hidden" }}>
+        {/* Description */}
+        <div
+          style={{
+            gridRow: "2 / 3",
+            gridColumn: "2 / 3",
+            overflow: "hidden",
+          }}
+        >
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ 
-              height: hovered ? "auto" : 0, 
+            animate={{
+              height: hovered ? "auto" : 0,
               opacity: hovered ? 1 : 0,
-              marginTop: hovered ? 16 : 0 
+              marginTop: hovered ? 16 : 0,
             }}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            style={{ willChange: "height, opacity" }}
+            transition={{
+              duration: 0.4,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            style={{
+              willChange: "height, opacity",
+            }}
           >
             <p
               style={{
@@ -196,16 +225,30 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
         </div>
       </div>
 
-      {/* Right side icon - Pulsing Plus */}
-      <div style={{ position: "absolute", right: "32px", top: "40px", transform: "translateY(-50%)" }}>
+      {/* Plus Icon */}
+      <div
+        style={{
+          position: "absolute",
+          right: "32px",
+          top: "40px",
+          transform: "translateY(-50%)",
+        }}
+      >
         <motion.div
-          animate={{ 
-            rotate: hovered ? 45 : 0, 
+          animate={{
+            rotate: hovered ? 45 : 0,
             color: hovered ? "hsl(var(--accent))" : "#111111",
-            scale: hovered ? 1.1 : 1
+            scale: hovered ? 1.1 : 1,
           }}
-          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{ fontSize: "24px", fontWeight: 700, lineHeight: 1 }}
+          transition={{
+            duration: 0.4,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          style={{
+            fontSize: "24px",
+            fontWeight: 700,
+            lineHeight: 1,
+          }}
         >
           +
         </motion.div>
@@ -216,7 +259,6 @@ function ServiceRow({ service, i }: { service: (typeof services)[0]; i: number }
 
 export default function ServicesSection() {
   const headingRef = useRef(null);
-  const inView = useInView(headingRef, { once: true });
 
   return (
     <section
@@ -225,13 +267,21 @@ export default function ServicesSection() {
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* GRID HEADING BLOCK */}
+
+        {/* Heading */}
         <motion.div
           ref={headingRef}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.12 } }, hidden: {} }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.12,
+              },
+            },
+            hidden: {},
+          }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 mb-16"
         >
           {/* Left: Heading */}
@@ -252,6 +302,7 @@ export default function ServicesSection() {
                 Our
               </motion.h2>
             </div>
+
             <div style={{ overflow: "hidden" }}>
               <motion.h2
                 variants={slideUp}
@@ -276,8 +327,12 @@ export default function ServicesSection() {
               variants={slideUp}
               className="font-montserrat text-sm md:text-[15px] font-medium text-foreground/60 leading-[1.8] border-l-2 border-accent pl-6"
             >
-              We provide end-to-end digital solutions from high-impact content and branding to technical engineering and social growth all designed to scale your vision.
+              We build the content infrastructure behind growing brands and
+              personal brands — combining strategy, content, social media,
+              and creators to turn organic attention into real business
+              growth.
             </motion.p>
+
             <motion.div variants={slideUp}>
               <Link
                 to="/contact-us"
@@ -290,8 +345,7 @@ export default function ServicesSection() {
           </div>
         </motion.div>
 
-
-        {/* ROWS */}
+        {/* Services */}
         <div
           className="rounded-[32px] overflow-hidden"
           style={{
@@ -300,8 +354,12 @@ export default function ServicesSection() {
           }}
         >
           <div className="rounded-[32px] overflow-hidden">
-            {services.map((s, i) => (
-              <ServiceRow key={s.index} service={s} i={i} />
+            {services.map((service, i) => (
+              <ServiceRow
+                key={service.index}
+                service={service}
+                i={i}
+              />
             ))}
           </div>
         </div>
@@ -331,6 +389,7 @@ export default function ServicesSection() {
           >
             Hover to explore
           </span>
+
           <span
             style={{
               fontFamily: "'Satoshi', sans-serif",
@@ -342,6 +401,7 @@ export default function ServicesSection() {
             5 Services
           </span>
         </motion.div>
+
       </div>
     </section>
   );
