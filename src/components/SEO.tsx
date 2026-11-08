@@ -11,7 +11,7 @@ interface SEOProps {
 
 const SITE_NAME = "DelightX Media";
 const DEFAULT_DESC = "Full-service creative agency specializing in branding, content creation, web development, videography, photography, and digital marketing.";
-const BASE_URL = "https://delightxmedia.in";
+const BASE_URL = "https://delightxmedia.com";
 
 export default function SEO({
   title,
@@ -38,6 +38,7 @@ export default function SEO({
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage} />
+      <meta name="twitter:url" content={url} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

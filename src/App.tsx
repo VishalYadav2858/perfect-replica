@@ -8,7 +8,6 @@ import AnimatedRoutes from "./components/AnimatedRoutes";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
-<link rel="canonical" href="https://delightxmedia.in/" />
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -25,4 +24,3 @@ const App = () => (
 );
 
 export default App;
-

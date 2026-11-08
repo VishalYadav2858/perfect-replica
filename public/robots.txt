@@ -16,4 +16,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://delightxmedia.in/sitemap.xml
+Sitemap: https://delightxmedia.com/sitemap.xml

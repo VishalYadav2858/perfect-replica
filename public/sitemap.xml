@@ -1,57 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://delightxmedia.in/</loc>
+    <loc>https://delightxmedia.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/about</loc>
+    <loc>https://delightxmedia.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/contact-us</loc>
+    <loc>https://delightxmedia.com/contact-us</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/brand-solutions</loc>
+    <loc>https://delightxmedia.com/brand-solutions</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/photography</loc>
+    <loc>https://delightxmedia.com/photography</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/videography</loc>
+    <loc>https://delightxmedia.com/videography</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/ui-ux</loc>
+    <loc>https://delightxmedia.com/website-design</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/branding</loc>
+    <loc>https://delightxmedia.com/ui-ux</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/youtube-video-editing</loc>
+    <loc>https://delightxmedia.com/branding</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://delightxmedia.com/youtube-video-editing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/youtube-growth-agency</loc>
+    <loc>https://delightxmedia.com/youtube-growth-agency</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://delightxmedia.in/video-editing-for-doctors</loc>
+    <loc>https://delightxmedia.com/video-editing-for-doctors</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

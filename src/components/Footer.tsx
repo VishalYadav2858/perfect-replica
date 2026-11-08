@@ -1,19 +1,18 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Instagram, Linkedin, Twitter } from "lucide-react";
+import { Instagram, Linkedin } from "lucide-react";
 
 const navLinks = [
   { label: "Home",            to: "/",                 hash: "__home__"  },
   { label: "About",          to: "/",                 hash: "about"     },
   { label: "Services",       to: "/",                 hash: "services"  },
   { label: "Our Work",       to: "/",                 hash: "work"      },
-  { label: "Brand Solutions", to: "/brand-solutions", hash: ""          },
+  // { label: "Brand Solutions", to: "/brand-solutions", hash: ""          },
   { label: "Contact",        to: "/contact-us",       hash: ""          },
 ];
 
 const socials = [
   { label: "Instagram", icon: Instagram, href: "https://instagram.com/delightxmedia" },
   { label: "LinkedIn",  icon: Linkedin,  href: "https://linkedin.com/company/delightxmedia" },
-  { label: "Twitter",   icon: Twitter,   href: "https://twitter.com/delightxmedia" },
 ];
 
 const Footer = () => {

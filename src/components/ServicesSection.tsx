@@ -21,9 +21,15 @@ const services = [
   },
   {
     index: "03",
+<<<<<<< HEAD
     title: "Social Media Growth",
     description:
       "We manage your social media end-to-end — strategy, content planning, execution, publishing, community, and optimization — building a consistent content engine designed for organic growth.",
+=======
+    title: "Social Media Management",
+    description:
+      "We manage your Youtube & Instagram end-to-end strategy, content planning, execution, publishing, community, and optimization building a consistent content engine designed for organic growth.",
+>>>>>>> 7a013fa (ZDF)
     tag: "Organic Growth",
   },
   {
