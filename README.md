@@ -64,6 +64,16 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
+### EmailJS contact form on Vercel
+
+The contact form requires these EmailJS values:
+
+- `VITE_EMAIL_SERVICE_ID`
+- `VITE_EMAIL_TEMPLATE_ID`
+- `VITE_EMAIL_PUBLIC_KEY`
+
+Add them in the Vercel project's **Settings -> Environment Variables** for each environment you deploy (at least Production), using the values from your EmailJS account. Redeploy after adding or changing them. Do not commit the real values; `.env.example` lists the required names.
+
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!

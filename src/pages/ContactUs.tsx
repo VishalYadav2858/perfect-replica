@@ -10,36 +10,55 @@ import { pageTransition } from "@/lib/animations";
 const ContactUs = () => {
   const form = useRef<HTMLFormElement | null>(null);
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<null | "success" | "error">(null);
+  const [status, setStatus] = useState<
+    null | "success" | "error" | "config-error"
+  >(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true);
-  setStatus(null);
+    e.preventDefault();
+    setStatus(null);
 
-  try {
-    const result = await emailjs.sendForm(
-      import.meta.env.VITE_EMAIL_SERVICE_ID as string,
-      import.meta.env.VITE_EMAIL_TEMPLATE_ID as string,
-      form.current!,
-      import.meta.env.VITE_EMAIL_PUBLIC_KEY as string
-    );
+    const serviceId = import.meta.env.VITE_EMAIL_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAIL_PUBLIC_KEY;
 
-    if (result.status === 200) {
-      console.log("SUCCESS:", result.text);
-      setStatus("success");
-      form.current?.reset();
-    } else {
-      throw new Error("Email not sent");
+    if (!serviceId || !templateId || !publicKey) {
+      console.error(
+        "EmailJS is not configured. Set VITE_EMAIL_SERVICE_ID, VITE_EMAIL_TEMPLATE_ID, and VITE_EMAIL_PUBLIC_KEY."
+      );
+      setStatus("config-error");
+      return;
     }
 
-  } catch (error) {
-    console.error("REAL ERROR:", error);
-    setStatus("error");
-  } finally {
-    setLoading(false);
-  }
-};
+    if (!form.current) {
+      console.error("Contact form is unavailable.");
+      setStatus("error");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const result = await emailjs.sendForm(
+        serviceId,
+        templateId,
+        form.current,
+        { publicKey }
+      );
+
+      if (result.status !== 200) {
+        throw new Error(`EmailJS returned status ${result.status}.`);
+      }
+
+      setStatus("success");
+      form.current.reset();
+    } catch (error) {
+      console.error("Failed to send contact form:", error);
+      setStatus("error");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <motion.div
       variants={pageTransition}
@@ -165,6 +184,12 @@ const ContactUs = () => {
               {status === "error" && (
                 <p className="text-red-500 text-sm">
                   We couldn’t send your request. Please email us at vishal@delightxmedia.com.
+                </p>
+              )}
+
+              {status === "config-error" && (
+                <p className="text-red-500 text-sm">
+                  Our contact form is temporarily unavailable. Please email us at vishal@delightxmedia.com.
                 </p>
               )}
 
