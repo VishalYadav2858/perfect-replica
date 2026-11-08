@@ -13,10 +13,12 @@ const ContactUs = () => {
   const [status, setStatus] = useState<
     null | "success" | "error" | "config-error"
   >(null);
+  const [emailErrorStatus, setEmailErrorStatus] = useState<number | null>(null);
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStatus(null);
+    setEmailErrorStatus(null);
 
     const serviceId = import.meta.env.VITE_EMAIL_SERVICE_ID;
     const templateId = import.meta.env.VITE_EMAIL_TEMPLATE_ID;
@@ -54,6 +56,14 @@ const ContactUs = () => {
       form.current.reset();
     } catch (error) {
       console.error("Failed to send contact form:", error);
+      if (
+        typeof error === "object" &&
+        error !== null &&
+        "status" in error &&
+        typeof error.status === "number"
+      ) {
+        setEmailErrorStatus(error.status);
+      }
       setStatus("error");
     } finally {
       setLoading(false);
@@ -183,7 +193,11 @@ const ContactUs = () => {
 
               {status === "error" && (
                 <p className="text-red-500 text-sm">
-                  We couldn’t send your request. Please email us at vishal@delightxmedia.com.
+                  We couldn’t send your request
+                  {emailErrorStatus !== null
+                    ? ` (EmailJS error ${emailErrorStatus})`
+                    : ""}
+                  . Please email us at vishal@delightxmedia.com.
                 </p>
               )}
 
